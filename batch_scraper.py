@@ -52,29 +52,30 @@ def run_scraper(config_info):
     print(f"{'#'*70}")
 
     try:
-        result = subprocess.run(
-            [sys.executable, scraper, config],
+        process = subprocess.Popen(
+            [sys.executable, "-u", scraper, config],
             cwd=BASE_DIR,
-            timeout=3600,  # 1 hour max per category
-            capture_output=True,
-            text=True
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            bufsize=1
         )
 
-        if result.returncode == 0:
-            print(f"✅ {category} — COMPLETED")
-            if result.stdout:
-                # Print last few lines of output
-                lines = result.stdout.strip().split('\n')
-                for line in lines[-5:]:
-                    print(f"   {line}")
-        else:
-            print(f"❌ {category} — FAILED (exit code {result.returncode})")
-            if result.stderr:
-                print(f"   Error: {result.stderr[:500]}")
+        # Stream output live — every line appears as it's produced
+        for line in process.stdout:
+            print(f"   {line}", end="")
 
-        return result.returncode == 0
+        process.wait(timeout=3600)  # 1 hour max per category
+
+        if process.returncode == 0:
+            print(f"✅ {category} — COMPLETED")
+        else:
+            print(f"❌ {category} — FAILED (exit code {process.returncode})")
+
+        return process.returncode == 0
 
     except subprocess.TimeoutExpired:
+        process.kill()
         print(f"⏰ {category} — TIMEOUT (1 hour)")
         return False
     except Exception as e:
