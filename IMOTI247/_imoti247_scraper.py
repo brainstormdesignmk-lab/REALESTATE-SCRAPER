@@ -2,6 +2,12 @@
 # Reads config.json from category folder, uses Chrome/Selenium, saves to SQLite
 # Usage: python3 _imoti247_scraper.py                         (runs ALL Imoti247 categories)
 #        python3 _imoti247_scraper.py I247_STANOVI_RENTA/     (runs ONE category)
+#
+# V2 — Added crash resilience:
+#   - try/except around each ad (skip bad ads, don't crash scraper)
+#   - Chrome restart if CDP connection dies
+#   - Retry logic for page loads
+#   - Committed to DB after each ad (no data loss on crash)
 
 import sys
 import os
@@ -19,10 +25,19 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
+from selenium.common.exceptions import (
+    TimeoutException, WebDriverException,
+    InvalidSessionIdException
+)
 
 # Add parent dir to path for shared utils
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '_shared'))
 from utils import normalize_phone, init_db, ad_exists, insert_ad
+
+MAX_CHROME_RESTARTS = 3
+MAX_AD_RETRIES = 2
+PAGE_LOAD_RETRIES = 2
+
 
 class Imoti247Scraper:
     def __init__(self, config_path):
@@ -43,60 +58,23 @@ class Imoti247Scraper:
 
         self.ads = []
         self.total_new = 0
+        self.total_skipped = 0
+        self.total_errors = 0
         self.seen_ids = set()
+        self.driver = None
+        self.chrome_restarts = 0
 
-    def get_phone(self, ad_id):
-        """Extract phone via AJAX endpoint"""
-        try:
-            phone_url = f"https://imoti247.com/description.php?get_phone=1&id={ad_id}"
-            resp = http_requests.get(phone_url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
-            if resp.status_code == 200:
-                cleaned = re.sub(r'[^\d+]', '', resp.text)
-                mk_matches = re.findall(r'07[0-8]\d{6}', cleaned)
-                if mk_matches:
-                    phones = ["+389" + m[1:] for m in mk_matches[:2]]
-                    return " | ".join(phones) if len(phones) > 1 else phones[0]
-                intl_matches = re.findall(r'\+\d{10,15}', cleaned)
-                if intl_matches:
-                    return " | ".join(intl_matches[:2])
-        except Exception as e:
-            print(f"  AJAX phone error for {ad_id}: {e}")
-        return ""
+    def create_driver(self):
+        """Create a fresh Chrome driver instance. Kills old one first if exists."""
+        if self.driver is not None:
+            try:
+                self.driver.quit()
+            except Exception:
+                pass
+            self.driver = None
+            time.sleep(5)  # Let Chrome fully die before restart
 
-    def get_images(self, ad_url):
-        """Extract images from ad page"""
-        try:
-            resp = http_requests.get(ad_url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
-            if resp.status_code == 200:
-                soup = BeautifulSoup(resp.text, "lxml")
-                img_tags = soup.select("img[src*='imoti247']")
-                images = [img.get('src') for img in img_tags
-                          if img.get('src') and 'logo' not in img.get('src', '').lower()]
-                return " | ".join(images) if images else ""
-        except Exception as e:
-            print(f"  Image error: {e}")
-        return ""
-
-    def get_real_title(self, wait):
-        """Get H1 title from current page"""
-        try:
-            h1 = wait.until(EC.presence_of_element_located((By.TAG_NAME, "h1")))
-            return h1.text.strip() or "NO TITLE"
-        except:
-            return "NO TITLE"
-
-    def sleep(self, a=0.7, b=1.8):
-        time.sleep(random.uniform(a, b))
-
-    def scrape(self):
-        print(f"\n{'='*60}")
-        print(f"IMOTI247 SCRAPER — {self.category}")
-        print(f"URL: {self.base_url}")
-        print(f"Pages: {self.pages}")
-        print(f"DB: {self.db_path}")
-        print(f"{'='*60}")
-
-        # Chrome setup
+        print(f"  [CHROME] Starting fresh Chrome instance (restart #{self.chrome_restarts})...")
         options = uc.ChromeOptions()
         options.add_argument("--start-minimized")
         options.add_argument("--window-position=0,0")
@@ -124,6 +102,163 @@ class Imoti247Scraper:
             """
         })
 
+        driver.set_page_load_timeout(60)
+        self.driver = driver
+        print(f"  [CHROME] Ready.")
+        return driver
+
+    def restart_chrome(self, reason="unknown"):
+        """Restart Chrome after a crash. Returns new driver or None if max restarts reached."""
+        self.chrome_restarts += 1
+        print(f"\n  [CHROME RESTART #{self.chrome_restarts}] Reason: {reason}")
+
+        if self.chrome_restarts > MAX_CHROME_RESTARTS:
+            print(f"  [CHROME] Max restarts ({MAX_CHROME_RESTARTS}) reached. Giving up.")
+            return None
+
+        # Wait before restart to let system recover
+        wait_time = 10 * self.chrome_restarts  # 10s, 20s, 30s
+        print(f"  [CHROME] Waiting {wait_time}s before restart...")
+        time.sleep(wait_time)
+
+        try:
+            return self.create_driver()
+        except Exception as e:
+            print(f"  [CHROME] Restart failed: {e}")
+            return None
+
+    def safe_page_load(self, url, retries=PAGE_LOAD_RETRIES):
+        """Load a URL with retry logic. Returns True if page loaded, False if all retries failed."""
+        for attempt in range(retries + 1):
+            try:
+                self.driver.get(url)
+                return True
+            except (TimeoutException, WebDriverException,
+                    InvalidSessionIdException, ConnectionRefusedError,
+                    ConnectionResetError, OSError) as e:
+                print(f"  [PAGE LOAD] Attempt {attempt+1}/{retries+1} failed: {type(e).__name__}")
+                if attempt < retries:
+                    # Try Chrome restart
+                    new_driver = self.restart_chrome(str(e))
+                    if new_driver is None:
+                        return False
+                    self.driver = new_driver
+                    try:
+                        self.driver.get(url)
+                        return True
+                    except Exception as e2:
+                        print(f"  [PAGE LOAD] Post-restart load also failed: {e2}")
+                else:
+                    print(f"  [PAGE LOAD] All {retries+1} attempts failed for {url}")
+                    return False
+        return False
+
+    def get_phone(self, ad_id):
+        """Extract phone via AJAX endpoint"""
+        try:
+            phone_url = f"https://imoti247.com/description.php?get_phone=1&id={ad_id}"
+            resp = http_requests.get(phone_url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
+            if resp.status_code == 200:
+                cleaned = re.sub(r'[^\d+]', '', resp.text)
+                mk_matches = re.findall(r'07[0-8]\d{6}', cleaned)
+                if mk_matches:
+                    phones = ["+389" + m[1:] for m in mk_matches[:2]]
+                    return " | ".join(phones) if len(phones) > 1 else phones[0]
+                intl_matches = re.findall(r'\+\d{10,15}', cleaned)
+                if intl_matches:
+                    return " | ".join(intl_matches[:2])
+        except Exception as e:
+            print(f"  AJAX phone error for {ad_id}: {e}")
+        return ""
+
+    def get_images(self, ad_url):
+        """Extract images from ad page via requests (not Chrome)"""
+        try:
+            resp = http_requests.get(ad_url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
+            if resp.status_code == 200:
+                soup = BeautifulSoup(resp.text, "lxml")
+                img_tags = soup.select("img[src*='imoti247']")
+                images = [img.get('src') for img in img_tags
+                          if img.get('src') and 'logo' not in img.get('src', '').lower()]
+                return " | ".join(images) if images else ""
+        except Exception as e:
+            print(f"  Image error: {e}")
+        return ""
+
+    def get_real_title(self, wait):
+        """Get H1 title from current page"""
+        try:
+            h1 = wait.until(EC.presence_of_element_located((By.TAG_NAME, "h1")))
+            return h1.text.strip() or "NO TITLE"
+        except:
+            return "NO TITLE"
+
+    def sleep(self, a=0.7, b=1.8):
+        time.sleep(random.uniform(a, b))
+
+    def process_single_ad(self, ad_id, ad_url, wait):
+        """Process one ad with retry. Returns True if saved, False if skipped."""
+        for attempt in range(MAX_AD_RETRIES + 1):
+            try:
+                if not self.safe_page_load(ad_url):
+                    print(f"  SKIP -> {ad_id} | page load failed after all retries")
+                    self.total_skipped += 1
+                    return False
+
+                self.sleep(8, 12)
+
+                title = self.get_real_title(wait)
+                phone = self.get_phone(ad_id)
+                images = self.get_images(ad_url)
+
+                # Save to DB (immediately — no data loss)
+                insert_ad(self.cur, self.conn, ad_id, title, "N/A", "N/A",
+                          phone, images, ad_url, self.site, self.category)
+
+                self.seen_ids.add(ad_id)
+                self.total_new += 1
+                print(f"  SUCCESS -> {ad_id} | {phone[:30]} | {title[:50]}...")
+                self.sleep(6, 10)
+                return True
+
+            except (InvalidSessionIdException, ConnectionRefusedError,
+                    ConnectionResetError, OSError) as e:
+                print(f"  [AD ERROR] {ad_id} attempt {attempt+1}: {type(e).__name__}: {e}")
+                if attempt < MAX_AD_RETRIES:
+                    new_driver = self.restart_chrome(str(e))
+                    if new_driver is None:
+                        self.total_skipped += 1
+                        return False
+                    self.driver = new_driver
+                    wait = WebDriverWait(self.driver, 20)
+                else:
+                    self.total_skipped += 1
+                    return False
+
+            except Exception as e:
+                print(f"  [AD ERROR] {ad_id} unexpected: {type(e).__name__}: {e}")
+                self.total_skipped += 1
+                return False
+
+        self.total_skipped += 1
+        return False
+
+    def scrape(self):
+        print(f"\n{'='*60}")
+        print(f"IMOTI247 SCRAPER — {self.category}")
+        print(f"URL: {self.base_url}")
+        print(f"Pages: {self.pages}")
+        print(f"DB: {self.db_path}")
+        print(f"{'='*60}")
+
+        # Create initial Chrome instance
+        try:
+            driver = self.create_driver()
+        except Exception as e:
+            print(f"  [FATAL] Cannot start Chrome: {e}")
+            self.conn.close()
+            return
+
         wait = WebDriverWait(driver, 20)
 
         try:
@@ -133,20 +268,39 @@ class Imoti247Scraper:
             while page <= self.pages:
                 url = f"{self.base_url}&page={page}"
                 print(f"\n[Page {page:02d}] -> {url}")
-                driver.get(url)
+
+                # Load listing page with retry
+                if not self.safe_page_load(url):
+                    print(f"  SKIP page {page} — could not load after retries")
+                    page += 1
+                    self.sleep(10, 15)
+                    continue
+
                 self.sleep(10, 15)
 
                 # Scroll to load all ads
                 for _ in range(12):
-                    driver.execute_script(f"window.scrollBy(0, {random.randint(800, 1400)});")
-                    self.sleep(0.6, 1.3)
+                    try:
+                        self.driver.execute_script(
+                            f"window.scrollBy(0, {random.randint(800, 1400)});")
+                        self.sleep(0.6, 1.3)
+                    except Exception:
+                        print("  [SCROLL] Scroll failed, continuing...")
+                        break
 
                 # Collect unique ad links
-                links = driver.find_elements(By.XPATH, "//a[contains(@href,'.html') and contains(@href,'-')]")
-                unique_links = set(
-                    link.get_attribute("href") for link in links
-                    if link.get_attribute("href") and "imoti247.com" in link.get_attribute("href")
-                )
+                try:
+                    links = self.driver.find_elements(
+                        By.XPATH, "//a[contains(@href,'.html') and contains(@href,'-')]")
+                    unique_links = set(
+                        link.get_attribute("href") for link in links
+                        if link.get_attribute("href") and "imoti247.com" in link.get_attribute("href")
+                    )
+                except Exception as e:
+                    print(f"  [COLLECT] Failed to collect links: {e}")
+                    page += 1
+                    self.sleep(10, 15)
+                    continue
 
                 new_ads = []
                 for href in unique_links:
@@ -167,39 +321,34 @@ class Imoti247Scraper:
                     empty_streak = 0
 
                 for ad in new_ads:
-                    ad_id = ad["id"]
-                    ad_url = ad["href"]
-                    print(f"  -> Processing ID {ad_id}")
-                    driver.get(ad_url)
-                    self.sleep(8, 12)
-
-                    title = self.get_real_title(wait)
-                    phone = self.get_phone(ad_id)
-                    images = self.get_images(ad_url)
-
-                    # Save to DB
-                    insert_ad(self.cur, self.conn, ad_id, title, "N/A", "N/A",
-                              phone, images, ad_url, self.site, self.category)
-
-                    self.seen_ids.add(ad_id)
-                    self.total_new += 1
-                    print(f"  SUCCESS -> {ad_id} | {phone[:25]} | {title[:50]}...")
-                    self.sleep(6, 10)
+                    # Refresh wait object in case Chrome was restarted
+                    wait = WebDriverWait(self.driver, 20)
+                    self.process_single_ad(ad["id"], ad["href"], wait)
 
                 page += 1
                 self.sleep(20, 40)
 
+        except KeyboardInterrupt:
+            print("\n  INTERRUPTED BY USER")
+        except Exception as e:
+            print(f"\n  [FATAL] Unexpected error in scrape loop: {type(e).__name__}: {e}")
         finally:
-            driver.quit()
+            try:
+                self.driver.quit()
+            except Exception:
+                pass
 
-        real_phones = self.total_new  # Would need to query DB, but approximate
         print(f"\n{'='*60}")
         print(f"DONE — {self.category}")
         print(f"New ads: {self.total_new}")
+        print(f"Skipped: {self.total_skipped}")
+        print(f"Errors:  {self.total_errors}")
+        print(f"Chrome restarts: {self.chrome_restarts}")
         print(f"DB: {self.db_path}")
         print(f"{'='*60}")
 
         self.conn.close()
+
 
 if __name__ == "__main__":
     script_dir = os.path.dirname(os.path.abspath(__file__))
