@@ -1,0 +1,663 @@
+==========================================================================================================================================
+SCRAPERS / PAZAR3 / REKLAMA5 / IMOTI247 / BATCH RUNNER
+==========================================================================================================================================
+
+  ﻿﻿SCRAPERS_FINAL/                                                                    
+  ﻿﻿├── _shared/                                                                       
+  ﻿│   └── utils.py                    ← phone normalization, agency filters, DB      
+  ﻿﻿setup, priorities                                                                  
+  ﻿﻿│                                                                                  
+  ﻿﻿├── PAZAR3/                                                                        
+  ﻿﻿│   ├── _pazar3_scraper.py          ← base scraper (requests + BeautifulSoup)     ▄
+  ﻿│   └── P3_*/config.json + data/    ← 9 category folders                           
+  │                                                                                  
+  ├── REKLAMA5/                                                                      
+  │   ├── _reklama5_scraper.py        ← base scraper (requests + BeautifulSoup)      
+  │   └── R5_*/config.json + data/    ← 12 category folders                          
+  │                                                                                  
+  ├── IMOTI247/                                                                      
+  │   ├── _imoti247_scraper.py        ← base scraper (Selenium + Chrome 151)         
+  │   └── I247_*/config.json + data/  ← 8 category folders                           
+  │                                                                                  
+  ├── batch_scraper.py                ← master runner (all 29 sequentially)          
+  ├── serve_ana.py                    ← generates prioritized daily CSV              
+  ├── update_status.py                ← reads Ana's CSV, updates DBs                 
+  └── output/                                                                        
+      └── ana_batch_YYYY-MM-DD.csv    ← Ana's file                                   
+                                                      
+===========================================================================================================================================                                                      
+
+  How To Run                                                                         
+  ------------------------------------------------------------------------------------------------                                                                                   
+  // bash                                                                            
+  # Test one category                                                                
+  python3 PAZAR3/_pazar3_scraper.py PAZAR3/P3_STANOVI_RENTA/                         
+                                                                                     
+  # Run all 29 categories (overnight)                                               ▀
+  python3 batch_scraper.py                                                           
+                                                                                     
+  # Generate Ana's daily CSV                                                         
+  python3 serve_ana.py                                                               
+                                                                                     
+  # Update status after Ana marks contacts                                           
+  python3 update_status.py output/ana_batch_2026-08-28.csv                           
+                                                            
+  ------------------------------------------------------------------------------------------------
+    Command to Run Full Batch                                                          
+                                                                                     
+  // bash                                                                            
+  cd /home/metropolis3/Documents/PROJECTS/SCRAPERS_FINAL && nohup python3           ▄
+  batch_scraper.py > output/batch_log_$(date +%Y%m%d_%H%M).txt 2>&1 &                
+                                                                                     
+  This runs in background, survives terminal close, logs to  output/                 
+  batch_log_YYYYMMDD_HHMM.txt .                                                      
+                                                                                     
+  To check progress:                                                                 
+                                                                                     
+  // bash                                                                            
+  tail -f /home/metropolis3/Documents/PROJECTS/SCRAPERS_FINAL/output/batch_log_*.    
+  txt                                                                                
+                                                                                     
+  To stop it:                                                                        
+                                                                                     
+  // bash                                                                            
+  kill $(pgrep -f batch_scraper.py)      
+  ------------------------------------------------------------------------------------------------
+  ================================================================================================
+    COMPLETE SYSTEM — END TO END                                                       
+  ================================================================================================                                                                                   
+  ───────────────────────────────────────────────────────────────────────────        
+                                                                                     
+  PHASE 1: NIGHTLY SCRAPING (22:00)                                                  
+                                                                                     
+  Step 1: batch_scraper.py Starts                                                    
+                                                                                     
+  // bash                                                                            
+  python3 batch_scraper.py                                                           
+                                                                                     
+  The script does one thing: finds every  config.json  across all 3 sites, runs      
+  the matching base scraper for each.                                                
+                                                                                     
+  batch_scraper.py                                                                  ▀
+    → scans PAZAR3/ for config.json files (finds 9)                                  
+    → scans REKLAMA5/ for config.json files (finds 12)                               
+    → scans IMOTI247/ for config.json files (finds 8)                                
+    → total: 29 categories                                                           
+                                                                                     
+  It runs them sequentially, one at a time. This is deliberate:                      
+  - Only one Chrome instance at a time (Imoti247 needs Chrome, ~200-500MB RAM)       
+  - Machine has 7.7GB total, ~150MB free                                             
+  - Running even 2 scrapers simultaneously = Chrome crash                            
+                                                                                     
+  Step 2: Each Scraper Runs                                                          
+                                                                                     
+  For each of the 29 categories,  batch_scraper.py  calls:                           
+                                                                                     
+  // bash                                                                            
+  python3 PAZAR3/_pazar3_scraper.py PAZAR3/P3_STANOVI_RENTA/config.json              
+                                                                                     
+  The base scraper:                                                                  
+  1. Reads  config.json  → gets URL, category name, pages to scrape                  
+  2. Opens its own SQLite DB at  P3_STANOVI_RENTA/data/pazar3.db                     
+  3. Loads listing page 1 from the URL                                               
+  4. For each ad on the page:                                                        
+  - Extracts ad ID from the URL                                         
+  - Checks DB: is this ID already there?                                             
+  - YES → skip (already scraped before, never re-process)                            
+  - NO → continue to scrape this ad                                                  
+  5. Loads the individual ad page                                                    
+  6. Extracts:                                                                       
+  - Title from  <h1>  tag                                                            
+  - Phone using site-specific method (see below)                                     
+  - Images using site-specific method (see below)                                    
+  - Price/Size from title text via regex                                             
+  7. Checks: is this an agency ad?                                                   
+  - YES → skip (keyword match in title OR phone matches agency blacklist)            
+  - NO → save to DB                                                                  
+  8. Waits random delay (1.5-3s) → loads next ad                                     
+  9. After all ads on page → waits (3-6s) → loads next page                          
+  10. Repeats for all pages in config                                               ▄
+                                                                                     
+  Step 2a: Phone Extraction Per Site                                                 
+                                                                                     
+  Pazar3:                                                                            
+                                                                                     
+  // python                                                                          
+  # Extracts phones from ad HTML using regex                                         
+  # Filters out Pazar3's own number: +389 078 377 677                                
+  # Returns: "+389 70 123 456" or "+389 70 123 456 | +389 71 234 567"                
+                                                                                     
+  Reklama5:                                                                          
+                                                                                     
+  // python                                                                          
+  # Extracts phones from ad page text using regex                                    
+  # If no phone found, tries "ShowPhone" direct link                                 
+  # Filters out known agency phones (САВИЌ: +389 70 318 400)                         
+  # Returns: "+389 73 774 725"                                                       
+                                                                                     
+  Imoti247:                                                                          
+                                                                              
+  // python                                                                          
+  # Calls AJAX endpoint: https://imoti247.com/description.php?get_phone=1&id=AD_ID   
+  # Strips dashes/slashes from response (071-810-110 → 071810110)                    
+  # Returns: "+389 71 810 110"                                                       
+                                                                                     
+  Step 2b: Image Extraction Per Site                                                 
+                                                                                     
+  Pazar3:                                                                            
+                                                                                     
+  // python                                                                          
+  # Selects: img[data-src*='pazar3']                                                 
+  # Returns: "https://media.pazar3.mk/Image/UUID/..."                               ▄
+  # Typically 5-7 images per ad                                                      
+                                                                                     
+  Reklama5:                                                                          
+                                                                                     
+  // python                                                                          
+  # Regex: photos/xbig/[a-f0-9-]+\.jpg                                               
+  # Returns: "https://reklama5.mk/photos/xbig/UUID.jpg"                              
+  # Typically 3-6 images per ad                                                      
+                                                                                     
+  Imoti247:                                                                          
+                                                                                     
+  // python                                                                          
+  # Selects: img[src*='imoti247']                                                    
+  # Returns: "https://img.imoti247.com/img/0_XXX-800x600.jpeg"                       
+  # Typically 5-13 images per ad                                                     
+                                                                                     
+  Step 2c: What Gets Saved to DB                                                     
+                                                                                     
+  Each ad creates one row in SQLite:         
+  
+  // sql                                                                             
+  INSERT INTO listings VALUES (                                                      
+      id='9006273',                          -- unique ad ID from site               
+      title='Banese me qira',                 -- from <h1> tag                       
+      price='N/A',                            -- extracted from text (may be N/A)    
+      size='N/A',                             -- extracted from text (may be N/A)    
+      contact='+389 075 882 840',             -- normalized phone                    
+      images='https://media.pazar3.mk/... | https://...',  -- pipe-separated URLs    
+      url='https://www.pazar3.mk/oglas/...',  -- full ad page URL                    
+      status='',                              -- empty = new, not yet served         
+      first_seen='28.08 12:28',               -- when scraped                        
+      last_served='',                         -- when last served to Ana             
+      times_served=0,                         -- how many times served               
+      site='pazar3',                          -- source site                         
+      category='Станиви Изнајмување'           -- category name                      
+  )                                                                                 ▀
+                                                                                     
+  Step 2d: Deduplication During Scraping                                             
+                                                                                     
+  The dedup happens during scraping, not after:         
+  
+  Day 1: Scraper runs, finds 50 ads                                                  
+    → All 50 are NEW (not in DB)                                                     
+    → All 50 inserted with status=''                                                 
+                                                                                     
+  Day 2: Scraper runs again                                                          
+    → Finds same 50 ads + 5 new ones                                                 
+    → 50 already in DB → SKIP                                                        
+    → 5 are NEW → insert with status=''                                              
+    → Only 5 new ads processed                                                       
+                                                                                     
+  Day 15: Scraper runs                                                               
+    → Finds 30 ads                                                                   
+    → 25 already in DB → SKIP                                                        
+    → 5 are NEW → insert                                                            ▄
+    → Market pace: 5 new ads today                                                   
+                                                                                     
+  This means: The scraper never re-processes an ad. It only touches genuinely new    
+  listings. This saves time, bandwidth, and avoids duplicates in the DB.             
+                                                                                     
+  Step 2e: All 29 Categories Complete                                                
+                                                                                     
+  22:00 — batch_scraper.py starts                                                    
+  22:05 — P3_STANOVI_RENTA done (27 ads)                                             
+  22:12 — P3_STANOVI_PRODAZBA done (35 ads)                                          
+  22:20 — P3_KUKJI_RENTA done (15 ads)                                               
+  ...                                                                                
+  00:30 — All 29 categories done                                                     
+          Total: ~800 ads across all categories                                      
+          Each in its own data/*.db                                                  
+                                                                                     
+  ───────────────────────────────────────────────────────────────────────────      
+  
+  PHASE 2: GENERATE ANA'S CSV (00:30)                                                
+                                                                                     
+  Step 3: serve_ana.py Runs                                                          
+                                                                                     
+  // bash                                                                            
+  python3 serve_ana.py                                                               
+                                                                                     
+  This script:                                                                       
+  1. Finds all 29 DBs:                                                               
+                                                                                     
+  PAZAR3/P3_STANOVI_RENTA/data/pazar3.db                                             
+  PAZAR3/P3_STANOVI_PRODAZBA/data/pazar3.db                                          
+  ...                                                                                
+  IMOTI247/I247_VIKENDICA_PRODAZBA/data/imoti247.db                                  
+                                                                                     
+  2. Reads each DB:                                                                 ▀
+                                                                                     
+  // sql                                                                             
+  SELECT * FROM listings                                                             
+  WHERE status NOT IN ('CONTACTED', 'ACCEPTED', 'NOT_INTERESTED', 'DEAD')            
+  AND contact != ''                                                                  
+                                                                                     
+  This means:                                                                        
+  - New ads (never served) → included                                                
+  - Previously served but not contacted → included (retry)                           
+  - Contacted/Accepted/Dead → excluded                                               
+                                                                                     
+  3. Deduplicates across sites:                                                      
+                                                                                     
+  Same phone +389 70 123 456 found in:                                               
+    → Pazar3 Apartments Rent                                                         
+    → Reklama5 Apartments Rent                                                       
+    → Imoti247 Apartments Rent                                                       
+                                                                                     
+  Keep the version with most images (best data for Ana)       
+  
+4. Sorts by priority:                                                              
+                                                                                     
+  TIER 1 (Apartments):     26 ads  ← TOP OF CSV                                      
+  TIER 2 (Commercial/Houses): 45 ads                                                 
+  TIER 3 (Land/Garages):   30 ads                                                    
+  TIER 4 (Weekenders):     12 ads                                                    
+                                                                                     
+  5. Generates CSV:                                                                  
+                                                                                     
+  output/ana_batch_2026-08-28.csv                                                    
+                                                                                    ▀
+  Step 4: Ana's CSV Format                                                           
+                                                                                     
+  // csv                                                                             
+  source,category,title,price,size,phone,images,url,status,date                      
+  PAZAR3,Станиви Изнајмување,Banese me qira,N/A,N/A,+389 075 882 840,https://        
+  media.pazar3.mk/...,https://www.pazar3.mk/oglas/...,,28.08 12:28                   
+  REKLAMA5,Станиви Продажба,Стан Карпош,45000€,65m²,+389 71 234 567,https://         
+  reklama5.mk/photos/...,https://reklama5.mk/AdDetails?ad=123,,28.08 12:30           
+  IMOTI247,Станиви Изнајмување,Издавам стан,+389 72 345 678,https://img.imoti247.    
+  com/...,https://imoti247.com/.../123.html,,28.08 12:35                             
+                                                                                     
+  Key columns:                                                                       
+  - status column is EMPTY → Ana knows to call this person                           
+  - phone is normalized to  +389 7X XXX XXX                                          
+  - images are pipe-separated URLs                                                   
+  - url is the ad page link (fallback for images)                                    
+  - source tells Ana which site it's from                                            
+                                                                                     
+  ───────────────────────────────────────────────────────────────────────────  
+  
+  PHASE 3: ANA'S WORKDAY (09:00-12:00)                                               
+                                                                                     
+  Step 5: Ana Opens the CSV                                                          
+                                                                                     
+  Ana opens  ana_batch_2026-08-28.csv  in Excel/LibreOffice/Google Sheets.           
+                                                                                     
+  She sees:                                                                          
+                                                                                     
+  Row 1:  PAZAR3 | Apartments Rent | Banese me qira | +389 075 882 840 |        |    
+  ← CALL                                                                             
+  Row 2:  REKLAMA5| Apartments Sale | Стан Карпош    | +389 71 234 567 |        |    
+  ← CALL                                                                             
+  Row 3:  IMOTI247| Apartments Rent | Издавам стан    | +389 72 345 678 |            
+  | ← CALL                                                                           
+  ...                                                                                
+  Row 27: PAZAR3 | Apartments Rent | Last apartment   | +389 70 999 000 |            
+  | ← CALL                                                                          ▄
+  Row 28: PAZAR3 | Houses Sale     | Куќа Аеродром   | +389 73 111 222 |        |    
+  ← CALL (TIER 2)                                                                    
+                                                                                     
+  She sorts by  status  column → empty rows come to top → those are the ones to      
+  call.                                                                              
+                                                                                     
+  Step 6: Ana Calls Owners                                                           
+                                                                                     
+  Ana calls the first number:  +389 075 882 840                                      
+                                                                                     
+  Scenario A: No answer                                                              
+                                                                                     
+  Ana marks status = [CONTACTED]                                                     
+  Row 1 now shows: PAZAR3 | Apartments Rent | Banese me qira | +389 075 882 840 |    
+  [CONTACTED]                                                                        
+                                                                                     
+  Scenario B: Owner says yes, wants cooperation                                      
+                                                                                     
+  Ana marks status = [ACCEPTED]                                                      
+  Row 2 now shows: REKLAMA5 | Apartments Sale | Стан Карпош | +389 71 234 567 | [    
+  ACCEPTED]                                                            
+  
+  Scenario C: Owner says no, not interested                                          
+                                                                                     
+  Ana marks status = [NOT_INTERESTED]                                                
+  Row 3 now shows: IMOTI247 | Apartments Rent | Издавам стан | +389 72 345 678 | [   
+  NOT_INTERESTED]                                                                    
+                                                                                     
+  Step 7: Ana Rotates Categories                                                     
+                                                                                     
+  Ana finishes Tier 1 (apartments) — maybe 26 calls.                                 
+                                                                                     
+  Some didn't answer, some said no, some said yes.                                   
+                                                                                     
+  Now she moves to Tier 2 (commercial, houses):                                      
+                                                                                     
+  Row 28: PAZAR3 | Houses Sale | Куќа Аеродром | +389 73 111 222 |        | ← CALL   
+  Row 29: REKLAMA5| Commercial Rent | Деловен простор | +389 70 555 666 |            
+  | ← CALL                                                                           
+                                                                                    ▀
+  Mid-morning: NEW apartment leads appeared (last night's scrape added 3 more).      
+  Ana goes back to apartments, calls those 3, then returns to houses.                
+                                                                                     
+  Step 8: Working Hours End (12:00)                                                  
+                                                                                     
+  Ana saves the CSV. It now looks like:                                              
+                                                                                     
+  Row 1:  PAZAR3 | Apartments Rent | Banese me qira | +389 075 882 840 | [           
+  CONTACTED]                                                                         
+  Row 2:  REKLAMA5| Apartments Sale | Стан Карпош    | +389 71 234 567 | [           
+  ACCEPTED]                                                                          
+  Row 3:  IMOTI247| Apartments Rent | Издавам стан    | +389 72 345 678 | [          
+  NOT_INTERESTED]                                                                    
+  ...                                                                                
+  Row 25: PAZAR3 | Apartments Rent | Last apt        | +389 70 999 000 |        ←    
+  didn't reach this one                                                              
+  Row 28: PAZAR3 | Houses Sale     | Куќа Аеродром   | +389 73 111 222 |        ←    
+  didn't reach this one                                       
+  
+  Some rows have status, some are still empty (Ana didn't get to them).              
+                                                                                     
+  ───────────────────────────────────────────────────────────────────────────        
+                                                                                     
+  PHASE 4: STATUS UPDATE (12:00)                                                     
+                                                                                     
+  Step 9: update_status.py Runs                                                      
+                                                                                     
+  // bash                                                                            
+  python3 update_status.py output/ana_batch_2026-08-28.csv                           
+                                                                                     
+  This script:                                                                       
+  1. Reads Ana's CSV                                                                 
+  2. Finds all rows with status (CONTACTED, ACCEPTED, NOT_INTERESTED, DEAD)          
+  3. Updates the corresponding DB entries:                                           
+                                                                                     
+  // sql                                                                             
+  -- Row 1: no answer                                                               ▄
+  UPDATE listings SET status='CONTACTED' WHERE id='9006273'                          
+                                                                                     
+  -- Row 2: said yes                                                                 
+  UPDATE listings SET status='ACCEPTED' WHERE id='12345'                             
+                                                                                     
+  -- Row 3: said no                                                                  
+  UPDATE listings SET status='NOT_INTERESTED' WHERE id='67890'                       
+                                                                                     
+  Row 25 and 28 have no status → they stay as-is in the DB (empty status = will      
+  be served again tomorrow).                                                         
+                                                                                     
+  ───────────────────────────────────────────────────────────────────────────        
+                                                                                     
+  PHASE 5: NEXT DAY (22:00 → 08:00)                                                  
+                                                                                     
+  Step 10: batch_scraper.py Runs Again                                               
+                                                                                     
+  Night 2: scraper runs again.                                                       
+                                                                                     
+  P3_STANOVI_RENTA:                                   
+    → Finds 50 ads on listing page                                                   
+    → 47 already in DB → SKIP                                                        
+    → 3 are NEW → insert with status=''                                              
+    → 3 new ads processed                                                            
+                                                                                     
+  Step 11: serve_ana.py Runs Again                                                   
+                                                                                     
+  // sql                                                                             
+  -- Query: get all leads that are NOT contacted/accepted/dead                       
+  SELECT * FROM listings                                                             
+  WHERE status NOT IN ('CONTACTED', 'ACCEPTED', 'NOT_INTERESTED', 'DEAD')            
+  AND contact != ''                                                                  
+                                                                                     
+  Results:                                                                           
+  - 3 new ads from last night → status='' → included                                 
+  - Row 25 (from yesterday) → status='' → included (Ana didn't call, retry)          
+  - Row 28 (from yesterday) → status='' → included (Ana didn't call, retry)          
+  - Row 1 (CONTACTED) → excluded (already called, waiting for callback)             ▀
+  - Row 2 (ACCEPTED) → excluded (in system, done)                                    
+  - Row 3 (NOT_INTERESTED) → excluded (never serve again)                            
+                                                                                     
+  New CSV generated:                                                                 
+                                                                                     
+  Row 1: PAZAR3 | Apartments Rent | NEW AD 1 | +389 70 111 111 |        | ← FRESH,   
+   CALL                                                                              
+  Row 2: PAZAR3 | Apartments Rent | NEW AD 2 | +389 71 222 222 |        | ← FRESH,   
+   CALL                                                                              
+  Row 3: PAZAR3 | Apartments Rent | NEW AD 3 | +389 72 333 333 |        | ← FRESH,   
+   CALL                                                                              
+  Row 4: PAZAR3 | Apartments Rent | Last apt | +389 70 999 000 |        | ← RETRY    
+  (yesterday)                                                                        
+  Row 5: PAZAR3 | Houses Sale     | Куќа     | +389 73 111 222 |        | ← RETRY    
+  (yesterday)                                                                        
+                                                                           
+  Ana opens file → sees fresh leads at top → starts calling again.                   
+                                                                                     
+  ───────────────────────────────────────────────────────────────────────────        
+                                                                                     
+  THE COMPLETE DATA FLOW                                                             
+                                                                                     
+  NIGHT (22:00-00:30):                                                               
+    batch_scraper.py                                                                 
+      → 29 scrapers run sequentially                                                 
+      → Each reads config.json (URL, category, pages)                                
+      → Each scrapes listing pages → individual ad pages                             
+      → Each extracts: title, phone, images, price, size                             
+      → Each saves to its own data/*.db                                              
+      → Deduplication: skip already-seen ad IDs                                      
+      → Only genuinely new ads enter the DB                                          
+                                                                                     
+  LATE NIGHT (00:30):                                                                
+    serve_ana.py                                                                    ▄
+      → Reads all 29 DBs                                                             
+      → Filters: only status='' or 'served' (not contacted/accepted/dead)            
+      → Deduplicates across sites by phone number                                    
+      → Sorts by priority tier (apartments → commercial → houses → land →            
+  weekenders)                                                                        
+      → Outputs: output/ana_batch_YYYY-MM-DD.csv                                     
+                                                                                     
+  MORNING (08:00):                                                                   
+    Ana opens CSV                                                                    
+      → Sees prioritized list: apartments first                                      
+      → Empty status = call these                                                    
+      → [CONTACTED] = already called, skip                                           
+      → [ACCEPTED] = in system, skip                                                 
+                                                                                     
+  WORKING HOURS (09:00-12:00):                                                       
+    Ana calls owners one by one                                                      
+      → No answer → marks [CONTACTED]                                                
+      → Says yes → marks [ACCEPTED]                                                  
+      → Says no → marks [NOT_INTERESTED]                      
+                                             
+      → When apartments run out → rotates to other categories                        
+      → When new apartment leads appear → goes back to apartments                    
+                                                                                     
+  AFTER WORK (12:00):                                                                
+    Ana saves CSV                                                                    
+    update_status.py runs                                                            
+      → Reads Ana's CSV                                                              
+      → Updates DBs with status changes                                              
+      → CONTACTED → served again tomorrow (retry)                                    
+      → ACCEPTED → removed from pipeline                                             
+      → NOT_INTERESTED → removed forever                                             
+      → Empty → served again tomorrow (Ana didn't reach)                             
+                                                                                     
+  NEXT NIGHT (22:00):                                                                
+    batch_scraper.py runs again                                                      
+      → Only NEW ads processed (old ones skipped by dedup)                           
+      → Yesterday's CONTACTED → still in DB, served again                            
+      → Yesterday's ACCEPTED → still in DB but excluded from CSV                    ▀
+      → Yesterday's NOT_INTERESTED → still in DB but excluded from CSV               
+      → Brand new ads → inserted with status=''                                      
+                                                                                     
+  ───────────────────────────────────────────────────────────────────────────        
+                                                                                     
+  WHAT EACH FILE DOES                                                                
+                                                                                                                                                                  
+  ┌───────────────────┬────────────────┬──────────────────────────────────────┐      
+  │ File              │ When           │ What It Does                         │      
+  ├───────────────────┼────────────────┼──────────────────────────────────────┤      
+  │ batch_scraper.py  │ 22:00          │ Runs all 29 scrapers sequentially    │      
+  │ _pazar3_scraper.p │ During batch   │ Scrapes one Pazar3 category, saves   │      
+  │ y                 │                │ to DB                                │      
+  │ _reklama5_scraper │ During batch   │ Scrapes one Reklama5 category, saves │      
+  │ .py               │                │ to DB                                │      
+  │ _imoti247_scraper │ During batch   │ Scrapes one Imoti247 category, saves │      
+  │ .py               │                │ to DB                                │      
+  │ config.json × 29  │ Read by        │ URL, category name, pages, priority, │      
+  │                   │ scrapers       │ daily_limit                          │      
+  │ data/*.db × 29    │ Written by     │ SQLite DBs with all scraped ads +    │      
+  │                   │ scrapers       │ status                               │      
+  │ serve_ana.py      │ 00:30          │ Reads all DBs, generates Ana's CSV   │      
+  │ update_status.py  │ 12:00          │ Reads Ana's CSV, updates DBs with    │      
+  │                   │                │ status                               │      
+  │ output/ana_batch_ │ Ana opens this │ The one file Ana works with          │      
+  │ *.csv             │                │                                      │      
+  └───────────────────┴────────────────┴──────────────────────────────────────┘      
+                                                                                    ▀
+  ───────────────────────────────────────────────────────────────────────────        
+                                                                                     
+  WHY THIS DESIGN WORKS                                                              
+                                                                                     
+  1. No lead is ever lost — everything goes to SQLite, even if CSV generation        
+  fails                                                                              
+  2. No lead is ever contacted twice — status tracking prevents re-serving           
+  contacted leads                                                                    
+  3. Fresh leads always come first — priority sorting + status filtering             
+  4. One bug fix = one file — base scrapers are shared, not duplicated               
+  5. Each category is isolated — one DB crashes, others are fine                     
+  6. Disk stays clean — only new ads processed, old ones skipped                     
+  7. Ana never sees irrelevant data — dead/contacted/accepted filtered out           
+  automatically                                                                      
+  8. Carryover works automatically — uncontacted leads sit in DB, served again       
+  tomorrow                                                                           
+  9. Image fallback exists — if images break,  re_scrape_images(ad_url)  can re-     
+  fetch                                                                             
+  10. Supabase compatible — CSV can be imported directly        
+  
+ ================================================================================
+ 
+  ANA'S SERVE FILE — EXACT TIMING AND SOURCE                                         
+                                                                                     
+  When Is It Generated?                                                              
+                                                                                     
+  22:00 — batch_scraper.py starts                                                    
+          Scrapers run one by one: P3_STANOVI_RENTA → P3_STANOVI_PRODAZBA → ... →    
+  I247_VIKENDICA                                                                     
+          Each scraper writes to its OWN data/*.db                                   
+                                                                                     
+  00:30 — All 29 scrapers finish                                                     
+          No serve_ana.py yet — just raw DBs sitting there                           
+                                                                                     
+  00:30 — serve_ana.py runs (manually or via cron)                                  ▄
+          Reads ALL 29 DBs                                                           
+          Combines, deduplicates, sorts                                              
+          Outputs: output/ana_batch_2026-08-28.csv                                   
+                                                                                     
+  08:00 — Ana opens the COMBINED CSV                                                 
+                                                                                     
+  Where Does Ana Pull From?                                                          
+                                                                                     
+  Ana pulls from ONE file: the combined CSV.                                         
+                                                                                     
+  She never touches individual DBs. She never opens individual category folders.     
+  She sees one file:                                                                 
+                                                                                     
+  output/ana_batch_2026-08-28.csv                                                    
+                                                                                     
+  This file contains leads from ALL 29 categories, merged together, sorted by        
+  priority.                                                                          
+                                                     
+  The Flow Diagram                                                                   
+                                                                                     
+  29 individual DBs                    ONE combined CSV                              
+  ─────────────────                    ──────────────────                            
+                                                                                     
+  P3_STANOVI_RENTA/data/pazar3.db  ─┐                                                
+  P3_STANOVI_PRODAZBA/data/pazar3.db ─┤                                              
+  P3_KUKJI_RENTA/data/pazar3.db    ─┤                                                
+  P3_KUKJI_PRODAZBA/data/pazar3.db  ─┤                                               
+  P3_DELOVEN_RENTA/data/pazar3.db  ─┤                                                
+  P3_DELOVEN_PRODAZBA/data/pazar3.db ─┤                                              
+  P3_BARAKI_RENTA/data/pazar3.db   ─┤                                                
+  P3_BARAKI_PRODAZBA/data/pazar3.db ─┤                                               
+  P3_VIKENDICI_PRODAZBA/data/pazar3.db─┤                                             
+                                      │                                              
+  R5_STANOVI_PRODAZBA/data/reklama5.db─┤                                             
+  R5_STANOVI_RENTA/data/reklama5.db ─┤    serve_ana.py                               
+  R5_KUKJI_PRODAZBA/data/reklama5.db─┤   ─────────────                               
+  R5_KUKJI_RENTA/data/reklama5.db   ─┤   Reads all 29 DBs                            
+  R5_VIKENDICI_PRODAZBA/data/reklama5.db─┤ Filters by status                         
+  R5_DELOVEN_PRODAZBA/data/reklama5.db─┤ Deduplicates by phone                      ▀
+  R5_DELOVEN_RENTA/data/reklama5.db  ─┤ Sorts by priority                            
+  R5_DELOVEN_MIXED/data/reklama5.db ─┤ Outputs ONE CSV                               
+  R5_GARAZI_PRODAZBA/data/reklama5.db─┤                                              
+  R5_PLOCOVI/data/reklama5.db      ─┤       │                                        
+  R5_MAGACINI/data/reklama5.db     ─┤       │                                        
+  R5_BARAKI_KONTEJNERI/data/reklama5.db ─┘   │                                       
+                                              ▼                                      
+  I247_PLACEVI_PRODAZBA/data/imoti247.db ─┐  output/                                 
+  I247_STANOVI_PRODAZBA/data/imoti247.db ─┤  ana_batch_2026-08-28.csv                
+  I247_STANOVI_RENTA/data/imoti247.db    ─┤       ▲                                  
+  I247_KUKJI_PRODAZBA/data/imoti247.db  ─┤       │                                   
+  I247_KUKJI_RENTA/data/imoti247.db     ─┤       │                                   
+  I247_DELOVNI_PRODAZBA/data/imoti247.db ─┤       │                                  
+  I247_DELOVNI_RENTA/data/imoti247.db   ─┤       │                                   
+  I247_VIKENDICI_PRODAZBA/data/imoti247.db─┘       │                                 
+                                                   │                                 
+                                      Ana opens THIS FILE        
+                                                                    
+                                      In Excel / LibreOffice                         
+                                                                                     
+  Why Individual DBs + Combined CSV?                                                 
+                                                                                     
+  ┌───────────────────┬───────────────────┬───────────────────────────────────┐      
+  │ Component         │ Who Uses It       │ Why Separate                      │      
+  ├───────────────────┼───────────────────┼───────────────────────────────────┤      
+  │ Individual DBs    │ Scrapers write to │ Isolation — one category fails,   │      
+  │ (×29)             │ them              │ others fine                       │      
+  │ Combined CSV      │ Ana reads it      │ One file to work with, not 29     │      
+  │ serve_ana.py      │ Bridge between    │ Reads DBs, writes CSV             │      
+  │                   │ the two           │                                   │      
+  └───────────────────┴───────────────────┴───────────────────────────────────┘      
+                                                                                     
+  The DBs are the source of truth. The CSV is a view of that truth, filtered and     
+  sorted for Ana's workflow.                                                         
+                                                                                     
+  Can Ana Pull Directly From Individual DBs?                                         
+                                                                                     
+  Technically yes — she could open any  data/pazar3.db  in a SQLite browser. But:    
+  - She'd need to open 29 separate files                                            ▄
+  - No priority sorting                                                              
+  - No cross-site deduplication                                                      
+  - No status filtering (she'd see contacted/accepted/dead leads too)                
+  - She'd need to know which categories to check                                     
+                                                                                     
+  The combined CSV solves all of this. One file, pre-sorted, pre-filtered, ready     
+  to call.                                                                           
+                                                                     ⎘ • 33s • △▽    
+                                                                                              
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+                                                            
