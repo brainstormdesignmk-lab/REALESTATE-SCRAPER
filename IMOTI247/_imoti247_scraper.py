@@ -205,7 +205,7 @@ class Imoti247Scraper:
                     self.total_skipped += 1
                     return False
 
-                self.sleep(8, 12)
+                self.sleep(2, 4)
 
                 title = self.get_real_title(wait)
                 phone = self.get_phone(ad_id)
@@ -218,7 +218,7 @@ class Imoti247Scraper:
                 self.seen_ids.add(ad_id)
                 self.total_new += 1
                 print(f"  SUCCESS -> {ad_id} | {phone[:30]} | {title[:50]}...")
-                self.sleep(6, 10)
+                self.sleep(1, 3)
                 return True
 
             except (InvalidSessionIdException, ConnectionRefusedError,
@@ -276,14 +276,14 @@ class Imoti247Scraper:
                     self.sleep(10, 15)
                     continue
 
-                self.sleep(10, 15)
+                self.sleep(3, 6)
 
                 # Scroll to load all ads
                 for _ in range(12):
                     try:
                         self.driver.execute_script(
                             f"window.scrollBy(0, {random.randint(800, 1400)});")
-                        self.sleep(0.6, 1.3)
+                        self.sleep(0.3, 0.8)
                     except Exception:
                         print("  [SCROLL] Scroll failed, continuing...")
                         break
@@ -326,7 +326,7 @@ class Imoti247Scraper:
                     self.process_single_ad(ad["id"], ad["href"], wait)
 
                 page += 1
-                self.sleep(20, 40)
+                self.sleep(5, 10)
 
         except KeyboardInterrupt:
             print("\n  INTERRUPTED BY USER")

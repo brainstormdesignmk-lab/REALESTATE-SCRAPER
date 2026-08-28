@@ -7,6 +7,7 @@ import sys
 import json
 import subprocess
 import time
+import threading
 from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -38,18 +39,41 @@ def find_all_configs():
 
     return configs
 
+# Timeout per category: 30 min for Pazar3/Reklama5, 45 min for Imoti247 (Chrome is slower)
+TIMEOUT_DEFAULT = 1800   # 30 min
+TIMEOUT_IMOTI = 2700     # 45 min
+
 def run_scraper(config_info):
-    """Run a single scraper for one category"""
+    """Run a single scraper for one category with proper timeout killing"""
     scraper = config_info["scraper"]
     config = config_info["config"]
     category = config_info["category"]
+    site = config_info["site"]
+
+    # Imoti247 uses Chrome — needs more time
+    timeout_sec = TIMEOUT_IMOTI if site == "IMOTI247" else TIMEOUT_DEFAULT
+    timeout_min = timeout_sec // 60
 
     print(f"\n{'#'*70}")
     print(f"# RUNNING: {category}")
     print(f"# Scraper: {scraper}")
     print(f"# Config:  {config}")
+    print(f"# Timeout: {timeout_min} min")
     print(f"# Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"{'#'*70}")
+
+    process = None
+    timed_out = threading.Event()
+
+    def timeout_killer():
+        """Runs in a thread — kills the process after timeout"""
+        timed_out.wait(timeout_sec)
+        if not timed_out.is_set() and process and process.poll() is None:
+            print(f"\n⏰ KILLING {category} — exceeded {timeout_min} min timeout")
+            try:
+                process.kill()  # SIGKILL
+            except OSError:
+                pass
 
     try:
         process = subprocess.Popen(
@@ -61,11 +85,17 @@ def run_scraper(config_info):
             bufsize=1
         )
 
+        # Start the watchdog timer
+        killer = threading.Thread(target=timeout_killer, daemon=True)
+        killer.start()
+
         # Stream output live — every line appears as it's produced
         for line in process.stdout:
             print(f"   {line}", end="")
 
-        process.wait(timeout=3600)  # 1 hour max per category
+        # stdout closed — process is done or hung
+        process.wait(timeout=10)
+        timed_out.set()  # Signal the killer thread to stop
 
         if process.returncode == 0:
             print(f"✅ {category} — COMPLETED")
@@ -74,12 +104,11 @@ def run_scraper(config_info):
 
         return process.returncode == 0
 
-    except subprocess.TimeoutExpired:
-        process.kill()
-        print(f"⏰ {category} — TIMEOUT (1 hour)")
-        return False
     except Exception as e:
         print(f"💥 {category} — ERROR: {e}")
+        if process and process.poll() is None:
+            process.kill()
+        timed_out.set()
         return False
 
 def main():
