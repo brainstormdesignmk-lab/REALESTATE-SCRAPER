@@ -44,19 +44,21 @@ PAGE_LOAD_RETRIES = 2
 AD_TIMEOUT = 90          # Skip ad if processing takes longer than 90s
 RESTART_EVERY = 50       # Restart Chrome every N ads to prevent memory leak
 
-def kill_all_chrome():
-    """Nuclear cleanup — kill ALL chrome/chromedriver processes for this user"""
-    for proc_name in ['google-chrome', 'chrome', 'chromedriver', 'undetected_chromedriver']:
+# Track scraper Chrome PID — only kill OUR Chrome, not the user's browser
+_scraper_chrome_pid = None
+
+def kill_scraper_chrome():
+    """Kill only the Chrome process tree started by this scraper"""
+    global _scraper_chrome_pid
+    if _scraper_chrome_pid:
         try:
-            sp.run(['pkill', '-9', '-f', proc_name],
+            sp.run(['pkill', '-9', '-P', str(_scraper_chrome_pid)],
+                   stdout=sp.DEVNULL, stderr=sp.DEVNULL, timeout=5)
+            sp.run(['kill', '-9', str(_scraper_chrome_pid)],
                    stdout=sp.DEVNULL, stderr=sp.DEVNULL, timeout=5)
         except Exception:
             pass
-
-# Register cleanup on ANY exit — normal, crash, SIGTERM, SIGINT
-atexit.register(kill_all_chrome)
-signal.signal(signal.SIGTERM, lambda s, f: (kill_all_chrome(), sys.exit(1)))
-signal.signal(signal.SIGINT, lambda s, f: (kill_all_chrome(), sys.exit(1)))
+        _scraper_chrome_pid = None
 
 
 class Imoti247Scraper:
@@ -92,6 +94,7 @@ class Imoti247Scraper:
             except Exception:
                 pass
             self.driver = None
+            kill_scraper_chrome()  # Kill by PID, not all Chrome
             time.sleep(5)  # Let Chrome fully die before restart
 
         print(f"  [CHROME] Starting fresh Chrome instance (restart #{self.chrome_restarts})...")
@@ -120,6 +123,14 @@ class Imoti247Scraper:
             version_main=151
         )
 
+        # Track OUR Chrome PID — only kill this, not the user's browser
+        global _scraper_chrome_pid
+        try:
+            _scraper_chrome_pid = driver.service.process.pid
+            print(f"  [CHROME] PID: {_scraper_chrome_pid}")
+        except Exception:
+            _scraper_chrome_pid = None
+
         driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
             "source": """
                 Object.defineProperty(navigator, 'webdriver', {get: () => false});
@@ -142,6 +153,9 @@ class Imoti247Scraper:
         if self.chrome_restarts > MAX_CHROME_RESTARTS:
             print(f"  [CHROME] Max restarts ({MAX_CHROME_RESTARTS}) reached. Giving up.")
             return None
+
+        # Kill our old Chrome process by PID
+        kill_scraper_chrome()
 
         # Wait before restart to let system recover
         wait_time = 10 * self.chrome_restarts  # 10s, 20s, 30s
@@ -448,6 +462,7 @@ class Imoti247Scraper:
                 self.driver.quit()
             except Exception:
                 pass
+            kill_scraper_chrome()
 
         print(f"\n{'='*60}")
         print(f"DONE — {self.category}")
