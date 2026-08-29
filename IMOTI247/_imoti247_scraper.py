@@ -17,6 +17,7 @@ import time
 import random
 import signal
 import atexit
+import threading
 import subprocess as sp
 import requests as http_requests
 from datetime import datetime
@@ -40,6 +41,8 @@ from utils import normalize_phone, init_db, ad_exists, insert_ad
 MAX_CHROME_RESTARTS = 3
 MAX_AD_RETRIES = 2
 PAGE_LOAD_RETRIES = 2
+AD_TIMEOUT = 90          # Skip ad if processing takes longer than 90s
+RESTART_EVERY = 50       # Restart Chrome every N ads to prevent memory leak
 
 def kill_all_chrome():
     """Nuclear cleanup — kill ALL chrome/chromedriver processes for this user"""
@@ -145,29 +148,20 @@ class Imoti247Scraper:
             return None
 
     def safe_page_load(self, url, retries=PAGE_LOAD_RETRIES):
-        """Load a URL with retry logic. Returns True if page loaded, False if all retries failed."""
+        """Load a URL with hard timeout + retry. Returns True if page loaded, False if all retries failed."""
         for attempt in range(retries + 1):
-            try:
-                self.driver.get(url)
+            if self.timed_get(url, timeout=60):
                 return True
-            except (TimeoutException, WebDriverException,
-                    InvalidSessionIdException, ConnectionRefusedError,
-                    ConnectionResetError, OSError) as e:
-                print(f"  [PAGE LOAD] Attempt {attempt+1}/{retries+1} failed: {type(e).__name__}")
-                if attempt < retries:
-                    # Try Chrome restart
-                    new_driver = self.restart_chrome(str(e))
-                    if new_driver is None:
-                        return False
-                    self.driver = new_driver
-                    try:
-                        self.driver.get(url)
-                        return True
-                    except Exception as e2:
-                        print(f"  [PAGE LOAD] Post-restart load also failed: {e2}")
-                else:
-                    print(f"  [PAGE LOAD] All {retries+1} attempts failed for {url}")
+            print(f"  [PAGE LOAD] Attempt {attempt+1}/{retries+1} failed: timed out or error")
+            if attempt < retries:
+                new_driver = self.restart_chrome(str(f"page load attempt {attempt+1}"))
+                if new_driver is None:
                     return False
+                self.driver = new_driver
+                if self.timed_get(url, timeout=60):
+                    return True
+                print(f"  [PAGE LOAD] Post-restart load also failed")
+        print(f"  [PAGE LOAD] All {retries+1} attempts failed for {url}")
         return False
 
     def get_phone(self, ad_id):
@@ -213,52 +207,117 @@ class Imoti247Scraper:
     def sleep(self, a=0.7, b=1.8):
         time.sleep(random.uniform(a, b))
 
-    def process_single_ad(self, ad_id, ad_url, wait):
-        """Process one ad with retry. Returns True if saved, False if skipped."""
-        for attempt in range(MAX_AD_RETRIES + 1):
+    def timed_get(self, url, timeout=60):
+        """Load URL with a hard timeout via thread. Returns True/False."""
+        result = [False]
+        def _load():
             try:
-                if not self.safe_page_load(ad_url):
-                    print(f"  SKIP -> {ad_id} | page load failed after all retries")
-                    self.total_skipped += 1
-                    return False
+                self.driver.get(url)
+                result[0] = True
+            except Exception:
+                pass
+        t = threading.Thread(target=_load, daemon=True)
+        t.start()
+        t.join(timeout)
+        if t.is_alive():
+            print(f"  [HARD TIMEOUT] {url} did not load in {timeout}s")
+            return False
+        return result[0]
 
-                self.sleep(2, 4)
+    def timed_script(self, script, timeout=15):
+        """Execute JS with hard timeout. Returns result or None."""
+        result = [None]
+        def _run():
+            try:
+                result[0] = self.driver.execute_script(script)
+            except Exception:
+                pass
+        t = threading.Thread(target=_run, daemon=True)
+        t.start()
+        t.join(timeout)
+        if t.is_alive():
+            print(f"  [SCRIPT TIMEOUT] JS did not complete in {timeout}s")
+            return None
+        return result[0]
 
-                title = self.get_real_title(wait)
-                phone = self.get_phone(ad_id)
-                images = self.get_images(ad_url)
+    def timed_find(self, by, value, timeout=15):
+        """Find elements with hard timeout. Returns list or empty list."""
+        result = [[]]
+        def _find():
+            try:
+                result[0] = self.driver.find_elements(by, value)
+            except Exception:
+                pass
+        t = threading.Thread(target=_find, daemon=True)
+        t.start()
+        t.join(timeout)
+        if t.is_alive():
+            print(f"  [FIND TIMEOUT] find_elements did not complete in {timeout}s")
+            return []
+        return result[0]
 
-                # Save to DB (immediately — no data loss)
-                insert_ad(self.cur, self.conn, ad_id, title, "N/A", "N/A",
-                          phone, images, ad_url, self.site, self.category)
-
-                self.seen_ids.add(ad_id)
-                self.total_new += 1
-                print(f"  SUCCESS -> {ad_id} | {phone[:30]} | {title[:50]}...")
-                self.sleep(1, 3)
-                return True
-
-            except (InvalidSessionIdException, ConnectionRefusedError,
-                    ConnectionResetError, OSError) as e:
-                print(f"  [AD ERROR] {ad_id} attempt {attempt+1}: {type(e).__name__}: {e}")
-                if attempt < MAX_AD_RETRIES:
-                    new_driver = self.restart_chrome(str(e))
-                    if new_driver is None:
+    def process_single_ad(self, ad_id, ad_url, wait):
+        """Process one ad with hard timeout watchdog. Returns True if saved, False if skipped."""
+        result = [False]
+        def _process():
+            for attempt in range(MAX_AD_RETRIES + 1):
+                try:
+                    if not self.safe_page_load(ad_url):
+                        print(f"  SKIP -> {ad_id} | page load failed after all retries")
                         self.total_skipped += 1
-                        return False
-                    self.driver = new_driver
-                    wait = WebDriverWait(self.driver, 20)
-                else:
+                        return
+
+                    self.sleep(2, 4)
+
+                    title = self.get_real_title(wait)
+                    phone = self.get_phone(ad_id)
+                    images = self.get_images(ad_url)
+
+                    insert_ad(self.cur, self.conn, ad_id, title, "N/A", "N/A",
+                              phone, images, ad_url, self.site, self.category)
+
+                    self.seen_ids.add(ad_id)
+                    self.total_new += 1
+                    print(f"  SUCCESS -> {ad_id} | {phone[:30]} | {title[:50]}...")
+                    self.sleep(1, 3)
+                    result[0] = True
+                    return
+
+                except (InvalidSessionIdException, ConnectionRefusedError,
+                        ConnectionResetError, OSError) as e:
+                    print(f"  [AD ERROR] {ad_id} attempt {attempt+1}: {type(e).__name__}: {e}")
+                    if attempt < MAX_AD_RETRIES:
+                        new_driver = self.restart_chrome(str(e))
+                        if new_driver is None:
+                            self.total_skipped += 1
+                            return
+                        self.driver = new_driver
+                        wait = WebDriverWait(self.driver, 20)
+                    else:
+                        self.total_skipped += 1
+                        return
+
+                except Exception as e:
+                    print(f"  [AD ERROR] {ad_id} unexpected: {type(e).__name__}: {e}")
                     self.total_skipped += 1
-                    return False
+                    return
 
-            except Exception as e:
-                print(f"  [AD ERROR] {ad_id} unexpected: {type(e).__name__}: {e}")
-                self.total_skipped += 1
-                return False
+            self.total_skipped += 1
 
-        self.total_skipped += 1
-        return False
+        t = threading.Thread(target=_process, daemon=True)
+        t.start()
+        t.join(AD_TIMEOUT)
+
+        if t.is_alive():
+            print(f"  [WATCHDOG] Ad {ad_id} exceeded {AD_TIMEOUT}s — killing Chrome")
+            self.total_skipped += 1
+            try:
+                self.driver.quit()
+            except Exception:
+                pass
+            self.driver = None
+
+        return result[0]
 
     def scrape(self):
         print(f"\n{'='*60}")
@@ -299,28 +358,33 @@ class Imoti247Scraper:
 
                 self.sleep(3, 6)
 
-                # Scroll to load all ads
+                # Scroll to load all ads (with hard timeout)
                 for _ in range(12):
-                    try:
-                        self.driver.execute_script(
-                            f"window.scrollBy(0, {random.randint(800, 1400)});")
-                        self.sleep(0.3, 0.8)
-                    except Exception:
-                        print("  [SCROLL] Scroll failed, continuing...")
+                    result = self.timed_script(
+                        f"window.scrollBy(0, {random.randint(800, 1400)});", timeout=10)
+                    if result is None:
+                        print("  [SCROLL] Scroll timed out, breaking...")
                         break
+                    self.sleep(0.3, 0.8)
 
-                # Collect unique ad links
+                # Collect unique ad links (with hard timeout)
+                links = self.timed_find(
+                    By.XPATH, "//a[contains(@href,'.html') and contains(@href,'-')]")
+                if not links:
+                    print(f"  [COLLECT] No links found (timed out?) on page {page}")
+                    page += 1
+                    self.sleep(5, 10)
+                    continue
+
                 try:
-                    links = self.driver.find_elements(
-                        By.XPATH, "//a[contains(@href,'.html') and contains(@href,'-')]")
                     unique_links = set(
                         link.get_attribute("href") for link in links
                         if link.get_attribute("href") and "imoti247.com" in link.get_attribute("href")
                     )
                 except Exception as e:
-                    print(f"  [COLLECT] Failed to collect links: {e}")
+                    print(f"  [COLLECT] Failed to process links: {e}")
                     page += 1
-                    self.sleep(10, 15)
+                    self.sleep(5, 10)
                     continue
 
                 new_ads = []
@@ -341,13 +405,32 @@ class Imoti247Scraper:
                 else:
                     empty_streak = 0
 
+                ads_since_restart = 0
                 for ad in new_ads:
                     # Refresh wait object in case Chrome was restarted
                     wait = WebDriverWait(self.driver, 20)
                     self.process_single_ad(ad["id"], ad["href"], wait)
 
+                    # Preventive Chrome restart every N ads to avoid memory leak
+                    ads_since_restart += 1
+                    if ads_since_restart >= RESTART_EVERY and self.driver:
+                        print(f"  [PREVENTIVE RESTART] {RESTART_EVERY} ads processed — restarting Chrome")
+                        try:
+                            self.driver.quit()
+                        except Exception:
+                            pass
+                        self.driver = None
+                        self.chrome_restarts += 1
+                        time.sleep(5)
+                        new_driver = self.create_driver()
+                        if new_driver is None:
+                            print("  [FATAL] Cannot restart Chrome")
+                            return
+                        wait = WebDriverWait(self.driver, 20)
+                        ads_since_restart = 0
+
                 page += 1
-                self.sleep(5, 10)
+                self.sleep(3, 6)
 
         except KeyboardInterrupt:
             print("\n  INTERRUPTED BY USER")
