@@ -15,6 +15,9 @@ import json
 import re
 import time
 import random
+import signal
+import atexit
+import subprocess as sp
 import requests as http_requests
 from datetime import datetime
 from bs4 import BeautifulSoup
@@ -37,6 +40,20 @@ from utils import normalize_phone, init_db, ad_exists, insert_ad
 MAX_CHROME_RESTARTS = 3
 MAX_AD_RETRIES = 2
 PAGE_LOAD_RETRIES = 2
+
+def kill_all_chrome():
+    """Nuclear cleanup — kill ALL chrome/chromedriver processes for this user"""
+    for proc_name in ['google-chrome', 'chrome', 'chromedriver', 'undetected_chromedriver']:
+        try:
+            sp.run(['pkill', '-9', '-f', proc_name],
+                   stdout=sp.DEVNULL, stderr=sp.DEVNULL, timeout=5)
+        except Exception:
+            pass
+
+# Register cleanup on ANY exit — normal, crash, SIGTERM, SIGINT
+atexit.register(kill_all_chrome)
+signal.signal(signal.SIGTERM, lambda s, f: (kill_all_chrome(), sys.exit(1)))
+signal.signal(signal.SIGINT, lambda s, f: (kill_all_chrome(), sys.exit(1)))
 
 
 class Imoti247Scraper:
@@ -250,6 +267,10 @@ class Imoti247Scraper:
         print(f"Pages: {self.pages}")
         print(f"DB: {self.db_path}")
         print(f"{'='*60}")
+
+        # Clean up any leftover Chrome from previous crashed runs
+        kill_all_chrome()
+        time.sleep(2)
 
         # Create initial Chrome instance
         try:

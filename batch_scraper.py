@@ -8,6 +8,7 @@ import json
 import subprocess
 import time
 import threading
+import signal
 from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -65,15 +66,24 @@ def run_scraper(config_info):
     process = None
     timed_out = threading.Event()
 
+    def kill_children(parent_pid):
+        """Kill all child processes (Chrome/chromedriver) of a given parent"""
+        try:
+            # Kill process group — ensures all children die
+            os.killpg(os.getpgid(parent_pid), signal.SIGKILL)
+        except (ProcessLookupError, PermissionError, OSError):
+            pass
+        try:
+            os.kill(parent_pid, signal.SIGKILL)
+        except (ProcessLookupError, PermissionError, OSError):
+            pass
+
     def timeout_killer():
-        """Runs in a thread — kills the process after timeout"""
+        """Runs in a thread — kills the process AND its Chrome children after timeout"""
         timed_out.wait(timeout_sec)
         if not timed_out.is_set() and process and process.poll() is None:
             print(f"\n⏰ KILLING {category} — exceeded {timeout_min} min timeout")
-            try:
-                process.kill()  # SIGKILL
-            except OSError:
-                pass
+            kill_children(process.pid)
 
     try:
         process = subprocess.Popen(
@@ -82,7 +92,8 @@ def run_scraper(config_info):
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,
-            bufsize=1
+            bufsize=1,
+            preexec_fn=os.setsid  # New process group — killpg kills all children
         )
 
         # Start the watchdog timer
@@ -102,12 +113,18 @@ def run_scraper(config_info):
         else:
             print(f"❌ {category} — FAILED (exit code {process.returncode})")
 
+        # Clean up any orphaned Chrome children even on normal exit
+        try:
+            kill_children(process.pid)
+        except Exception:
+            pass
+
         return process.returncode == 0
 
     except Exception as e:
         print(f"💥 {category} — ERROR: {e}")
         if process and process.poll() is None:
-            process.kill()
+            kill_children(process.pid)
         timed_out.set()
         return False
 
