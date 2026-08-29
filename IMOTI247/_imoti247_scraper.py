@@ -332,7 +332,7 @@ class Imoti247Scraper:
         print(f"{'='*60}")
 
         # Clean up any leftover Chrome from previous crashed runs
-        kill_all_chrome()
+        kill_scraper_chrome()
         time.sleep(2)
 
         # Create initial Chrome instance
