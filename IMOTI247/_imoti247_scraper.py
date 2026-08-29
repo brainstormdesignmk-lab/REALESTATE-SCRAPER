@@ -264,67 +264,50 @@ class Imoti247Scraper:
         return result[0]
 
     def process_single_ad(self, ad_id, ad_url, wait):
-        """Process one ad with hard timeout watchdog. Returns True if saved, False if skipped."""
-        result = [False]
-        def _process():
-            for attempt in range(MAX_AD_RETRIES + 1):
-                try:
-                    if not self.safe_page_load(ad_url):
-                        print(f"  SKIP -> {ad_id} | page load failed after all retries")
-                        self.total_skipped += 1
-                        return
-
-                    self.sleep(2, 4)
-
-                    title = self.get_real_title(wait)
-                    phone = self.get_phone(ad_id)
-                    images = self.get_images(ad_url)
-
-                    insert_ad(self.cur, self.conn, ad_id, title, "N/A", "N/A",
-                              phone, images, ad_url, self.site, self.category)
-
-                    self.seen_ids.add(ad_id)
-                    self.total_new += 1
-                    print(f"  SUCCESS -> {ad_id} | {phone[:30]} | {title[:50]}...")
-                    self.sleep(1, 3)
-                    result[0] = True
-                    return
-
-                except (InvalidSessionIdException, ConnectionRefusedError,
-                        ConnectionResetError, OSError) as e:
-                    print(f"  [AD ERROR] {ad_id} attempt {attempt+1}: {type(e).__name__}: {e}")
-                    if attempt < MAX_AD_RETRIES:
-                        new_driver = self.restart_chrome(str(e))
-                        if new_driver is None:
-                            self.total_skipped += 1
-                            return
-                        self.driver = new_driver
-                        wait = WebDriverWait(self.driver, 20)
-                    else:
-                        self.total_skipped += 1
-                        return
-
-                except Exception as e:
-                    print(f"  [AD ERROR] {ad_id} unexpected: {type(e).__name__}: {e}")
-                    self.total_skipped += 1
-                    return
-
-            self.total_skipped += 1
-
-        t = threading.Thread(target=_process, daemon=True)
-        t.start()
-        t.join(AD_TIMEOUT)
-
-        if t.is_alive():
-            print(f"  [WATCHDOG] Ad {ad_id} exceeded {AD_TIMEOUT}s — killing Chrome")
-            self.total_skipped += 1
+        """Process one ad. Returns True if saved, False if skipped."""
+        for attempt in range(MAX_AD_RETRIES + 1):
             try:
-                self.driver.quit()
-            except Exception:
-                pass
-            self.driver = None
+                if not self.safe_page_load(ad_url):
+                    print(f"  SKIP -> {ad_id} | page load failed after all retries")
+                    self.total_skipped += 1
+                    return False
 
-        return result[0]
+                self.sleep(2, 4)
+
+                title = self.get_real_title(wait)
+                phone = self.get_phone(ad_id)
+                images = self.get_images(ad_url)
+
+                insert_ad(self.cur, self.conn, ad_id, title, "N/A", "N/A",
+                          phone, images, ad_url, self.site, self.category)
+
+                self.seen_ids.add(ad_id)
+                self.total_new += 1
+                print(f"  SUCCESS -> {ad_id} | {phone[:30]} | {title[:50]}...")
+                self.sleep(1, 3)
+                return True
+
+            except (InvalidSessionIdException, ConnectionRefusedError,
+                    ConnectionResetError, OSError) as e:
+                print(f"  [AD ERROR] {ad_id} attempt {attempt+1}: {type(e).__name__}: {e}")
+                if attempt < MAX_AD_RETRIES:
+                    new_driver = self.restart_chrome(str(e))
+                    if new_driver is None:
+                        self.total_skipped += 1
+                        return False
+                    self.driver = new_driver
+                    wait = WebDriverWait(self.driver, 20)
+                else:
+                    self.total_skipped += 1
+                    return False
+
+            except Exception as e:
+                print(f"  [AD ERROR] {ad_id} unexpected: {type(e).__name__}: {e}")
+                self.total_skipped += 1
+                return False
+
+        self.total_skipped += 1
+        return False
 
     def scrape(self):
         print(f"\n{'='*60}")
