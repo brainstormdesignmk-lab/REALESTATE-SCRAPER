@@ -104,6 +104,13 @@ class Imoti247Scraper:
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--headless=new")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--disable-extensions")
+        options.add_argument("--disable-features=VizDisplayCompositor")
+        options.add_argument("--js-flags=--max-old-space-size=256")
+        options.add_argument("--disk-cache-size=10485760")
+        options.add_argument("--media-cache-size=10485760")
+        options.add_argument("--aggressive-cache-discard")
 
         service = Service(ChromeDriverManager().install())
         driver = uc.Chrome(
@@ -358,20 +365,37 @@ class Imoti247Scraper:
 
                 self.sleep(3, 6)
 
-                # Scroll to load all ads (with hard timeout)
-                for _ in range(12):
-                    result = self.timed_script(
-                        f"window.scrollBy(0, {random.randint(800, 1400)});", timeout=10)
-                    if result is None:
-                        print("  [SCROLL] Scroll timed out, breaking...")
-                        break
-                    self.sleep(0.3, 0.8)
+                # Scroll to load all ads — direct Selenium call (no threaded timeout)
+                # The CDP pipe deadlocks if we abandon threads, so we block the main thread.
+                try:
+                    for _ in range(12):
+                        self.driver.execute_script(
+                            f"window.scrollBy(0, {random.randint(800, 1400)});")
+                        self.sleep(0.3, 0.8)
+                except Exception as e:
+                    print(f"  [SCROLL] Scroll failed: {type(e).__name__}: {e} — restarting Chrome")
+                    new_driver = self.restart_chrome(f"scroll failed: {e}")
+                    if new_driver:
+                        self.driver = new_driver
+                    page += 1
+                    self.sleep(5, 10)
+                    continue
 
-                # Collect unique ad links (with hard timeout)
-                links = self.timed_find(
-                    By.XPATH, "//a[contains(@href,'.html') and contains(@href,'-')]")
+                # Collect unique ad links — direct Selenium call
+                try:
+                    links = self.driver.find_elements(
+                        By.XPATH, "//a[contains(@href,'.html') and contains(@href,'-')]")
+                except Exception as e:
+                    print(f"  [COLLECT] Find links failed: {type(e).__name__}: {e} — restarting Chrome")
+                    new_driver = self.restart_chrome(f"find_elements failed: {e}")
+                    if new_driver:
+                        self.driver = new_driver
+                    page += 1
+                    self.sleep(5, 10)
+                    continue
+
                 if not links:
-                    print(f"  [COLLECT] No links found (timed out?) on page {page}")
+                    print(f"  [COLLECT] No links found on page {page}")
                     page += 1
                     self.sleep(5, 10)
                     continue
