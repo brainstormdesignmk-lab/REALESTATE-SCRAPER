@@ -11,6 +11,12 @@ import threading
 import signal
 from datetime import datetime
 
+# Force ALL print() calls to flush immediately — fixes SSH live output
+_original_print = print
+def print(*args, **kwargs):
+    kwargs.setdefault('flush', True)
+    return _original_print(*args, **kwargs)
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def find_all_configs():
@@ -42,7 +48,7 @@ def find_all_configs():
 
 # Timeout per category: 30 min for Pazar3/Reklama5, 45 min for Imoti247 (Chrome is slower)
 TIMEOUT_DEFAULT = 1800   # 30 min
-TIMEOUT_IMOTI = 2700     # 45 min
+TIMEOUT_IMOTI = 7200    # 120 min
 
 def run_scraper(config_info):
     """Run a single scraper for one category with proper timeout killing"""
