@@ -58,6 +58,29 @@ def check_scrapling():
         return False
 
 
+def check_browser():
+    """Report which browser the IMOTI247 stealth scrapers will use."""
+    import shutil
+
+    bundled = None
+    try:
+        from browser import bundled_browser_path, describe
+        bundled = bundled_browser_path(BASE_DIR)
+        print(describe(BASE_DIR))
+    except Exception as e:
+        print(f"Bundled browser: (browser.py not importable: {e})")
+
+    system = [b for b in ("google-chrome", "google-chrome-stable",
+                          "chromium", "chromium-browser") if shutil.which(b)]
+    if system:
+        print(f"System Chrome/Chromium on PATH: {', '.join(system)}")
+    if not bundled and not system:
+        warnings.append(
+            "No bundled browser and no system Chrome/Chromium — IMOTI247 needs "
+            "one. Run ./install_browser.sh --cft (or install Chrome)."
+        )
+
+
 def check_layout():
     total = 0
     for site in SITES:
@@ -142,6 +165,8 @@ def main():
 
     check_python()
     check_scrapling()
+    print("\nBrowser (IMOTI247):")
+    check_browser()
     print("\nLayout:")
     check_layout()
 

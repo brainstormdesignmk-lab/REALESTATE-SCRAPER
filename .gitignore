@@ -29,3 +29,7 @@ venv/
 # Remote monitor runtime
 output/
 
+# Bundled browser (installed by install_browser.sh)
+browsers/
+*.zip
+

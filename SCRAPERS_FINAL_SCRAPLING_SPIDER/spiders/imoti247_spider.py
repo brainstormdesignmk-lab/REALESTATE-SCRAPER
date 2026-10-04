@@ -10,10 +10,17 @@ from __future__ import annotations
 
 import os
 import re
+import sys
 import shutil
 
 from scrapling.spiders import Request
 from scrapling.fetchers import FetcherSession, AsyncStealthySession
+
+# Pick up a browser bundled inside the project folder (pinned version) if present.
+_SHARED = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "_shared")
+if _SHARED not in sys.path:
+    sys.path.insert(0, _SHARED)
+from browser import browser_launch_kwargs  # noqa: E402
 
 
 def _real_chrome() -> bool:
@@ -55,6 +62,8 @@ class Imoti247Spider(BaseCategorySpider):
     def configure_sessions(self, manager):
         manager.add("http", FetcherSession(impersonate="chrome", stealthy_headers=True,
                                            retries=3, timeout=30.0))
+        browser_kwargs = {"real_chrome": _real_chrome()}
+        browser_kwargs.update(browser_launch_kwargs())
         manager.add(
             "browser",
             AsyncStealthySession(
@@ -63,7 +72,7 @@ class Imoti247Spider(BaseCategorySpider):
                 timeout=60000,
                 disable_resources=False,
                 page_action=_scroll_listing,
-                real_chrome=_real_chrome(),
+                **browser_kwargs,
             ),
             lazy=True,
         )

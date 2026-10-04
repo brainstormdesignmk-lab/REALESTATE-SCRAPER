@@ -29,6 +29,7 @@ __all__ = [
     "open_session",
     "robust_get",
     "robust_fetch",
+    "retry_after_seconds",
     "status_of",
     "html_of",
     "chrome_available",
@@ -65,6 +66,25 @@ RETRY_STATUS = (403, 429, 500, 502, 503, 504)
 # Chrome version in curl_cffi. Set SCRAPING_IMPERSONATE to override, e.g.
 # "chrome110" or "firefox" if a site starts blocking the default.
 IMPERSONATE = os.environ.get("SCRAPING_IMPERSONATE", "chrome")
+
+
+try:  # bundled-browser support lives next to this file
+    from browser import (
+        browser_launch_kwargs as _bundled_browser_kwargs,
+        bundled_browser_path as bundled_browser_path,
+        describe as describe_browser,
+    )
+except Exception:  # pragma: no cover - browser.py should always be present
+    def bundled_browser_path(root=None):  # type: ignore
+        return None
+
+    def describe_browser(root=None):  # type: ignore
+        return "bundled browser: unknown (browser.py not importable)"
+
+    def _bundled_browser_kwargs(root=None):  # type: ignore
+        return {}
+
+__all__.extend(["bundled_browser_path", "describe_browser"])
 
 
 class ScraplingUnavailable(RuntimeError):
@@ -159,8 +179,10 @@ def stealth_session(
         "disable_resources": disable_resources,
         "retries": retries,
     }
-    # Prefer the installed system Chrome (no browser download needed).
+    # Prefer a browser bundled in the project folder (pinned version); if none,
+    # fall back to the installed system Chrome (no browser download needed).
     kwargs.setdefault("real_chrome", default_real_chrome())
+    kwargs.update(_bundled_browser_kwargs())
     kwargs.update(extra)
     return StealthySession(**kwargs)
 
@@ -181,7 +203,36 @@ def html_of(resp) -> str:
     return getattr(resp, "html_content", None) or ""
 
 
-def _retry_loop(do_request, target, attempts, base_delay, factor, max_delay):
+def retry_after_seconds(resp) -> Optional[float]:
+    """Seconds to wait per the response's `Retry-After` header, if present.
+
+    Cloudflare throttles Pazar3 with `HTTP 503` + `Retry-After: 30`; honouring
+    that beats guessing with a fixed backoff. Handles both the delay-seconds and
+    the HTTP-date form, and never returns a negative value.
+    """
+    try:
+        headers = getattr(resp, "headers", None) or {}
+        raw = headers.get("retry-after") or headers.get("Retry-After")
+    except Exception:
+        return None
+    if not raw:
+        return None
+    raw = str(raw).strip()
+    if raw.isdigit():
+        return float(raw)
+    try:  # HTTP-date form, e.g. "Sun, 04 Oct 2026 22:58:39 GMT"
+        from email.utils import parsedate_to_datetime
+        from datetime import datetime, timezone
+        when = parsedate_to_datetime(raw)
+        if when.tzinfo is None:
+            when = when.replace(tzinfo=timezone.utc)
+        return max(0.0, (when - datetime.now(timezone.utc)).total_seconds())
+    except Exception:
+        return None
+
+
+def _retry_loop(do_request, target, attempts, base_delay, factor, max_delay,
+                respect_retry_after: bool = True):
     last = None
     for i in range(attempts):
         try:
@@ -190,11 +241,20 @@ def _retry_loop(do_request, target, attempts, base_delay, factor, max_delay):
             status = status_of(resp)
             if status not in RETRY_STATUS:
                 return resp
-            print(f"  [retry {i + 1}/{attempts}] HTTP {status} -> backing off")
+            wait = retry_after_seconds(resp) if respect_retry_after else None
+            if wait is not None:
+                print(f"  [retry {i + 1}/{attempts}] HTTP {status} -> Retry-After {wait:.0f}s")
+            else:
+                print(f"  [retry {i + 1}/{attempts}] HTTP {status} -> backing off")
         except Exception as e:
+            wait = None
             print(f"  [retry {i + 1}/{attempts}] {type(e).__name__}: {e}")
         if i < attempts - 1:
-            time.sleep(min(max_delay, base_delay * (factor ** i)))
+            if wait is None:
+                # Capped exponential backoff for our own guesses.
+                wait = min(max_delay, base_delay * (factor ** i))
+            # A server-provided Retry-After is honoured even if > max_delay.
+            time.sleep(wait)
     return last
 
 
@@ -202,8 +262,10 @@ def robust_get(session, url, attempts: int = 4, base_delay: float = 3.0,
                factor: float = 2.0, max_delay: float = 30.0, **kwargs):
     """`session.get(url)` with explicit retry/backoff on throttle statuses.
 
-    Returns the last Response (which may still be a 5xx if every attempt
-    failed) so the caller can inspect and report it.
+    Honours a server `Retry-After` header (Cloudflare returns 503 + Retry-After
+    for Pazar3) before falling back to capped exponential backoff. Returns the
+    last Response (which may still be a 5xx if every attempt failed) so the
+    caller can inspect and report it.
     """
     return _retry_loop(lambda: session.get(url, **kwargs), url, attempts,
                        base_delay, factor, max_delay)

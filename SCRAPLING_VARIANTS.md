@@ -148,6 +148,55 @@ SCRAPER_ARGS="--site REKLAMA5 --limit 1" ./start_scraper_remote.sh
 
 The `*_icon.sh` wrappers open the matching script in an `urxvt` window.
 
+## Pazar3 and Cloudflare's 503
+
+Pazar3 sometimes answers `HTTP 503` with `server: cloudflare` and
+`retry-after: 30`. Measured directly (8 interleaved requests each):
+
+| Fetch method | 503s |
+|---|---|
+| original `requests` + random UA | 6/8 |
+| Scrapling `Fetcher` (curl_cffi, `stealthy_headers=True`) | 7/8 |
+| Scrapling `Fetcher` (curl_cffi, `stealthy_headers=False`) | 8/8 |
+
+So the 503 is **Cloudflare rate-limiting by IP, not a Scrapling regression** —
+the original code hits it just as hard. The migration did not introduce it; it
+only made it visible. The old scraper's handling was:
+
+```python
+if r.status_code != 200:
+    print(f"  -> Status {r.status_code}, skipping...")
+    continue          # page silently dropped, no retry, no counter
+```
+
+Every 503 page was silently discarded, so Pazar3 quietly returned fewer ads. The
+Scrapling variants instead retry and report `BLOCKED` counts.
+
+`robust_get`/`robust_fetch` now honour the server's `Retry-After` (falls back to
+capped exponential backoff otherwise), so a throttled page waits the 30s
+Cloudflare asked for instead of guessing. To reduce 503s further, lower Pazar3's
+request rate — it is a rate limit, so fewer/faster requests is the only real fix.
+
+## Pinned browser (optional)
+
+By default the IMOTI247 stealth scrapers use the installed Chrome
+(`real_chrome=True`), which a Chrome auto-update can change under you. To pin a
+version, bundle a browser inside the variant folder:
+
+```bash
+./install_browser.sh --cft            # Chrome for Testing (latest stable)
+./install_browser.sh --cft 151.0.7922.71   # a specific version
+./install_browser.sh --copy-system    # copy the machine's installed Chrome
+./install_browser.sh --status
+./install_browser.sh --remove
+```
+
+Whatever it installs lands in `<variant>/browsers/` (git-ignored). `_shared/browser.py`
+detects it automatically and the stealth sessions launch it via `executable_path`,
+so the scraper no longer depends on the machine's Chrome. Override the search with
+`SCRAPING_BROWSER_PATH=/path/to/chrome`. With nothing bundled, behaviour is exactly
+as before (installed Chrome).
+
 ## Remaining limitations
 
 - Only 1-page smoke configs were run end-to-end; a full 29-category batch has not
@@ -156,7 +205,9 @@ The `*_icon.sh` wrappers open the matching script in an `urxvt` window.
 - The MONITOR remote scripts attach a tmux session, so they need a real terminal;
   when run non-interactively (e.g. over a pipe) the session still starts but the
   attach step reports "not a terminal".
-- IMOTI247 uses system Chrome via `real_chrome=True`; if Chrome is upgraded or
-  removed, re-check it (or run `scrapling install` for a bundled browser).
-- Pazar3's 503 is intermittent and IP/throttle-related; `robust_get` mitigates it,
-  but if it worsens, slow Pazar3 down or route it through a browser session.
+- IMOTI247 uses system Chrome via `real_chrome=True` unless a browser is bundled
+  with `install_browser.sh`; run `./install_browser.sh --status` to see which one
+  is in use.
+- Pazar3's Cloudflare 503 is a per-IP rate limit and cannot be eliminated from
+  the client side; `robust_get` now waits for the server's `Retry-After` and
+  retries, which recovers most throttled pages.

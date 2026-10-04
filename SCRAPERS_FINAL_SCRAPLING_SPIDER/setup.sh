@@ -2,7 +2,7 @@
 # setup.sh — create the Scrapling venv for SCRAPERS_FINAL_SCRAPLING_SPIDER
 #
 #   ./setup.sh                  # venv + Python deps
-#   ./setup.sh --with-browser   # also download the browser for IMOTI247
+#   ./setup.sh --with-browser   # also bundle Chrome for Testing in ./browsers
 #
 # Scrapling needs Python >= 3.10.
 
@@ -36,9 +36,13 @@ echo "Using interpreter: $($PY --version) ($PY)"
 .venv/bin/pip install -r requirements.txt
 
 if [ "$WANT_BROWSER" -eq 1 ]; then
-  echo "Downloading browser for IMOTI247..."
-  .venv/bin/scrapling install
+  echo "Bundling Chrome for Testing for IMOTI247 (this needs disk + time)..."
+  ./install_browser.sh --cft
 fi
+
+echo
+echo "Browser in use for IMOTI247:"
+./install_browser.sh --status || true
 
 echo
 echo "Smoke test:"

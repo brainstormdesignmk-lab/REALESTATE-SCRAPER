@@ -2,7 +2,10 @@
 # setup.sh — create the Scrapling venv for SCRAPERS_FINAL_IMPROVED
 #
 #   ./setup.sh                  # venv + Python deps (PAZAR3 + REKLAMA5 ready)
-#   ./setup.sh --with-browser   # also download the browser for IMOTI247
+#   ./setup.sh --with-browser   # also bundle Chrome for Testing in ./browsers
+#
+# Note: IMOTI247 already works with the machine's installed Chrome without
+# --with-browser. Use it to PIN a browser version inside this folder.
 #
 # Scrapling needs Python >= 3.10. On Debian/Ubuntu without a 3.10+ interpreter,
 # install one first, e.g.:
@@ -39,9 +42,13 @@ echo "Using interpreter: $($PY --version) ($PY)"
 .venv/bin/pip install -r requirements.txt
 
 if [ "$WANT_BROWSER" -eq 1 ]; then
-  echo "Downloading browser for IMOTI247 (this needs disk + time)..."
-  .venv/bin/scrapling install
+  echo "Bundling Chrome for Testing for IMOTI247 (this needs disk + time)..."
+  ./install_browser.sh --cft
 fi
+
+echo
+echo "Browser in use for IMOTI247:"
+./install_browser.sh --status || true
 
 echo
 echo "Done. Run the scrapers with:"
