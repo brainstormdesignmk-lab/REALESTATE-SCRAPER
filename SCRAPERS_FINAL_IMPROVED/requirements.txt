@@ -1,0 +1,11 @@
+# SCRAPERS_FINAL_IMPROVED — Python dependencies
+#
+# Scrapling requires Python >= 3.10. The `fetchers` extra brings curl_cffi
+# (TLS impersonation, used by PAZAR3 + REKLAMA5) and playwright/patchright
+# (used by IMOTI247's stealth browser).
+scrapling[fetchers]>=0.4.15,<0.5
+
+# Parsing. Scrapling already pulls lxml, but the scrapers use BeautifulSoup
+# directly, so it is listed explicitly.
+beautifulsoup4>=4.12
+lxml>=6.1.1

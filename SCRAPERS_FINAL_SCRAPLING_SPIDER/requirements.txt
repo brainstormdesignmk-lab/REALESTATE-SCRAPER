@@ -1,0 +1,10 @@
+# SCRAPERS_FINAL_SCRAPLING_SPIDER — Python dependencies
+#
+# Requires Python >= 3.10 (Scrapling). The `fetchers` extra provides
+# curl_cffi for the HTTP sessions and playwright/patchright for the
+# IMOTI247 stealth browser session.
+scrapling[fetchers]>=0.4.15,<0.5
+
+# Parsing helpers used by spiders/parsers.py
+beautifulsoup4>=4.12
+lxml>=6.1.1

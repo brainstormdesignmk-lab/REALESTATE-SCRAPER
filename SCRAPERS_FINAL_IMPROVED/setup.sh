@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# setup.sh — create the Scrapling venv for SCRAPERS_FINAL_IMPROVED
+#
+#   ./setup.sh                  # venv + Python deps (PAZAR3 + REKLAMA5 ready)
+#   ./setup.sh --with-browser   # also download the browser for IMOTI247
+#
+# Scrapling needs Python >= 3.10. On Debian/Ubuntu without a 3.10+ interpreter,
+# install one first, e.g.:
+#   sudo apt install python3.11 python3.11-venv
+# or use pyenv/deadsnakes. The script auto-detects python3.10/3.11/3.12/3.13.
+
+set -euo pipefail
+cd "$(dirname "$0")"
+
+WANT_BROWSER=0
+[ "${1:-}" = "--with-browser" ] && WANT_BROWSER=1
+
+PY=""
+for c in python3.13 python3.12 python3.11 python3.10; do
+  if command -v "$c" >/dev/null 2>&1; then PY="$c"; break; fi
+done
+
+# Fall back to a user-local standalone Python (e.g. installed without root)
+if [ -z "$PY" ]; then
+  for c in "$HOME"/.local/python*/python/bin/python3.1[0-9]; do
+    [ -x "$c" ] && { PY="$c"; break; }
+  done
+fi
+
+if [ -z "$PY" ]; then
+  echo "ERROR: no Python >= 3.10 found (looked for 3.10-3.13)."
+  echo "Install one, e.g.:  sudo apt install python3.11 python3.11-venv"
+  exit 1
+fi
+
+echo "Using interpreter: $($PY --version) ($PY)"
+"$PY" -m venv .venv
+.venv/bin/pip install --upgrade pip wheel
+.venv/bin/pip install -r requirements.txt
+
+if [ "$WANT_BROWSER" -eq 1 ]; then
+  echo "Downloading browser for IMOTI247 (this needs disk + time)..."
+  .venv/bin/scrapling install
+fi
+
+echo
+echo "Done. Run the scrapers with:"
+echo "  .venv/bin/python batch_scraper.py --dry-run"
+echo "  .venv/bin/python batch_scraper.py"
+echo
+echo "Generate Ana's CSV / apply status updates as usual:"
+echo "  .venv/bin/python serve_ana.py"
+echo "  .venv/bin/python update_status.py output/ana_batch_YYYY-MM-DD.csv"
