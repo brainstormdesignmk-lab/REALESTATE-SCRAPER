@@ -116,11 +116,46 @@ cd ~/Documents/PROJECTS/SCRAPERS_FINAL_SCRAPLING_SPIDER
 .venv/bin/python update_status.py output/ana_batch_YYYY-MM-DD.csv
 ```
 
+## Monitoring from the Lenovo
+
+Each variant has its own `MONITOR/` folder (copied to the T60 as well). These
+replace the original `SCRAPERS_FINAL/MONITOR/` scripts, which were hard-coded to
+the old folder and to system `python3` (3.9) — they cannot run the Scrapling
+variants. The adapted scripts are layout-independent:
+
+- **Interpreter**: always the variant's `.venv/bin/python` (3.11 + Scrapling).
+- **Entry point**: auto-detected — `run_spiders.py` if present, else `batch_scraper.py`.
+- **tmux session**: `scraper_improved` (V1) and `scraper_scrapling_spider` (V2), so
+  both can run side by side without clashing with the old `scraper` session.
+- **Remote folder**: auto-detected on the T60 — tries
+  `~/Documents/PROJECTS/<variant>` (sibling) then the local mirrored path, so it
+  works whether the variants sit next to or inside `SCRAPERS_FINAL`.
+- `output/` is created on demand before logging.
+
+```bash
+# on the Lenovo, from a variant's MONITOR/ folder
+./start_scraper_remote.sh --dry-run     # show resolved remote path/session/entry
+./start_scraper_remote.sh               # start + attach on the T60
+./watch_scraper_remote.sh               # attach to the running T60 session
+./kill_scraper_remote.sh                # stop the T60 session + processes
+
+./launch_scraper_local.sh               # same, but on the Lenovo itself
+./kill_scraper_local.sh
+
+# limited smoke run
+SCRAPER_ARGS="--site REKLAMA5 --limit 1" ./start_scraper_remote.sh
+```
+
+The `*_icon.sh` wrappers open the matching script in an `urxvt` window.
+
 ## Remaining limitations
 
 - Only 1-page smoke configs were run end-to-end; a full 29-category batch has not
   been executed on the target. Recommend a `--site REKLAMA5 --limit 1` then a full
   overnight run.
+- The MONITOR remote scripts attach a tmux session, so they need a real terminal;
+  when run non-interactively (e.g. over a pipe) the session still starts but the
+  attach step reports "not a terminal".
 - IMOTI247 uses system Chrome via `real_chrome=True`; if Chrome is upgraded or
   removed, re-check it (or run `scrapling install` for a bundled browser).
 - Pazar3's 503 is intermittent and IP/throttle-related; `robust_get` mitigates it,

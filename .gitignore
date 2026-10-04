@@ -21,3 +21,11 @@ Thumbs.db
 # Environment
 .env
 *.env
+
+# Virtual environments
+.venv/
+venv/
+
+# Remote monitor runtime
+output/
+
