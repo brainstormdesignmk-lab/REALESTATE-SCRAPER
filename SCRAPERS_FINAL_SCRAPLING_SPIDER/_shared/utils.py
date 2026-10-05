@@ -8,29 +8,17 @@ from datetime import datetime
 # -------------------------------
 # PHONE NORMALIZATION
 # -------------------------------
-def normalize_phone(p):
-    """Normalize any MK phone to +389 7X XXX XXX format"""
-    cleaned = re.sub(r'[^\d+]', '', p)
-    if not cleaned:
-        return None
-    if cleaned.startswith('+389'):
-        digits = cleaned[4:]
-    elif cleaned.startswith('00389'):
-        digits = cleaned[5:]
-    elif cleaned.startswith('389') and len(cleaned) == 11:
-        digits = cleaned[3:]
-    else:
-        digits = cleaned
-        if digits.startswith('7') and len(digits) == 8:
-            digits = '0' + digits
-    if not digits.startswith(('070', '071', '072', '073', '075', '076', '077', '078')):
-        return None
-    if len(digits) < 8 or len(digits) > 9:
-        return None
-    if len(digits) == 8:
-        digits = '0' + digits
-    digits = digits[:9].ljust(9, '0')
-    return f"+389 {digits[:3]} {digits[3:6]} {digits[6:9]}"
+# The engine lives in phones.py so extraction and normalization stay in one
+# place, shared with Variant 1. It supports the MK 074/079 prefixes, foreign
+# numbers (compact E.164) and separator-heavy formats such as
+# "071-751-588" / "072 240 604".
+from phones import (  # noqa: E402,F401
+    normalize_phone,
+    extract_phones,
+    extract_phone_text,
+    is_foreign,
+    MK_MOBILE_PREFIXES,
+)
 
 # -------------------------------
 # AGENCY FILTERS
@@ -48,6 +36,9 @@ AGENCY_PHONES = [
     "+389 070 318 400",   # САВИЌ
     "+389 078 377 677",   # Pazar3 platform number
 ]
+
+# Kept as a module-level list for spiders that need it explicitly.
+EXCLUDE_PHONES = list(AGENCY_PHONES)
 
 PAZAR3_PLATFORM_PHONE = "+389 078 377 677"
 

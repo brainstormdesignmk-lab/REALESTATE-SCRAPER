@@ -13,7 +13,12 @@ import sys
 _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(os.path.dirname(_HERE), "_shared"))
 
-from utils import normalize_phone, PAZAR3_PLATFORM_PHONE  # noqa: E402
+from utils import (  # noqa: E402
+    normalize_phone,
+    PAZAR3_PLATFORM_PHONE,
+    EXCLUDE_PHONES,
+)
+from phones import extract_phones, extract_phone_text  # noqa: E402
 
 
 # --------------------------------------------------------------------- shared
@@ -43,21 +48,10 @@ def extract_price_size(text: str):
 
 # -------------------------------------------------------------------- PAZAR3
 def phone_pazar3(html: str) -> str:
-    phones = set()
-    patterns = [
-        r"(?:\+?389|00389)?[\s\-/]*7\d{7,8}",
-        r"0?7\d{7,8}",
-    ]
-    for pattern in patterns:
-        for match in re.findall(pattern, html):
-            normalized = normalize_phone(match)
-            if normalized and normalized != PAZAR3_PLATFORM_PHONE:
-                phones.add(normalized)
-    for bare in re.findall(r">\s*(\d{7,9})\s*<", html):
-        normalized = normalize_phone(bare)
-        if normalized and normalized != PAZAR3_PLATFORM_PHONE:
-            phones.add(normalized)
-    return " | ".join(sorted(phones)) if phones else ""
+    """Shared engine: tel: links, <bdi> dropdowns, contact buttons and body
+    text. Excludes the Pazar3 platform number and known agency numbers, and
+    rejects map coordinates. Returns the DB-ready "a | b" contact string."""
+    return extract_phone_text(html=html, exclude=[PAZAR3_PLATFORM_PHONE] + EXCLUDE_PHONES)
 
 
 def images_pazar3(soup) -> str:
@@ -67,27 +61,16 @@ def images_pazar3(soup) -> str:
 
 
 # ------------------------------------------------------------------ REKLAMA5
-def phone_reklama5(soup) -> str:
-    page_text = soup.get_text(separator=" ")
-    phones = re.findall(r"07[0-9\s\-]{8,14}07[0-9]{7}", page_text)
-    phones += re.findall(r"07\d{7}", page_text)
-    phones += re.findall(r"\+389\s?7\d\s?\d{3}\s?\d{3}", page_text)
-    phones += re.findall(r"07\d\s?\d{3}\s?\d{3}", page_text)
-    found = set()
-    for p in phones:
-        normalized = normalize_phone(p)
-        if normalized:
-            found.add(normalized)
-    return " | ".join(sorted(found)) if found else ""
+def phone_reklama5(soup, html: str = "") -> str:
+    """Shared engine over both the parsed page (text + <bdi>) and the raw HTML
+    (so tel: links are seen too)."""
+    return extract_phone_text(soup=soup, html=html or None)
 
 
 def phone_from_text(text: str) -> str:
     """Extract a phone from a raw response body (used by the ShowPhone fallback)."""
-    match = re.search(r"07\d{7}", text)
-    if not match:
-        return ""
-    normalized = normalize_phone(match.group(0))
-    return normalized or ""
+    phones = extract_phones(html=text)
+    return phones[0] if phones else ""
 
 
 def images_reklama5(soup) -> str:
@@ -99,23 +82,8 @@ def images_reklama5(soup) -> str:
 
 # ------------------------------------------------------------------- IMOTI247
 def phone_imoti(raw_text: str) -> str:
-    """Parse the AJAX phone endpoint response body."""
-    cleaned = re.sub(r"[^\d+]", "", raw_text)
-    mk_matches = re.findall(r"07[0-8]\d{6}", cleaned)
-    if mk_matches:
-        # Normalise to the SAME format as Pazar3/Reklama5 so that
-        # serve_ana.py's cross-site phone dedup works.
-        phones = []
-        for m in mk_matches[:2]:
-            n = normalize_phone(m)
-            if n and n not in phones:
-                phones.append(n)
-        if phones:
-            return " | ".join(phones) if len(phones) > 1 else phones[0]
-    intl = re.findall(r"\+\d{10,15}", cleaned)
-    if intl:
-        return " | ".join(intl[:2])
-    return ""
+    """Parse the AJAX phone endpoint response body with the shared engine."""
+    return extract_phone_text(html=raw_text)
 
 
 def images_imoti(soup) -> str:

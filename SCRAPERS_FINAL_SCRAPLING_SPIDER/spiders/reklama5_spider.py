@@ -57,7 +57,7 @@ class Reklama5Spider(BaseCategorySpider):
             return
 
         soup = self.soup_of(response)
-        phone = phone_reklama5(soup)
+        phone = phone_reklama5(soup, response.html_content or "")
         images = images_reklama5(soup)
 
         if phone and is_agency(title, phone):

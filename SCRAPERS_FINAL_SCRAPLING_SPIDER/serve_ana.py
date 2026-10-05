@@ -114,13 +114,19 @@ def dedup_by_phone(leads):
     return deduped
 
 def generate_csv(leads, output_path):
-    """Generate CSV for Ana"""
+    """Generate the full CSV for humans/back-office review.
+
+    Includes the ad `id` (the DB primary key) so update_status.py can match a
+    row back to its listing. Without it, status updates silently did nothing.
+    """
     with open(output_path, "w", newline="", encoding="utf-8-sig") as f:
         writer = csv.writer(f)
-        writer.writerow(["source", "category", "title", "price", "size", "phone", "images", "url", "status", "date"])
+        writer.writerow(["id", "source", "category", "title", "price", "size",
+                         "phone", "images", "url", "status", "date"])
 
         for lead in leads:
             writer.writerow([
+                lead["id"],
                 lead["site"],
                 lead["source_category"],
                 lead["title"],
@@ -133,6 +139,21 @@ def generate_csv(leads, output_path):
                 lead["first_seen"]
             ])
 
+    return len(leads)
+
+
+def generate_leads_csv(leads, output_path):
+    """Generate the compact lead file Ana's outbound parser consumes.
+
+    Ana (outbound_final/lead-processor.js `parseLeadLine`) expects exactly
+    `id,title,phone,url` (>= 3 fields). The rich CSV above is for humans; this
+    one is the machine seam.
+    """
+    with open(output_path, "w", newline="", encoding="utf-8-sig") as f:
+        writer = csv.writer(f)
+        writer.writerow(["id", "title", "phone", "url"])
+        for lead in leads:
+            writer.writerow([lead["id"], lead["title"], lead["phone"], lead["url"]])
     return len(leads)
 
 def main():
@@ -163,12 +184,16 @@ def main():
     # Generate CSV
     output_dir = os.path.join(BASE_DIR, "output")
     os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, f"ana_batch_{datetime.now().strftime('%Y-%m-%d')}.csv")
+    stamp = datetime.now().strftime('%Y-%m-%d')
+    output_path = os.path.join(output_dir, f"ana_batch_{stamp}.csv")
+    leads_path = os.path.join(output_dir, f"ana_leads_{stamp}.csv")
 
     count = generate_csv(deduped, output_path)
+    generate_leads_csv(deduped, leads_path)
 
     print(f"\n{'='*70}")
-    print(f"CSV GENERATED: {output_path}")
+    print(f"CSV GENERATED:  {output_path}")
+    print(f"LEADS FOR ANA:  {leads_path}   (id,title,phone,url)")
     print(f"Total leads: {count}")
     print(f"{'='*70}")
 
