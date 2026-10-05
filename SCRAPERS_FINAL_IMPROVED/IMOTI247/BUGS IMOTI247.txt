@@ -1,0 +1,1 @@
+images urls + resizing + system for importing in the lovable app

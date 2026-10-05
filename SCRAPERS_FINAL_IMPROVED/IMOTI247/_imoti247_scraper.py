@@ -137,14 +137,25 @@ class Imoti247Scraper:
         return ""
 
     def get_images(self, ad_url):
-        """Extract image URLs from the ad page HTML."""
+        """Extract gallery image URLs from the ad page HTML.
+
+        Gallery photos live under `img.imoti247.com/img/`; anything else
+        (icons, logo, avatars) is ignored. Order is preserved, duplicates
+        removed.
+        """
         try:
             resp = http_get(ad_url)
             if self._status_of(resp) == 200:
                 soup = BeautifulSoup(html_of(resp), "lxml")
-                img_tags = soup.select("img[src*='imoti247']")
-                images = [img.get("src") for img in img_tags
-                          if img.get("src") and "logo" not in img.get("src", "").lower()]
+                images = []
+                for img in soup.select("img"):
+                    src = (img.get("src") or "").strip()
+                    if not src or "imoti247.com/img/" not in src:
+                        continue
+                    if "logo" in src.lower():
+                        continue
+                    if src not in images:
+                        images.append(src)
                 return " | ".join(images) if images else ""
         except Exception as e:
             print(f"  Image error: {e}")
@@ -168,7 +179,7 @@ class Imoti247Scraper:
 
         self.seen_ids.add(ad_id)
         self.total_new += 1
-        print(f"  SUCCESS -> {ad_id} | {phone[:30]} | {title[:50]}...")
+        print(f"  [+] {ad_url} | {title} | {phone or '-'} | {images or '-'}")
         polite_sleep(1, 3)
         return True
 

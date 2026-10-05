@@ -142,9 +142,28 @@ def check_network():
         try:
             resp = http_get(url, timeout=20)
             status = getattr(resp, "status", None) or getattr(resp, "status_code", 0)
-            flag = "OK" if status == 200 else "PROBLEM"
-            print(f"  {site:9} {url} -> HTTP {status}  [{flag}]")
-            if status in (403, 429, 503):
+            retry_after = None
+            try:
+                retry_after = (getattr(resp, "headers", None) or {}).get("retry-after")
+            except Exception:
+                pass
+
+            if status == 200:
+                flag = "OK"
+            elif status == 503:
+                # Cloudflare per-IP rate limit: transient, not a code problem.
+                flag = "RATE-LIMITED"
+            else:
+                flag = "PROBLEM"
+            extra = f" (retry-after {retry_after})" if retry_after else ""
+            print(f"  {site:9} {url} -> HTTP {status}  [{flag}]{extra}")
+
+            if status == 503:
+                warnings.append(
+                    f"{site} returned HTTP 503 — Cloudflare rate limit (transient). "
+                    "Re-run later; the scrapers retry and honour Retry-After."
+                )
+            elif status in (403, 429):
                 errors.append(f"{site} returned HTTP {status} even with impersonation")
         except ScraplingUnavailable:
             warnings.append("Network check skipped: Scrapling not installed.")

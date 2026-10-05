@@ -9,3 +9,7 @@ scrapling[fetchers]>=0.4.15,<0.5
 # directly, so it is listed explicitly.
 beautifulsoup4>=4.12
 lxml>=6.1.1
+
+# Image processing for the deal-close pipeline (download -> crop Reklama5
+# logo band -> resize -> WebP/JPEG). See _shared/media.py and scrape_images.py.
+Pillow>=10.0

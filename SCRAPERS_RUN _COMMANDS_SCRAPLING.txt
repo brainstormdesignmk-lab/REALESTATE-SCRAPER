@@ -1,0 +1,5 @@
+  // bash                                                                      
+  cd ~/Documents/PROJECTS/SCRAPERS_FINAL_IMPROVED && .venv/bin/python          
+  batch_scraper.py                                                             
+  cd ~/Documents/PROJECTS/SCRAPERS_FINAL_SCRAPLING_SPIDER && .venv/bin/        
+  python run_spiders.py 

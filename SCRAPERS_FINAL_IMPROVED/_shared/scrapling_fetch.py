@@ -18,11 +18,13 @@ import os
 import random
 import shutil
 import time
+import logging
 from contextlib import contextmanager
 from typing import Any, Optional
 
 __all__ = [
     "ScraplingUnavailable",
+    "quiet_scrapling",
     "http_session",
     "http_get",
     "stealth_session",
@@ -37,6 +39,24 @@ __all__ = [
     "polite_sleep",
     "IMPERSONATE",
 ]
+
+
+def quiet_scrapling(level: Optional[str] = None) -> None:
+    """Silence Scrapling's per-request `INFO: Fetched (200) <GET ...>` lines.
+
+    Those lines are emitted by Scrapling's own `scrapling` logger and drown out
+    the per-ad output. We keep WARNING+ (real problems still show). Override
+    with SCRAPERS_LOG_LEVEL=INFO or DEBUG when debugging a fetch issue.
+    """
+    name = (level or os.environ.get("SCRAPERS_LOG_LEVEL") or "WARNING").upper()
+    try:
+        logging.getLogger("scrapling").setLevel(getattr(logging, name))
+    except Exception:
+        logging.getLogger("scrapling").setLevel(logging.WARNING)
+
+
+# Apply on import: every scraper that uses this module is quiet by default.
+quiet_scrapling()
 
 
 def chrome_available() -> bool:
@@ -94,6 +114,9 @@ class ScraplingUnavailable(RuntimeError):
 def _require_scrapling() -> None:
     try:
         import scrapling  # noqa: F401
+        # Scrapling's setup_logger() sets the 'scrapling' logger back to INFO
+        # when it is first imported, so re-apply our level AFTER the import.
+        quiet_scrapling()
     except Exception as exc:  # pragma: no cover - depends on host env
         raise ScraplingUnavailable(
             "Scrapling is not installed for this interpreter.\n"
@@ -122,6 +145,7 @@ def http_session(
     """
     _require_scrapling()
     from scrapling.fetchers import FetcherSession
+    quiet_scrapling()
 
     kwargs: dict[str, Any] = {
         "impersonate": impersonate or IMPERSONATE,
@@ -143,6 +167,7 @@ def http_get(url: str, **kwargs: Any):
     """
     _require_scrapling()
     from scrapling.fetchers import Fetcher
+    quiet_scrapling()
 
     kwargs.setdefault("impersonate", IMPERSONATE)
     kwargs.setdefault("stealthy_headers", True)
@@ -170,6 +195,7 @@ def stealth_session(
     """
     _require_scrapling()
     from scrapling.fetchers import StealthySession
+    quiet_scrapling()
 
     kwargs: dict[str, Any] = {
         "headless": headless,

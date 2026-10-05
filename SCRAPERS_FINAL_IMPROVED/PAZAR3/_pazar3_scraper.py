@@ -29,9 +29,10 @@ from bs4 import BeautifulSoup
 # Add parent dir to path for shared utils
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "_shared"))
 from utils import (  # noqa: E402
-    normalize_phone,
     is_agency,
     PAZAR3_PLATFORM_PHONE,
+    AGENCY_PHONES,
+    extract_phone_text,
     init_db,
     ad_exists,
     insert_ad,
@@ -59,32 +60,38 @@ def extract_price_size(text: str):
     return price, size
 
 
-def get_phone_pazar3(html: str) -> str:
-    """Extract phone from Pazar3 ad HTML."""
-    phones = set()
-    patterns = [
-        r"(?:\+?389|00389)?[\s\-/]*7\d{7,8}",
-        r"0?7\d{7,8}",
-    ]
-    for pattern in patterns:
-        for match in re.findall(pattern, html):
-            normalized = normalize_phone(match)
-            if normalized and normalized != PAZAR3_PLATFORM_PHONE:
-                phones.add(normalized)
-    # Also check between > < tags
-    for bare in re.findall(r">\s*(\d{7,9})\s*<", html):
-        normalized = normalize_phone(bare)
-        if normalized and normalized != PAZAR3_PLATFORM_PHONE:
-            phones.add(normalized)
-    if not phones:
-        return ""
-    return " | ".join(sorted(phones))
+def get_phone_pazar3(html: str, soup=None) -> str:
+    """Extract phone(s) from a Pazar3 ad page.
+
+    Uses the shared engine so that 074 numbers, foreign numbers (+49/…),
+    dashed/spaced formats, <bdi> dropdowns, tel: links and numbers written in
+    the ad body text are all captured. The Pazar3 platform number and known
+    agency numbers are excluded.
+    """
+    return extract_phone_text(
+        html=html,
+        soup=soup,
+        site="pazar3",
+        exclude=[PAZAR3_PLATFORM_PHONE, *AGENCY_PHONES],
+    )
 
 
 def get_images_pazar3(soup: BeautifulSoup) -> str:
-    """Extract images from Pazar3 ad page."""
-    img_tags = soup.select("img[data-src*='pazar3']")
-    images = [img.get("data-src") for img in img_tags if img.get("data-src")]
+    """Extract real gallery image URLs from a Pazar3 ad page.
+
+    Pazar3 keeps the real image in `data-src` (media.pazar3.mk/Image/...) and
+    an animated skeleton SVG in `src`, so `data-src` is the only field worth
+    storing. Order is preserved and duplicates are removed.
+    """
+    images = []
+    for img in soup.select("img[data-src]"):
+        src = (img.get("data-src") or "").strip()
+        if not src or ".svg" in src.lower():
+            continue
+        if "pazar3.mk" not in src:
+            continue
+        if src not in images:
+            images.append(src)
     return " | ".join(images) if images else ""
 
 
@@ -186,7 +193,7 @@ def scrape_category(config_path, session=None):
                 if not title or len(title) < 5:
                     continue
 
-                phone_raw = get_phone_pazar3(ad_html)
+                phone_raw = get_phone_pazar3(ad_html, soup=ad_soup)
                 if is_agency(title, phone_raw if phone_raw else None):
                     continue
 
@@ -200,7 +207,7 @@ def scrape_category(config_path, session=None):
                 if phone_raw:
                     total_phones += 1
 
-                print(f"  [+] {title[:55]:55} | {phone_raw[:20]}")
+                print(f"  [+] {full_link} | {title} | {phone_raw or '-'} | {images or '-'}")
                 polite_sleep(1.5, 3.0)
 
             print(f"  -> {page_new} new ads on page {page}")

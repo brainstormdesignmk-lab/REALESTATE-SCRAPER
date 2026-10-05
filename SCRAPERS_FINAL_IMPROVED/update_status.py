@@ -31,15 +31,24 @@ def update_dbs(csv_path):
         print(f"CSV not found: {csv_path}")
         return
 
-    # Read CSV
-    updates = {}
+    # Read CSV. `id` is required (serve_ana now emits it); `source` (site) is
+    # optional and, when present, scopes the update to that site's DBs so an id
+    # that exists on two sites is never updated in the wrong one.
+    updates = []
     with open(csv_path, "r", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
         for row in reader:
             ad_id = row.get("id") or row.get("ID") or row.get("ad_id")
             status = row.get("status", "")
+            source = (row.get("source") or row.get("site") or "").strip()
             if ad_id and status:
-                updates[ad_id] = status
+                updates.append((source, str(ad_id), status))
+
+    if not updates:
+        print("No rows with both `id` and `status` found in the CSV.")
+        print("If this is Ana's lead file, it has no status column — export a "
+              "status CSV (id,source,status) from the back-office first.")
+        return
 
     print(f"Found {len(updates)} status updates in CSV")
 
@@ -49,11 +58,15 @@ def update_dbs(csv_path):
 
     total_updated = 0
     for db_path in dbs:
+        site = next((s for s in ("PAZAR3", "REKLAMA5", "IMOTI247")
+                     if os.sep + s + os.sep in db_path), "")
         conn = sqlite3.connect(db_path)
         cur = conn.cursor()
 
         db_updates = 0
-        for ad_id, status in updates.items():
+        for source, ad_id, status in updates:
+            if source and site and source.upper() != site:
+                continue
             cur.execute("UPDATE listings SET status=? WHERE id=?", (status, ad_id))
             if cur.rowcount > 0:
                 db_updates += 1
@@ -62,7 +75,7 @@ def update_dbs(csv_path):
         conn.close()
 
         if db_updates > 0:
-            print(f"  Updated {db_updates} ads in {os.path.basename(db_path)}")
+            print(f"  Updated {db_updates} ads in {db_path}")
             total_updated += db_updates
 
     print(f"\nTotal ads updated across all DBs: {total_updated}")

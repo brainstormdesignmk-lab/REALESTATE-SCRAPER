@@ -29,7 +29,15 @@ import sqlite3
 from bs4 import BeautifulSoup
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "_shared"))
-from utils import normalize_phone, is_agency, init_db, ad_exists, insert_ad  # noqa: E402
+from utils import (  # noqa: E402
+    normalize_phone,
+    extract_phones,
+    is_agency,
+    AGENCY_PHONES,
+    init_db,
+    ad_exists,
+    insert_ad,
+)
 from scrapling_fetch import (  # noqa: E402
     http_session,
     robust_get,
@@ -64,37 +72,32 @@ class Reklama5Scraper:
     def _status_of(resp):
         return getattr(resp, "status", None) or getattr(resp, "status_code", 0)
 
-    def get_phone(self, soup):
-        """Extract phone from ad page soup."""
+    def get_phone(self, soup, html=None):
+        """Extract phone from an ad page using the shared engine.
+
+        Falls back to the site's "Show phone" link when the number is hidden.
+        """
         try:
-            page_text = soup.get_text(separator=" ")
-
-            phones = re.findall(r"07[0-9\s\-]{8,14}07[0-9]{7}", page_text)
-            phones += re.findall(r"07\d{7}", page_text)
-            phones += re.findall(r"\+389\s?7\d\s?\d{3}\s?\d{3}", page_text)
-            phones += re.findall(r"07\d\s?\d{3}\s?\d{3}", page_text)
-
-            found_phones = set()
-            for p in phones:
-                normalized = normalize_phone(p)
-                if normalized:
-                    found_phones.add(normalized)
+            phones = extract_phones(
+                html=html, soup=soup, site="reklama5", exclude=AGENCY_PHONES
+            )
+            if phones:
+                return " | ".join(phones)
 
             # If no phone, try the "show phone" direct link
-            if not found_phones:
-                show_link = soup.find("a", href=re.compile(r"/ShowPhone"))
-                if show_link:
-                    show_url = "https://reklama5.mk" + show_link["href"]
-                    time.sleep(2)
-                    show_resp = robust_get(self.session, show_url)
-                    if self._status_of(show_resp) == 200:
-                        match = re.search(r"07\d{7}", html_of(show_resp))
-                        if match:
-                            normalized = normalize_phone(match.group(0))
-                            if normalized:
-                                found_phones.add(normalized)
+            show_link = soup.find("a", href=re.compile(r"/ShowPhone"))
+            if show_link:
+                show_url = "https://reklama5.mk" + show_link["href"]
+                time.sleep(2)
+                show_resp = robust_get(self.session, show_url)
+                if self._status_of(show_resp) == 200:
+                    match = re.search(r"07\d{7}", html_of(show_resp))
+                    if match:
+                        normalized = normalize_phone(match.group(0))
+                        if normalized:
+                            return normalized
 
-            return " | ".join(sorted(found_phones)) if found_phones else ""
+            return ""
         except Exception as e:
             print(f"  Phone error: {e}")
             return ""
@@ -190,8 +193,9 @@ class Reklama5Scraper:
                 print(f"    -> HTTP {status}, skipped")
                 continue
 
-            soup = BeautifulSoup(html_of(resp), "lxml")
-            phone = self.get_phone(soup)
+            ad_html = html_of(resp)
+            soup = BeautifulSoup(ad_html, "lxml")
+            phone = self.get_phone(soup, html=ad_html)
             images = self.get_images(soup)
 
             if phone and is_agency(ad["title"], phone):
@@ -202,9 +206,8 @@ class Reklama5Scraper:
 
             if phone:
                 total_phones += 1
-                print(f"    -> {phone}")
-            else:
-                print("    -> no phone")
+
+            print(f"  [+] {ad['url']} | {ad['title']} | {phone or '-'} | {images or '-'}")
 
             polite_sleep(2.0, 4.0)
 

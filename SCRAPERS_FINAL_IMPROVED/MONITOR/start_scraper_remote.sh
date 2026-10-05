@@ -7,17 +7,23 @@
 #
 # Usage:        ./start_scraper_remote.sh
 # Config check: ./start_scraper_remote.sh --dry-run
+# One site only: SITE=REKLAMA5 ./start_scraper_remote.sh   (its own tmux session)
 
 set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 PROJECT_NAME="$(basename "$PROJECT_DIR")"
-SESSION="scraper_$(echo "$PROJECT_NAME" | sed 's/^SCRAPERS_FINAL_//' | tr 'A-Z' 'a-z')"
+
+SITE="${SITE:-}"
+SITE_TAG=""
+[ -n "$SITE" ] && SITE_TAG="_$(echo "$SITE" | tr 'A-Z' 'a-z')"
+SESSION="scraper_$(echo "$PROJECT_NAME" | sed 's/^SCRAPERS_FINAL_//' | tr 'A-Z' 'a-z')$SITE_TAG"
 
 if [ -f "$PROJECT_DIR/run_spiders.py" ]; then ENTRY="run_spiders.py"; else ENTRY="batch_scraper.py"; fi
 PYBIN=".venv/bin/python"
 ARGS="${SCRAPER_ARGS:-}"
+[ -n "$SITE" ] && ARGS="${ARGS:+$ARGS }--site $SITE"
 
 REMOTE="t60hermes"
 REMOTE_HOME="/home/metropolis4"
@@ -62,7 +68,7 @@ if tmux has-session -t '$SESSION' 2>/dev/null; then
 else
     echo \"Starting $PROJECT_NAME on T60 (in \$WORKDIR)...\"
     tmux new-session -d -s '$SESSION' -c \"\$WORKDIR\" \
-    'PYTHONUNBUFFERED=1 $PYBIN -u $ENTRY $ARGS 2>&1 | tee output/batch_log_\$(date +%Y%m%d_%H%M).txt;
+    'PYTHONUNBUFFERED=1 $PYBIN -u $ENTRY $ARGS 2>&1 | tee output/batch_log_$SITE_TAG\$(date +%Y%m%d_%H%M).txt;
     BATCH_EXIT=\${PIPESTATUS[0]};
     echo;
     echo \"BATCH EXIT: \$BATCH_EXIT\";

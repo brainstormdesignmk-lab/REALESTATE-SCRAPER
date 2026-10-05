@@ -6,17 +6,26 @@
 # Usage:        ./launch_scraper_local.sh
 # Config check: ./launch_scraper_local.sh --dry-run
 # Extra args:   SCRAPER_ARGS="--site REKLAMA5 --limit 1" ./launch_scraper_local.sh
+# One site only: SITE=REKLAMA5 ./launch_scraper_local.sh   (its own tmux session,
+#                so you do not wait for Pazar3/Imoti247 to finish)
 
 set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 PROJECT_NAME="$(basename "$PROJECT_DIR")"
-SESSION="scraper_$(echo "$PROJECT_NAME" | sed 's/^SCRAPERS_FINAL_//' | tr 'A-Z' 'a-z')"
+
+# Optional single-site run: SITE=PAZAR3|REKLAMA5|IMOTI247
+SITE="${SITE:-}"
+SITE_TAG=""
+[ -n "$SITE" ] && SITE_TAG="_$(echo "$SITE" | tr 'A-Z' 'a-z')"
+SESSION="scraper_$(echo "$PROJECT_NAME" | sed 's/^SCRAPERS_FINAL_//' | tr 'A-Z' 'a-z')$SITE_TAG"
 
 if [ -f "$PROJECT_DIR/run_spiders.py" ]; then ENTRY="run_spiders.py"; else ENTRY="batch_scraper.py"; fi
 PYBIN=".venv/bin/python"
 ARGS="${SCRAPER_ARGS:-}"
+# Our batch runner takes --site; the spider runner takes --site too.
+[ -n "$SITE" ] && ARGS="${ARGS:+$ARGS }--site $SITE"
 
 if [ "${1:-}" = "--dry-run" ]; then
     echo "project : $PROJECT_DIR"
