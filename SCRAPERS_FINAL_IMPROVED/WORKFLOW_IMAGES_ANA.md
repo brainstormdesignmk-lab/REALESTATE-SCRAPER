@@ -35,6 +35,10 @@ SITE=PAZAR3   ./MONITOR/start_scraper_remote.sh     # T60
 Sessions: `scraper_improved_pazar3`, `scraper_improved_reklama5`,
 `scraper_improved_imoti247`. Start/stop them independently.
 
+Smoke-tested on the T60 after deploy: all three sites completed a 1-category
+run (`RC=0`), and the fixed Reklama5 crop produced `cropped_top=36`
+(`crop_mode=reklama5-fixed`) there as well.
+
 ## 3. Clean output
 
 Scrapling's `INFO: Fetched (200) <GET ...>` lines are silenced by default
@@ -102,7 +106,35 @@ caches the image responses at the edge, so a short T60 outage does not break
 pages that were already served. Optional durability net: mirror the image
 folder to Cloudflare R2 (10 GB free, zero egress) — a backup, not the source.
 
-## 6. Ana seam — `serve_ana.py` + `update_status.py`
+## 6. Deploying to the T60 and serving images
+
+Deploy the variant code (never the local `.venv`/`browsers`/`output`/`data`):
+
+```bash
+cd SCRAPERS_FINAL_IMPROVED
+rsync -az --exclude='.venv/' --exclude='browsers/' --exclude='__pycache__/' \
+  --exclude='*.pyc' --exclude='output/' --exclude='*/data/' \
+  ./ t60hermes:Documents/PROJECTS/SCRAPERS_FINAL_IMPROVED/
+```
+
+On the T60 (already installed: `cloudflared` in `~/.local/bin`, Pillow in the venv):
+
+```bash
+# 1. static image server (127.0.0.1:8088, session metropolis_images)
+./MONITOR/serve_images_local.sh
+
+# 2. expose it — zero-account URL for testing...
+./MONITOR/expose_images_tunnel.sh --quick
+# ...or a stable named tunnel (needs `cloudflared tunnel login` + a domain)
+./MONITOR/expose_images_tunnel.sh --name metropolis-images
+```
+
+Images live under `$METROPOLIS_IMAGES_DIR` (default `~/metropolis-images` on the T60);
+point `scrape_images.py` at the same root. Verified end-to-end: the public
+`*.trycloudflare.com` URL served `/<key>/01.jpg` as `image/jpeg` with
+`Cache-Control: public, max-age=31536000, immutable` so Cloudflare caches it.
+
+## 7. Ana seam — `serve_ana.py` + `update_status.py`
 
 `serve_ana.py` now writes two files in `output/`:
 
