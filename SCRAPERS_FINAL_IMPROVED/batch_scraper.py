@@ -168,6 +168,10 @@ def main():
     if args.limit:
         configs = configs[:args.limit]
 
+    if not configs:
+        print("ERROR: no scraper categories found; refusing to report an empty run as successful.")
+        return 2
+
     print(f"\nFound {len(configs)} categories to scrape:")
     for c in configs:
         print(f"  {c['site']}/{c['category']}")
@@ -204,6 +208,14 @@ def main():
         print(f"BLOCKED responses seen: {total_blocked}  <-- investigate")
     print(f"{'=' * 70}")
 
+    # The T60 nightly wrapper publishes the Ana lead batch only when this
+    # process exits zero. A partial scrape must therefore be a failure, even
+    # though successful category databases remain useful for the next run.
+    if results["failed"]:
+        print("ERROR: incomplete scrape; Ana handoff must be skipped.")
+        return 1
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
