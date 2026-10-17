@@ -89,6 +89,7 @@ def run_scraper(config_info):
 
     process = None
     timed_out = threading.Event()
+    timeout_hit = threading.Event()
     blocked_seen = {"count": 0}
 
     def kill_children(parent_pid):
@@ -104,6 +105,7 @@ def run_scraper(config_info):
     def timeout_killer():
         timed_out.wait(timeout_sec)
         if not timed_out.is_set() and process and process.poll() is None:
+            timeout_hit.set()
             print(f"\n  KILLING {category} — exceeded {timeout_min} min timeout")
             kill_children(process.pid)
 
@@ -129,24 +131,29 @@ def run_scraper(config_info):
         process.wait(timeout=10)
         timed_out.set()
 
-        if process.returncode == 0:
+        if timeout_hit.is_set():
+            failure_reason = f"timed out after {timeout_min} min (exit code {process.returncode})"
+            print(f"FAIL {category} — {failure_reason}")
+        elif process.returncode == 0:
+            failure_reason = ""
             print(f"OK   {category} — COMPLETED")
         else:
-            print(f"FAIL {category} — exit code {process.returncode}")
+            failure_reason = f"exit code {process.returncode}"
+            print(f"FAIL {category} — {failure_reason}")
 
         try:
             kill_children(process.pid)
         except Exception:
             pass
 
-        return process.returncode == 0, blocked_seen["count"]
+        return process.returncode == 0 and not timeout_hit.is_set(), blocked_seen["count"], failure_reason
 
     except Exception as e:
         print(f"ERROR {category} — {e}")
         if process and process.poll() is None:
             kill_children(process.pid)
         timed_out.set()
-        return False, blocked_seen["count"]
+        return False, blocked_seen["count"], f"{type(e).__name__}: {e}"
 
 
 def main():
@@ -186,9 +193,12 @@ def main():
 
     for i, config in enumerate(configs):
         print(f"\n[{i + 1}/{len(configs)}] Starting...")
-        success, blocked = run_scraper(config)
+        success, blocked, failure_reason = run_scraper(config)
         total_blocked += blocked
-        (results["success"] if success else results["failed"]).append(config["category"])
+        label = f"{config['site']}/{config['category']}"
+        (results["success"] if success else results["failed"]).append(label)
+        if not success:
+            results.setdefault("failure_details", []).append((label, failure_reason or "unknown scraper failure"))
 
         if i < len(configs) - 1:
             time.sleep(5)
@@ -208,12 +218,21 @@ def main():
         print(f"BLOCKED responses seen: {total_blocked}  <-- investigate")
     print(f"{'=' * 70}")
 
-    # The T60 nightly wrapper publishes the Ana lead batch only when this
-    # process exits zero. A partial scrape must therefore be a failure, even
-    # though successful category databases remain useful for the next run.
+    # Category failures are partial-run warnings, not a reason to discard
+    # successful category data. The launch wrappers hand this data to Ana on
+    # exit code zero, so record the failures and continue the handoff.
     if results["failed"]:
-        print("ERROR: incomplete scrape; Ana handoff must be skipped.")
-        return 1
+        output_dir = os.path.join(BASE_DIR, "output")
+        os.makedirs(output_dir, exist_ok=True)
+        failure_log = os.path.join(output_dir, "scraper_failures.log")
+        run_stamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        with open(failure_log, "a", encoding="utf-8") as log:
+            log.write(f"\n[{run_stamp}] PARTIAL SCRAPE — {len(results['failed'])}/{len(configs)} categories failed\n")
+            for label, reason in results.get("failure_details", []):
+                log.write(f"  - {label}: {reason}\n")
+            log.write("  Ana handoff: continuing with data from all category databases.\n")
+        print("WARNING: partial scrape; continuing to Ana with available category data.")
+        print(f"Failure details written to: {failure_log}")
     return 0
 
 

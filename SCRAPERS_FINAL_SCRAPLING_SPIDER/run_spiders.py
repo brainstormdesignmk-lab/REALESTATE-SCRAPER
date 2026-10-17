@@ -79,6 +79,10 @@ def main():
     if args.limit:
         configs = configs[:args.limit]
 
+    if not configs:
+        print("ERROR: no scraper categories found; refusing to hand off stale data to Ana.")
+        return 2
+
     print(f"\nFound {len(configs)} categories:")
     for c in configs:
         print(f"  {c['site']}/{c['category']}")
@@ -104,22 +108,39 @@ def main():
             counts = run_one({**entry, "crawldir": crawldir})
             for k in totals:
                 totals[k] += counts.get(k, 0)
+            item_errors = counts.get("errors", 0)
+            if item_errors:
+                failures.append((label, f"{item_errors} item/database error(s); partial data retained"))
         except Exception as e:
-            print(f"FAIL {label}: {type(e).__name__}: {e}")
-            failures.append(label)
+            reason = f"{type(e).__name__}: {e}"
+            print(f"FAIL {label}: {reason}")
+            failures.append((label, reason))
 
     elapsed = time.time() - start
     print(f"\n{'=' * 70}")
     print(f"SPIDER RUN COMPLETE — {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"Duration: {int(elapsed // 60)}m {int(elapsed % 60)}s")
-    print(f"Categories run: {len(configs) - len(failures)}/{len(configs)}")
+    print(f"Categories without errors: {len(configs) - len(failures)}/{len(configs)}")
     print(f"New DB writes:  {totals['new']}")
     if totals["blocked"]:
         print(f"BLOCKED:        {totals['blocked']}  <-- investigate")
     if totals["errors"]:
         print(f"DB errors:      {totals['errors']}")
     if failures:
-        print(f"Failed: {', '.join(failures)}")
+        print("Failed categories:")
+        for label, reason in failures:
+            print(f"  - {label}: {reason}")
+        output_dir = os.path.join(BASE_DIR, "output")
+        os.makedirs(output_dir, exist_ok=True)
+        failure_log = os.path.join(output_dir, "scraper_failures.log")
+        run_stamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        with open(failure_log, "a", encoding="utf-8") as log:
+            log.write(f"\n[{run_stamp}] PARTIAL SCRAPE — {len(failures)}/{len(configs)} categories had errors\n")
+            for label, reason in failures:
+                log.write(f"  - {label}: {reason}\n")
+            log.write("  Ana handoff: continuing with data from all category databases.\n")
+        print("WARNING: partial scrape; continuing to Ana with available category data.")
+        print(f"Failure details written to: {failure_log}")
     print(f"{'=' * 70}")
 
 
