@@ -1,0 +1,2078 @@
+You have no mail.
+metropolis4@T60:~
+$ tmux capture-pane -p -S -100000 -t scraper
+
+   [Page 3/10] -> https://reklama5.mk/Search?city=1&cat=168&q=&subcat=&sell=0&se
+ll=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRead
+y=0&DDVIncluded=0&private=0&company=0&page=3&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=168&q=&subcat=&sell=0&sell=1&buy=0&trade=0&includeOld=0&inclu
+deOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0
+&page=3&SortByPrice=0&zz=1&pageView=
+
+   [Page 4/10] -> https://reklama5.mk/Search?city=1&cat=168&q=&subcat=&sell=0&se
+ll=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRead
+y=0&DDVIncluded=0&private=0&company=0&page=4&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=168&q=&subcat=&sell=0&sell=1&buy=0&trade=0&includeOld=0&inclu
+deOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0
+&page=4&SortByPrice=0&zz=1&pageView=
+
+   [Page 5/10] -> https://reklama5.mk/Search?city=1&cat=168&q=&subcat=&sell=0&se
+ll=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRead
+y=0&DDVIncluded=0&private=0&company=0&page=5&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=168&q=&subcat=&sell=0&sell=1&buy=0&trade=0&includeOld=0&inclu
+deOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0
+&page=5&SortByPrice=0&zz=1&pageView=
+
+   [Page 6/10] -> https://reklama5.mk/Search?city=1&cat=168&q=&subcat=&sell=0&se
+ll=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRead
+y=0&DDVIncluded=0&private=0&company=0&page=6&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=168&q=&subcat=&sell=0&sell=1&buy=0&trade=0&includeOld=0&inclu
+deOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0
+&page=6&SortByPrice=0&zz=1&pageView=
+
+   [Page 7/10] -> https://reklama5.mk/Search?city=1&cat=168&q=&subcat=&sell=0&se
+ll=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRead
+y=0&DDVIncluded=0&private=0&company=0&page=7&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=168&q=&subcat=&sell=0&sell=1&buy=0&trade=0&includeOld=0&inclu
+deOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0
+&page=7&SortByPrice=0&zz=1&pageView=
+
+   [Page 8/10] -> https://reklama5.mk/Search?city=1&cat=168&q=&subcat=&sell=0&se
+ll=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRead
+y=0&DDVIncluded=0&private=0&company=0&page=8&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=168&q=&subcat=&sell=0&sell=1&buy=0&trade=0&includeOld=0&inclu
+deOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0
+&page=8&SortByPrice=0&zz=1&pageView=
+
+   [Page 9/10] -> https://reklama5.mk/Search?city=1&cat=168&q=&subcat=&sell=0&se
+ll=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRead
+y=0&DDVIncluded=0&private=0&company=0&page=9&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=168&q=&subcat=&sell=0&sell=1&buy=0&trade=0&includeOld=0&inclu
+deOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0
+&page=9&SortByPrice=0&zz=1&pageView=
+
+   [Page 10/10] -> https://reklama5.mk/Search?city=1&cat=168&q=&subcat=&sell=0&s
+ell=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRea
+dy=0&DDVIncluded=0&private=0&company=0&page=10&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=168&q=&subcat=&sell=0&sell=1&buy=0&trade=0&includeOld=0&inclu
+deOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0
+&page=10&SortByPrice=0&zz=1&pageView=
+
+   Total new ads to process: 0
+
+   ============================================================
+   DONE — Деловен Простор Мешан
+   New ads: 0
+   With phone: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_DELOVEN_M
+IXED/data/reklama5.db
+   ============================================================
+✅ R5_DELOVEN_MIXED — COMPLETED
+
+[12/29] Starting...
+
+######################################################################
+# RUNNING: R5_DELOVEN_PRODAZBA
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/_reklama
+5_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_DELOV
+EN_PRODAZBA/config.json
+# Timeout: 30 min
+# Started: 2026-10-04 21:22:41
+######################################################################
+
+   ============================================================
+   REKLAMA5 SCRAPER — Деловен Простор Продажба
+   URL: https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=
+&f58_to=&priceFrom=&priceTo=&f59=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&tr
+ade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVInclud
+ed=0&private=1&company=0&page=1&SortByPrice=0&zz=1&pageView=
+   Pages: 10
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_DELOVEN_P
+RODAZBA/data/reklama5.db
+   ============================================================
+
+   [Page 1/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&sell=1&buy=0&rent=0&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=1&company=0&page=1&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&pa
+ge=1&SortByPrice=0&zz=1&pageView=
+
+   [Page 2/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&sell=1&buy=0&rent=0&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=1&company=0&page=2&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&pa
+ge=2&SortByPrice=0&zz=1&pageView=
+
+   [Page 3/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&sell=1&buy=0&rent=0&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=1&company=0&page=3&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&pa
+ge=3&SortByPrice=0&zz=1&pageView=
+
+   [Page 4/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&sell=1&buy=0&rent=0&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=1&company=0&page=4&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&pa
+ge=4&SortByPrice=0&zz=1&pageView=
+
+   [Page 5/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&sell=1&buy=0&rent=0&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=1&company=0&page=5&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&pa
+ge=5&SortByPrice=0&zz=1&pageView=
+
+   [Page 6/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&sell=1&buy=0&rent=0&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=1&company=0&page=6&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&pa
+ge=6&SortByPrice=0&zz=1&pageView=
+
+   [Page 7/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&sell=1&buy=0&rent=0&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=1&company=0&page=7&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&pa
+ge=7&SortByPrice=0&zz=1&pageView=
+
+   [Page 8/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&sell=1&buy=0&rent=0&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=1&company=0&page=8&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&pa
+ge=8&SortByPrice=0&zz=1&pageView=
+
+   [Page 9/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&sell=1&buy=0&rent=0&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=1&company=0&page=9&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&pa
+ge=9&SortByPrice=0&zz=1&pageView=
+
+   [Page 10/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to
+=&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&sell=1&buy=0&rent=0&includef
+orrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=
+0&DDVIncluded=0&private=1&company=0&page=10&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&pa
+ge=10&SortByPrice=0&zz=1&pageView=
+
+   Total new ads to process: 0
+
+   ============================================================
+   DONE — Деловен Простор Продажба
+   New ads: 0
+   With phone: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_DELOVEN_P
+RODAZBA/data/reklama5.db
+   ============================================================
+✅ R5_DELOVEN_PRODAZBA — COMPLETED
+
+[13/29] Starting...
+
+######################################################################
+# RUNNING: R5_DELOVEN_RENTA
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/_reklama
+5_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_DELOV
+EN_RENTA/config.json
+# Timeout: 30 min
+# Started: 2026-10-04 21:23:36
+######################################################################
+
+   ============================================================
+   REKLAMA5 SCRAPER — Деловен Простор Изнајмување
+   URL: https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=
+&f58_to=&priceFrom=&priceTo=&f59=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&tr
+ade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVInclud
+ed=0&private=0&company=0&page=1&SortByPrice=0&zz=1&pageView=
+   Pages: 10
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_DELOVEN_R
+ENTA/data/reklama5.db
+   ============================================================
+
+   [Page 1/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&buy=0&rent=0&rent=1&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=0&company=0&page=1&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&pa
+ge=1&SortByPrice=0&zz=1&pageView=
+
+   [Page 2/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&buy=0&rent=0&rent=1&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=0&company=0&page=2&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&pa
+ge=2&SortByPrice=0&zz=1&pageView=
+
+   [Page 3/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&buy=0&rent=0&rent=1&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=0&company=0&page=3&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&pa
+ge=3&SortByPrice=0&zz=1&pageView=
+
+   [Page 4/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&buy=0&rent=0&rent=1&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=0&company=0&page=4&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&pa
+ge=4&SortByPrice=0&zz=1&pageView=
+
+   [Page 5/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&buy=0&rent=0&rent=1&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=0&company=0&page=5&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&pa
+ge=5&SortByPrice=0&zz=1&pageView=
+
+   [Page 6/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&buy=0&rent=0&rent=1&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=0&company=0&page=6&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&pa
+ge=6&SortByPrice=0&zz=1&pageView=
+
+   [Page 7/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&buy=0&rent=0&rent=1&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=0&company=0&page=7&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&pa
+ge=7&SortByPrice=0&zz=1&pageView=
+
+   [Page 8/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&buy=0&rent=0&rent=1&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=0&company=0&page=8&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&pa
+ge=8&SortByPrice=0&zz=1&pageView=
+
+   [Page 9/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to=
+&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&buy=0&rent=0&rent=1&includefo
+rrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0
+&DDVIncluded=0&private=0&company=0&page=9&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&pa
+ge=9&SortByPrice=0&zz=1&pageView=
+
+   [Page 10/10] -> https://reklama5.mk/Search?city=1&cat=167&q=&f57_from=&f57_to
+=&f58_from=&f58_to=&priceFrom=&priceTo=&f59=&sell=0&buy=0&rent=0&rent=1&includef
+orrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=
+0&DDVIncluded=0&private=0&company=0&page=10&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=167&q=&f57_from=&f57_to=&f58_from=&f58_to=&priceFrom=&priceTo
+=&f59=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeO
+ld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&pa
+ge=10&SortByPrice=0&zz=1&pageView=
+
+   Total new ads to process: 0
+
+   ============================================================
+   DONE — Деловен Простор Изнајмување
+   New ads: 0
+   With phone: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_DELOVEN_R
+ENTA/data/reklama5.db
+   ============================================================
+✅ R5_DELOVEN_RENTA — COMPLETED
+
+[14/29] Starting...
+
+######################################################################
+# RUNNING: R5_GARAZI_PRODAZBA
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/_reklama
+5_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_GARAZ
+I_PRODAZBA/config.json
+# Timeout: 30 min
+# Started: 2026-10-04 21:24:30
+######################################################################
+
+   ============================================================
+   REKLAMA5 SCRAPER — Гаражи Продажба
+   URL: https://reklama5.mk/Search?city=1&cat=172&q=&sell=0&sell=1&buy=0&trade=0
+&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&
+private=1&company=0&page=1&SortByPrice=0&zz=1&pageView=
+   Pages: 10
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_GARAZI_PR
+ODAZBA/data/reklama5.db
+   ============================================================
+
+   [Page 1/10] -> https://reklama5.mk/Search?city=1&cat=172&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=1&company=0&page=1&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=172&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&page=1&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 2/10] -> https://reklama5.mk/Search?city=1&cat=172&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=1&company=0&page=2&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=172&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&page=2&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 3/10] -> https://reklama5.mk/Search?city=1&cat=172&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=1&company=0&page=3&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=172&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&page=3&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 4/10] -> https://reklama5.mk/Search?city=1&cat=172&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=1&company=0&page=4&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=172&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&page=4&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 5/10] -> https://reklama5.mk/Search?city=1&cat=172&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=1&company=0&page=5&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=172&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&page=5&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 6/10] -> https://reklama5.mk/Search?city=1&cat=172&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=1&company=0&page=6&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=172&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&page=6&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 7/10] -> https://reklama5.mk/Search?city=1&cat=172&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=1&company=0&page=7&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=172&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&page=7&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 8/10] -> https://reklama5.mk/Search?city=1&cat=172&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=1&company=0&page=8&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=172&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&page=8&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 9/10] -> https://reklama5.mk/Search?city=1&cat=172&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=1&company=0&page=9&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=172&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&page=9&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 10/10] -> https://reklama5.mk/Search?city=1&cat=172&q=&sell=0&sell=1&bu
+y=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDV
+Included=0&private=1&company=0&page=10&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=172&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=1&company=0&page=10
+&SortByPrice=0&zz=1&pageView=
+
+   Total new ads to process: 0
+
+   ============================================================
+   DONE — Гаражи Продажба
+   New ads: 0
+   With phone: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_GARAZI_PR
+ODAZBA/data/reklama5.db
+   ============================================================
+✅ R5_GARAZI_PRODAZBA — COMPLETED
+
+[15/29] Starting...
+
+######################################################################
+# RUNNING: R5_KUKJI_PRODAZBA
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/_reklama
+5_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_KUKJI
+_PRODAZBA/config.json
+# Timeout: 30 min
+# Started: 2026-10-04 21:25:25
+######################################################################
+
+   ============================================================
+   REKLAMA5 SCRAPER — Куќи Продажба
+   URL: https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=
+&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&sell=1&buy
+=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includ
+eNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=1&SortByPrice=0&zz=1&
+pageView=
+   Pages: 10
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_KUKJI_PRO
+DAZBA/data/reklama5.db
+   ============================================================
+
+   [Page 1/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=1&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=1&SortByPrice=0&zz=1&pageView=
+
+   [Page 2/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=2&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=2&SortByPrice=0&zz=1&pageView=
+
+   [Page 3/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=3&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=3&SortByPrice=0&zz=1&pageView=
+
+   [Page 4/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=4&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=4&SortByPrice=0&zz=1&pageView=
+
+   [Page 5/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=5&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=5&SortByPrice=0&zz=1&pageView=
+
+   [Page 6/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=6&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=6&SortByPrice=0&zz=1&pageView=
+
+   [Page 7/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=7&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=7&SortByPrice=0&zz=1&pageView=
+
+   [Page 8/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=8&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=8&SortByPrice=0&zz=1&pageView=
+
+   [Page 9/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=9&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=9&SortByPrice=0&zz=1&pageView=
+
+   [Page 10/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to
+=&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0
+&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeN
+ew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=10&SortByP
+rice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=10&SortByPrice=0&zz=1&pageView=
+
+   Total new ads to process: 0
+
+   ============================================================
+   DONE — Куќи Продажба
+   New ads: 0
+   With phone: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_KUKJI_PRO
+DAZBA/data/reklama5.db
+   ============================================================
+✅ R5_KUKJI_PRODAZBA — COMPLETED
+
+[16/29] Starting...
+
+######################################################################
+# RUNNING: R5_KUKJI_RENTA
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/_reklama
+5_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_KUKJI
+_RENTA/config.json
+# Timeout: 30 min
+# Started: 2026-10-04 21:26:16
+######################################################################
+
+   ============================================================
+   REKLAMA5 SCRAPER — Куќи Изнајмување
+   URL: https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=
+&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&buy=0&rent
+=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includ
+eNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=1&SortByPrice=0&zz=1&
+pageView=
+   Pages: 10
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_KUKJI_REN
+TA/data/reklama5.db
+   ============================================================
+
+   [Page 1/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=1&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=1&SortByPrice=0&zz=1&pageView=
+
+   [Page 2/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=2&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=2&SortByPrice=0&zz=1&pageView=
+
+   [Page 3/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=3&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=3&SortByPrice=0&zz=1&pageView=
+
+   [Page 4/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=4&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=4&SortByPrice=0&zz=1&pageView=
+
+   [Page 5/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=5&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=5&SortByPrice=0&zz=1&pageView=
+
+   [Page 6/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=6&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=6&SortByPrice=0&zz=1&pageView=
+
+   [Page 7/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=7&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=7&SortByPrice=0&zz=1&pageView=
+
+   [Page 8/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=8&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=8&SortByPrice=0&zz=1&pageView=
+
+   [Page 9/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to=
+&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&
+buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeNe
+w=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=9&SortByPri
+ce=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=9&SortByPrice=0&zz=1&pageView=
+
+   [Page 10/10] -> https://reklama5.mk/Search?city=1&cat=158&q=&f41_from=&f41_to
+=&f42_from=&f42_to=&priceFrom=&priceTo=&f43=&f44=&f10017=&f10018=&f10028=&sell=0
+&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeOld=1&includeN
+ew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=10&SortByP
+rice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=158&q=&f41_from=&f41_to=&f42_from=&f42_to=&priceFrom=&priceTo
+=&f43=&f44=&f10017=&f10018=&f10028=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&
+trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncl
+uded=0&private=0&company=0&page=10&SortByPrice=0&zz=1&pageView=
+
+   Total new ads to process: 0
+
+   ============================================================
+   DONE — Куќи Изнајмување
+   New ads: 0
+   With phone: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_KUKJI_REN
+TA/data/reklama5.db
+   ============================================================
+✅ R5_KUKJI_RENTA — COMPLETED
+
+[17/29] Starting...
+
+######################################################################
+# RUNNING: R5_MAGACINI
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/_reklama
+5_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_MAGAC
+INI/config.json
+# Timeout: 30 min
+# Started: 2026-10-04 21:27:10
+######################################################################
+
+   ============================================================
+   REKLAMA5 SCRAPER — Магацини
+   URL: https://reklama5.mk/Search?city=1&cat=174&q=&sell=0&sell=1&buy=0&trade=0
+&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&
+private=0&company=0&page=1&SortByPrice=0&zz=1&pageView=
+   Pages: 10
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_MAGACINI/
+data/reklama5.db
+   ============================================================
+
+   [Page 1/10] -> https://reklama5.mk/Search?city=1&cat=174&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=0&company=0&page=1&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=174&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=1&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 2/10] -> https://reklama5.mk/Search?city=1&cat=174&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=0&company=0&page=2&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=174&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=2&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 3/10] -> https://reklama5.mk/Search?city=1&cat=174&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=0&company=0&page=3&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=174&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=3&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 4/10] -> https://reklama5.mk/Search?city=1&cat=174&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=0&company=0&page=4&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=174&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=4&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 5/10] -> https://reklama5.mk/Search?city=1&cat=174&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=0&company=0&page=5&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=174&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=5&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 6/10] -> https://reklama5.mk/Search?city=1&cat=174&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=0&company=0&page=6&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=174&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=6&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 7/10] -> https://reklama5.mk/Search?city=1&cat=174&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=0&company=0&page=7&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=174&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=7&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 8/10] -> https://reklama5.mk/Search?city=1&cat=174&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=0&company=0&page=8&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=174&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=8&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 9/10] -> https://reklama5.mk/Search?city=1&cat=174&q=&sell=0&sell=1&buy
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=0&company=0&page=9&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=174&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=9&
+SortByPrice=0&zz=1&pageView=
+
+   [Page 10/10] -> https://reklama5.mk/Search?city=1&cat=174&q=&sell=0&sell=1&bu
+y=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDV
+Included=0&private=0&company=0&page=10&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=174&q=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=10
+&SortByPrice=0&zz=1&pageView=
+
+   Total new ads to process: 0
+
+   ============================================================
+   DONE — Магацини
+   New ads: 0
+   With phone: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_MAGACINI/
+data/reklama5.db
+   ============================================================
+✅ R5_MAGACINI — COMPLETED
+
+[18/29] Starting...
+
+######################################################################
+# RUNNING: R5_PLOCOVI
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/_reklama
+5_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_PLOCO
+VI/config.json
+# Timeout: 30 min
+# Started: 2026-10-04 21:28:01
+######################################################################
+
+   ============================================================
+   REKLAMA5 SCRAPER — Плацови
+   URL: https://reklama5.mk/Search?city=1&cat=173&q=&f63_from=&f63_to=&priceFrom
+=&priceTo=&f88=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew
+=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=1&SortByPric
+e=0&zz=1&pageView=
+   Pages: 10
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_PLOCOVI/d
+ata/reklama5.db
+   ============================================================
+
+   [Page 1/10] -> https://reklama5.mk/Search?city=1&cat=173&q=&f63_from=&f63_to=
+&priceFrom=&priceTo=&f88=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=1&
+SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=173&q=&f63_from=&f63_to=&priceFrom=&priceTo=&f88=&sell=0&sell
+=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=
+0&DDVIncluded=0&private=0&company=0&page=1&SortByPrice=0&zz=1&pageView=
+
+   [Page 2/10] -> https://reklama5.mk/Search?city=1&cat=173&q=&f63_from=&f63_to=
+&priceFrom=&priceTo=&f88=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=2&
+SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=173&q=&f63_from=&f63_to=&priceFrom=&priceTo=&f88=&sell=0&sell
+=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=
+0&DDVIncluded=0&private=0&company=0&page=2&SortByPrice=0&zz=1&pageView=
+
+   [Page 3/10] -> https://reklama5.mk/Search?city=1&cat=173&q=&f63_from=&f63_to=
+&priceFrom=&priceTo=&f88=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=3&
+SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=173&q=&f63_from=&f63_to=&priceFrom=&priceTo=&f88=&sell=0&sell
+=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=
+0&DDVIncluded=0&private=0&company=0&page=3&SortByPrice=0&zz=1&pageView=
+
+   [Page 4/10] -> https://reklama5.mk/Search?city=1&cat=173&q=&f63_from=&f63_to=
+&priceFrom=&priceTo=&f88=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=4&
+SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=173&q=&f63_from=&f63_to=&priceFrom=&priceTo=&f88=&sell=0&sell
+=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=
+0&DDVIncluded=0&private=0&company=0&page=4&SortByPrice=0&zz=1&pageView=
+
+   [Page 5/10] -> https://reklama5.mk/Search?city=1&cat=173&q=&f63_from=&f63_to=
+&priceFrom=&priceTo=&f88=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=5&
+SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=173&q=&f63_from=&f63_to=&priceFrom=&priceTo=&f88=&sell=0&sell
+=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=
+0&DDVIncluded=0&private=0&company=0&page=5&SortByPrice=0&zz=1&pageView=
+
+   [Page 6/10] -> https://reklama5.mk/Search?city=1&cat=173&q=&f63_from=&f63_to=
+&priceFrom=&priceTo=&f88=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=6&
+SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=173&q=&f63_from=&f63_to=&priceFrom=&priceTo=&f88=&sell=0&sell
+=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=
+0&DDVIncluded=0&private=0&company=0&page=6&SortByPrice=0&zz=1&pageView=
+
+   [Page 7/10] -> https://reklama5.mk/Search?city=1&cat=173&q=&f63_from=&f63_to=
+&priceFrom=&priceTo=&f88=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=7&
+SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=173&q=&f63_from=&f63_to=&priceFrom=&priceTo=&f88=&sell=0&sell
+=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=
+0&DDVIncluded=0&private=0&company=0&page=7&SortByPrice=0&zz=1&pageView=
+
+   [Page 8/10] -> https://reklama5.mk/Search?city=1&cat=173&q=&f63_from=&f63_to=
+&priceFrom=&priceTo=&f88=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=8&
+SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=173&q=&f63_from=&f63_to=&priceFrom=&priceTo=&f88=&sell=0&sell
+=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=
+0&DDVIncluded=0&private=0&company=0&page=8&SortByPrice=0&zz=1&pageView=
+
+   [Page 9/10] -> https://reklama5.mk/Search?city=1&cat=173&q=&f63_from=&f63_to=
+&priceFrom=&priceTo=&f88=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1&
+includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=9&
+SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=173&q=&f63_from=&f63_to=&priceFrom=&priceTo=&f88=&sell=0&sell
+=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=
+0&DDVIncluded=0&private=0&company=0&page=9&SortByPrice=0&zz=1&pageView=
+
+   [Page 10/10] -> https://reklama5.mk/Search?city=1&cat=173&q=&f63_from=&f63_to
+=&priceFrom=&priceTo=&f88=&sell=0&sell=1&buy=0&trade=0&includeOld=0&includeOld=1
+&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company=0&page=1
+0&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=173&q=&f63_from=&f63_to=&priceFrom=&priceTo=&f88=&sell=0&sell
+=1&buy=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=
+0&DDVIncluded=0&private=0&company=0&page=10&SortByPrice=0&zz=1&pageView=
+
+   Total new ads to process: 0
+
+   ============================================================
+   DONE — Плацови
+   New ads: 0
+   With phone: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_PLOCOVI/d
+ata/reklama5.db
+   ============================================================
+✅ R5_PLOCOVI — COMPLETED
+
+[19/29] Starting...
+
+######################################################################
+# RUNNING: R5_STANOVI_PRODAZBA
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/_reklama
+5_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_STANO
+VI_PRODAZBA/config.json
+# Timeout: 30 min
+# Started: 2026-10-04 21:28:57
+######################################################################
+
+   ============================================================
+   REKLAMA5 SCRAPER — Станови Продажба
+   URL: https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=
+&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell
+=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeNew=0&cargoR
+eady=0&DDVIncluded=0&private=0&company=0&page=1&SortByPrice=0&zz=1&pageView=
+   Pages: 10
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_STANOVI_P
+RODAZBA/data/reklama5.db
+   ============================================================
+
+   [Page 1/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=0&company=0&page=1&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=0&company=0&page=1&SortByPrice=0&zz=1&pageView=
+
+   [Page 2/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=0&company=0&page=2&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=0&company=0&page=2&SortByPrice=0&zz=1&pageView=
+
+   [Page 3/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=0&company=0&page=3&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=0&company=0&page=3&SortByPrice=0&zz=1&pageView=
+
+   [Page 4/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=0&company=0&page=4&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=0&company=0&page=4&SortByPrice=0&zz=1&pageView=
+
+   [Page 5/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=0&company=0&page=5&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=0&company=0&page=5&SortByPrice=0&zz=1&pageView=
+
+   [Page 6/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=0&company=0&page=6&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=0&company=0&page=6&SortByPrice=0&zz=1&pageView=
+
+   [Page 7/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=0&company=0&page=7&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=0&company=0&page=7&SortByPrice=0&zz=1&pageView=
+
+   [Page 8/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=0&company=0&page=8&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=0&company=0&page=8&SortByPrice=0&zz=1&pageView=
+
+   [Page 9/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=0&company=0&page=9&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=0&company=0&page=9&SortByPrice=0&zz=1&pageView=
+
+   [Page 10/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to
+=&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f
+10040=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&includeN
+ew=0&cargoReady=0&DDVIncluded=0&private=0&company=0&page=10&SortByPrice=0&zz=1&p
+ageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=0&company=0&page=10&SortByPrice=0&zz=1&pageView=
+
+   Total new ads to process: 0
+
+   ============================================================
+   DONE — Станови Продажба
+   New ads: 0
+   With phone: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_STANOVI_P
+RODAZBA/data/reklama5.db
+   ============================================================
+✅ R5_STANOVI_PRODAZBA — COMPLETED
+
+[20/29] Starting...
+
+######################################################################
+# RUNNING: R5_STANOVI_RENTA
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/_reklama
+5_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_STANO
+VI_RENTA/config.json
+# Timeout: 30 min
+# Started: 2026-10-04 21:29:48
+######################################################################
+
+   ============================================================
+   REKLAMA5 SCRAPER — Станови Изнајмување
+   URL: https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=
+&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell
+=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeNew=0&cargoR
+eady=0&DDVIncluded=0&private=1&company=0&page=1&SortByPrice=0&zz=1&pageView=
+   Pages: 10
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_STANOVI_R
+ENTA/data/reklama5.db
+   ============================================================
+
+   [Page 1/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=1&company=0&page=1&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&buy=0&rent=0&rent=1&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=1&company=0&page=1&SortByPrice=0&zz=1&pageView=
+
+   [Page 2/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=1&company=0&page=2&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&buy=0&rent=0&rent=1&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=1&company=0&page=2&SortByPrice=0&zz=1&pageView=
+
+   [Page 3/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=1&company=0&page=3&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&buy=0&rent=0&rent=1&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=1&company=0&page=3&SortByPrice=0&zz=1&pageView=
+
+   [Page 4/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=1&company=0&page=4&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&buy=0&rent=0&rent=1&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=1&company=0&page=4&SortByPrice=0&zz=1&pageView=
+
+   [Page 5/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=1&company=0&page=5&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&buy=0&rent=0&rent=1&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=1&company=0&page=5&SortByPrice=0&zz=1&pageView=
+
+   [Page 6/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=1&company=0&page=6&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&buy=0&rent=0&rent=1&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=1&company=0&page=6&SortByPrice=0&zz=1&pageView=
+
+   [Page 7/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=1&company=0&page=7&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&buy=0&rent=0&rent=1&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=1&company=0&page=7&SortByPrice=0&zz=1&pageView=
+
+   [Page 8/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=1&company=0&page=8&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&buy=0&rent=0&rent=1&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=1&company=0&page=8&SortByPrice=0&zz=1&pageView=
+
+   [Page 9/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to=
+&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f1
+0040=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeNe
+w=0&cargoReady=0&DDVIncluded=0&private=1&company=0&page=9&SortByPrice=0&zz=1&pag
+eView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&buy=0&rent=0&rent=1&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=1&company=0&page=9&SortByPrice=0&zz=1&pageView=
+
+   [Page 10/10] -> https://reklama5.mk/Search?city=1&cat=159&q=&f45_from=&f45_to
+=&f46_from=&f46_to=&priceFrom=&priceTo=&f48_from=&f48_to=&f47=&f10029=&f10030=&f
+10040=&sell=0&buy=0&rent=0&rent=1&includeforrent=0&trade=0&includeOld=0&includeN
+ew=0&cargoReady=0&DDVIncluded=0&private=1&company=0&page=10&SortByPrice=0&zz=1&p
+ageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=159&q=&f45_from=&f45_to=&f46_from=&f46_to=&priceFrom=&priceTo
+=&f48_from=&f48_to=&f47=&f10029=&f10030=&f10040=&sell=0&buy=0&rent=0&rent=1&incl
+udeforrent=0&trade=0&includeOld=0&includeNew=0&cargoReady=0&DDVIncluded=0&privat
+e=1&company=0&page=10&SortByPrice=0&zz=1&pageView=
+
+   Total new ads to process: 0
+
+   ============================================================
+   DONE — Станови Изнајмување
+   New ads: 0
+   With phone: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_STANOVI_R
+ENTA/data/reklama5.db
+   ============================================================
+✅ R5_STANOVI_RENTA — COMPLETED
+
+[21/29] Starting...
+
+######################################################################
+# RUNNING: R5_VIKENDICI_PRODAZBA
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/_reklama
+5_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_VIKEN
+DICI_PRODAZBA/config.json
+# Timeout: 30 min
+# Started: 2026-10-04 21:30:40
+######################################################################
+
+   ============================================================
+   REKLAMA5 SCRAPER — Викендици Продажба
+   URL: https://reklama5.mk/Search?city=1&cat=161&q=&f53_from=&f53_to=&f54_from=
+&f54_to=&priceFrom=&priceTo=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&includeforrent
+=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVI
+ncluded=0&private=0&company=0&page=1&SortByPrice=0&zz=1&pageView=
+   Pages: 10
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_VIKENDICI
+_PRODAZBA/data/reklama5.db
+   ============================================================
+
+   [Page 1/10] -> https://reklama5.mk/Search?city=1&cat=161&q=&f53_from=&f53_to=
+&f54_from=&f54_to=&priceFrom=&priceTo=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRe
+ady=0&DDVIncluded=0&private=0&company=0&page=1&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=161&q=&f53_from=&f53_to=&f54_from=&f54_to=&priceFrom=&priceTo
+=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&inc
+ludeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company
+=0&page=1&SortByPrice=0&zz=1&pageView=
+
+   [Page 2/10] -> https://reklama5.mk/Search?city=1&cat=161&q=&f53_from=&f53_to=
+&f54_from=&f54_to=&priceFrom=&priceTo=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRe
+ady=0&DDVIncluded=0&private=0&company=0&page=2&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=161&q=&f53_from=&f53_to=&f54_from=&f54_to=&priceFrom=&priceTo
+=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&inc
+ludeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company
+=0&page=2&SortByPrice=0&zz=1&pageView=
+
+   [Page 3/10] -> https://reklama5.mk/Search?city=1&cat=161&q=&f53_from=&f53_to=
+&f54_from=&f54_to=&priceFrom=&priceTo=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRe
+ady=0&DDVIncluded=0&private=0&company=0&page=3&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=161&q=&f53_from=&f53_to=&f54_from=&f54_to=&priceFrom=&priceTo
+=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&inc
+ludeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company
+=0&page=3&SortByPrice=0&zz=1&pageView=
+
+   [Page 4/10] -> https://reklama5.mk/Search?city=1&cat=161&q=&f53_from=&f53_to=
+&f54_from=&f54_to=&priceFrom=&priceTo=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRe
+ady=0&DDVIncluded=0&private=0&company=0&page=4&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=161&q=&f53_from=&f53_to=&f54_from=&f54_to=&priceFrom=&priceTo
+=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&inc
+ludeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company
+=0&page=4&SortByPrice=0&zz=1&pageView=
+
+   [Page 5/10] -> https://reklama5.mk/Search?city=1&cat=161&q=&f53_from=&f53_to=
+&f54_from=&f54_to=&priceFrom=&priceTo=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRe
+ady=0&DDVIncluded=0&private=0&company=0&page=5&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=161&q=&f53_from=&f53_to=&f54_from=&f54_to=&priceFrom=&priceTo
+=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&inc
+ludeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company
+=0&page=5&SortByPrice=0&zz=1&pageView=
+
+   [Page 6/10] -> https://reklama5.mk/Search?city=1&cat=161&q=&f53_from=&f53_to=
+&f54_from=&f54_to=&priceFrom=&priceTo=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRe
+ady=0&DDVIncluded=0&private=0&company=0&page=6&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=161&q=&f53_from=&f53_to=&f54_from=&f54_to=&priceFrom=&priceTo
+=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&inc
+ludeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company
+=0&page=6&SortByPrice=0&zz=1&pageView=
+
+   [Page 7/10] -> https://reklama5.mk/Search?city=1&cat=161&q=&f53_from=&f53_to=
+&f54_from=&f54_to=&priceFrom=&priceTo=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRe
+ady=0&DDVIncluded=0&private=0&company=0&page=7&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=161&q=&f53_from=&f53_to=&f54_from=&f54_to=&priceFrom=&priceTo
+=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&inc
+ludeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company
+=0&page=7&SortByPrice=0&zz=1&pageView=
+
+   [Page 8/10] -> https://reklama5.mk/Search?city=1&cat=161&q=&f53_from=&f53_to=
+&f54_from=&f54_to=&priceFrom=&priceTo=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRe
+ady=0&DDVIncluded=0&private=0&company=0&page=8&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=161&q=&f53_from=&f53_to=&f54_from=&f54_to=&priceFrom=&priceTo
+=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&inc
+ludeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company
+=0&page=8&SortByPrice=0&zz=1&pageView=
+
+   [Page 9/10] -> https://reklama5.mk/Search?city=1&cat=161&q=&f53_from=&f53_to=
+&f54_from=&f54_to=&priceFrom=&priceTo=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&incl
+udeforrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoRe
+ady=0&DDVIncluded=0&private=0&company=0&page=9&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=161&q=&f53_from=&f53_to=&f54_from=&f54_to=&priceFrom=&priceTo
+=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&inc
+ludeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company
+=0&page=9&SortByPrice=0&zz=1&pageView=
+
+   [Page 10/10] -> https://reklama5.mk/Search?city=1&cat=161&q=&f53_from=&f53_to
+=&f54_from=&f54_to=&priceFrom=&priceTo=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&inc
+ludeforrent=0&trade=0&includeOld=0&includeOld=1&includeNew=0&includeNew=1&cargoR
+eady=0&DDVIncluded=0&private=0&company=0&page=10&SortByPrice=0&zz=1&pageView=
+     -> Request failed: 403 Client Error: Forbidden for url: https://reklama5.mk
+/Search?city=1&cat=161&q=&f53_from=&f53_to=&f54_from=&f54_to=&priceFrom=&priceTo
+=&f55=&f56=&sell=0&sell=1&buy=0&rent=0&includeforrent=0&trade=0&includeOld=0&inc
+ludeOld=1&includeNew=0&includeNew=1&cargoReady=0&DDVIncluded=0&private=0&company
+=0&page=10&SortByPrice=0&zz=1&pageView=
+
+   Total new ads to process: 0
+
+   ============================================================
+   DONE — Викендици Продажба
+   New ads: 0
+   With phone: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/REKLAMA5/R5_VIKENDICI
+_PRODAZBA/data/reklama5.db
+   ============================================================
+✅ R5_VIKENDICI_PRODAZBA — COMPLETED
+
+[22/29] Starting...
+
+######################################################################
+# RUNNING: I247_DELOVNI_PRODAZBA
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/_imoti24
+7_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_DEL
+OVNI_PRODAZBA/config.json
+# Timeout: 120 min
+# Started: 2026-10-04 21:31:32
+######################################################################
+
+   ============================================================
+   IMOTI247 SCRAPER — Деловни Простори Продажба
+   URL: https://imoti247.com/mk/prodava-%D0%B4%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%
+BD-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D1%80/Skopje?status=0&floor_from=-1&floo
+r_to=-1
+   Pages: 50
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_DELOVNI
+_PRODAZBA/data/imoti247.db
+   ============================================================
+     [CHROME] Starting fresh Chrome instance (restart #0)...
+     [CHROME] PID: 25125
+     [CHROME] Ready.
+
+   [Page 01] -> https://imoti247.com/mk/prodava-%D0%B4%D0%B5%D0%BB%D0%BE%D0%B2%D
+0%B5%D0%BD-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D1%80/Skopje?status=0&floor_from
+=-1&floor_to=-1&page=1
+     -> 1 new ads on page 1
+     SUCCESS -> 76972 | +38970205715 | Se prodava dukjan 130m2 na prizemje vo Ce
+ntar...
+
+   [Page 02] -> https://imoti247.com/mk/prodava-%D0%B4%D0%B5%D0%BB%D0%BE%D0%B2%D
+0%B5%D0%BD-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D1%80/Skopje?status=0&floor_from
+=-1&floor_to=-1&page=2
+     -> 0 new ads on page 2
+
+   [Page 03] -> https://imoti247.com/mk/prodava-%D0%B4%D0%B5%D0%BB%D0%BE%D0%B2%D
+0%B5%D0%BD-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D1%80/Skopje?status=0&floor_from
+=-1&floor_to=-1&page=3
+     -> 0 new ads on page 3
+
+   [Page 04] -> https://imoti247.com/mk/prodava-%D0%B4%D0%B5%D0%BB%D0%BE%D0%B2%D
+0%B5%D0%BD-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D1%80/Skopje?status=0&floor_from
+=-1&floor_to=-1&page=4
+     -> 0 new ads on page 4
+
+   [Page 05] -> https://imoti247.com/mk/prodava-%D0%B4%D0%B5%D0%BB%D0%BE%D0%B2%D
+0%B5%D0%BD-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D1%80/Skopje?status=0&floor_from
+=-1&floor_to=-1&page=5
+     -> 0 new ads on page 5
+
+   [Page 06] -> https://imoti247.com/mk/prodava-%D0%B4%D0%B5%D0%BB%D0%BE%D0%B2%D
+0%B5%D0%BD-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D1%80/Skopje?status=0&floor_from
+=-1&floor_to=-1&page=6
+     -> 0 new ads on page 6
+     5 empty pages in a row -> stopping
+
+   ============================================================
+   DONE — Деловни Простори Продажба
+   New ads: 1
+   Skipped: 0
+   Errors:  0
+   Chrome restarts: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_DELOVNI
+_PRODAZBA/data/imoti247.db
+   ============================================================
+✅ I247_DELOVNI_PRODAZBA — COMPLETED
+
+[23/29] Starting...
+
+######################################################################
+# RUNNING: I247_DELOVNI_RENTA
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/_imoti24
+7_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_DEL
+OVNI_RENTA/config.json
+# Timeout: 120 min
+# Started: 2026-10-04 21:33:46
+######################################################################
+
+   ============================================================
+   IMOTI247 SCRAPER — Деловни Простори Изнајмување
+   URL: https://imoti247.com/mk/izdava-%D0%B4%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%B
+D-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D1%80/Skopje?status=0&floor_from=-1&floor
+_to=-1
+   Pages: 50
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_DELOVNI
+_RENTA/data/imoti247.db
+   ============================================================
+     [CHROME] Starting fresh Chrome instance (restart #0)...
+     [CHROME] PID: 25850
+     [CHROME] Ready.
+
+   [Page 01] -> https://imoti247.com/mk/izdava-%D0%B4%D0%B5%D0%BB%D0%BE%D0%B2%D0
+%B5%D0%BD-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D1%80/Skopje?status=0&floor_from=
+-1&floor_to=-1&page=1
+     -> 1 new ads on page 1
+     SUCCESS -> 77028 | +38970274423 | NAMESTEN DELOVEN PROSTOR VO KARPOSH...
+
+   [Page 02] -> https://imoti247.com/mk/izdava-%D0%B4%D0%B5%D0%BB%D0%BE%D0%B2%D0
+%B5%D0%BD-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D1%80/Skopje?status=0&floor_from=
+-1&floor_to=-1&page=2
+     -> 0 new ads on page 2
+
+   [Page 03] -> https://imoti247.com/mk/izdava-%D0%B4%D0%B5%D0%BB%D0%BE%D0%B2%D0
+%B5%D0%BD-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D1%80/Skopje?status=0&floor_from=
+-1&floor_to=-1&page=3
+     -> 0 new ads on page 3
+
+   [Page 04] -> https://imoti247.com/mk/izdava-%D0%B4%D0%B5%D0%BB%D0%BE%D0%B2%D0
+%B5%D0%BD-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D1%80/Skopje?status=0&floor_from=
+-1&floor_to=-1&page=4
+     -> 0 new ads on page 4
+
+   [Page 05] -> https://imoti247.com/mk/izdava-%D0%B4%D0%B5%D0%BB%D0%BE%D0%B2%D0
+%B5%D0%BD-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D1%80/Skopje?status=0&floor_from=
+-1&floor_to=-1&page=5
+     -> 0 new ads on page 5
+
+   [Page 06] -> https://imoti247.com/mk/izdava-%D0%B4%D0%B5%D0%BB%D0%BE%D0%B2%D0
+%B5%D0%BD-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D1%80/Skopje?status=0&floor_from=
+-1&floor_to=-1&page=6
+     -> 0 new ads on page 6
+     5 empty pages in a row -> stopping
+
+   ============================================================
+   DONE — Деловни Простори Изнајмување
+   New ads: 1
+   Skipped: 0
+   Errors:  0
+   Chrome restarts: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_DELOVNI
+_RENTA/data/imoti247.db
+   ============================================================
+✅ I247_DELOVNI_RENTA — COMPLETED
+
+[24/29] Starting...
+
+######################################################################
+# RUNNING: I247_KUKJI_PRODAZBA
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/_imoti24
+7_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_KUK
+JI_PRODAZBA/config.json
+# Timeout: 120 min
+# Started: 2026-10-04 21:35:59
+######################################################################
+
+   ============================================================
+   IMOTI247 SCRAPER — Куќи Продажба
+   URL: https://imoti247.com/mk/prodava-%D0%BA%D1%83%D1%9C%D0%B0/Skopje?status=0
+&floor_from=-1&floor_to=-1
+   Pages: 50
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_KUKJI_P
+RODAZBA/data/imoti247.db
+   ============================================================
+     [CHROME] Starting fresh Chrome instance (restart #0)...
+     [CHROME] PID: 26606
+     [CHROME] Ready.
+
+   [Page 01] -> https://imoti247.com/mk/prodava-%D0%BA%D1%83%D1%9C%D0%B0/Skopje?
+status=0&floor_from=-1&floor_to=-1&page=1
+     -> 1 new ads on page 1
+     SUCCESS -> 77040 | +38978222112 | Se prodava kukja vo Zlokukani od 319m2 i
+plac 980m...
+
+   [Page 02] -> https://imoti247.com/mk/prodava-%D0%BA%D1%83%D1%9C%D0%B0/Skopje?
+status=0&floor_from=-1&floor_to=-1&page=2
+     -> 0 new ads on page 2
+
+   [Page 03] -> https://imoti247.com/mk/prodava-%D0%BA%D1%83%D1%9C%D0%B0/Skopje?
+status=0&floor_from=-1&floor_to=-1&page=3
+     -> 1 new ads on page 3
+     SUCCESS -> 77007 | +38972624017 | Куќа во Драчево...
+
+   [Page 04] -> https://imoti247.com/mk/prodava-%D0%BA%D1%83%D1%9C%D0%B0/Skopje?
+status=0&floor_from=-1&floor_to=-1&page=4
+     -> 0 new ads on page 4
+
+   [Page 05] -> https://imoti247.com/mk/prodava-%D0%BA%D1%83%D1%9C%D0%B0/Skopje?
+status=0&floor_from=-1&floor_to=-1&page=5
+     -> 0 new ads on page 5
+
+   [Page 06] -> https://imoti247.com/mk/prodava-%D0%BA%D1%83%D1%9C%D0%B0/Skopje?
+status=0&floor_from=-1&floor_to=-1&page=6
+     -> 0 new ads on page 6
+
+   [Page 07] -> https://imoti247.com/mk/prodava-%D0%BA%D1%83%D1%9C%D0%B0/Skopje?
+status=0&floor_from=-1&floor_to=-1&page=7
+     -> 0 new ads on page 7
+
+   [Page 08] -> https://imoti247.com/mk/prodava-%D0%BA%D1%83%D1%9C%D0%B0/Skopje?
+status=0&floor_from=-1&floor_to=-1&page=8
+     -> 0 new ads on page 8
+     5 empty pages in a row -> stopping
+
+   ============================================================
+   DONE — Куќи Продажба
+   New ads: 2
+   Skipped: 0
+   Errors:  0
+   Chrome restarts: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_KUKJI_P
+RODAZBA/data/imoti247.db
+   ============================================================
+✅ I247_KUKJI_PRODAZBA — COMPLETED
+
+[25/29] Starting...
+
+######################################################################
+# RUNNING: I247_KUKJI_RENTA
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/_imoti24
+7_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_KUK
+JI_RENTA/config.json
+# Timeout: 120 min
+# Started: 2026-10-04 21:38:57
+######################################################################
+
+   ============================================================
+   IMOTI247 SCRAPER — Куќи Изнајмување
+   URL: https://imoti247.com/mk/izdava-%D0%BA%D1%83%D1%9C%D0%B0/Skopje?status=0&
+floor_from=-1&floor_to=-1
+   Pages: 50
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_KUKJI_R
+ENTA/data/imoti247.db
+   ============================================================
+     [CHROME] Starting fresh Chrome instance (restart #0)...
+     [CHROME] PID: 27438
+     [CHROME] Ready.
+
+   [Page 01] -> https://imoti247.com/mk/izdava-%D0%BA%D1%83%D1%9C%D0%B0/Skopje?s
+tatus=0&floor_from=-1&floor_to=-1&page=1
+     -> 4 new ads on page 1
+     SUCCESS -> 77017 | +38970274423 | SAMOSTOJNA KUKJA SO LOKACIJA VO CENTAR...
+     SUCCESS -> 77035 | +38970274423 | ODLICNA SEMEJNA KUKJA SO BAZEN VO BARDOVC
+I...
+     SUCCESS -> 77033 | +38970274423 | MODEREN DUPLEX SO BAZEN VO BARDOVCI...
+     SUCCESS -> 77034 | +38970274423 | SE IZDAVA KUKJA VO KOZLE...
+
+   [Page 02] -> https://imoti247.com/mk/izdava-%D0%BA%D1%83%D1%9C%D0%B0/Skopje?s
+tatus=0&floor_from=-1&floor_to=-1&page=2
+     -> 0 new ads on page 2
+
+   [Page 03] -> https://imoti247.com/mk/izdava-%D0%BA%D1%83%D1%9C%D0%B0/Skopje?s
+tatus=0&floor_from=-1&floor_to=-1&page=3
+     -> 0 new ads on page 3
+
+   [Page 04] -> https://imoti247.com/mk/izdava-%D0%BA%D1%83%D1%9C%D0%B0/Skopje?s
+tatus=0&floor_from=-1&floor_to=-1&page=4
+     -> 0 new ads on page 4
+
+   [Page 05] -> https://imoti247.com/mk/izdava-%D0%BA%D1%83%D1%9C%D0%B0/Skopje?s
+tatus=0&floor_from=-1&floor_to=-1&page=5
+     -> 0 new ads on page 5
+
+   [Page 06] -> https://imoti247.com/mk/izdava-%D0%BA%D1%83%D1%9C%D0%B0/Skopje?s
+tatus=0&floor_from=-1&floor_to=-1&page=6
+     -> 0 new ads on page 6
+     5 empty pages in a row -> stopping
+
+   ============================================================
+   DONE — Куќи Изнајмување
+   New ads: 4
+   Skipped: 0
+   Errors:  0
+   Chrome restarts: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_KUKJI_R
+ENTA/data/imoti247.db
+   ============================================================
+✅ I247_KUKJI_RENTA — COMPLETED
+
+[26/29] Starting...
+
+######################################################################
+# RUNNING: I247_PLACEVI_PRODAZBA
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/_imoti24
+7_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_PLA
+CEVI_PRODAZBA/config.json
+# Timeout: 120 min
+# Started: 2026-10-04 21:41:26
+######################################################################
+
+   ============================================================
+   IMOTI247 SCRAPER — Плацови Продажба
+   URL: https://imoti247.com/mk/prodava-%D0%BF%D0%BB%D0%B0%D1%86/Skopje?status=0
+&floor_from=-1&floor_to=-1
+   Pages: 50
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_PLACEVI
+_PRODAZBA/data/imoti247.db
+   ============================================================
+     [CHROME] Starting fresh Chrome instance (restart #0)...
+     [CHROME] PID: 28232
+     [CHROME] Ready.
+
+   [Page 01] -> https://imoti247.com/mk/prodava-%D0%BF%D0%BB%D0%B0%D1%86/Skopje?
+status=0&floor_from=-1&floor_to=-1&page=1
+     -> 1 new ads on page 1
+     SUCCESS -> 77009 | +38972518815 | Plac na Dolno Vodno...
+
+   [Page 02] -> https://imoti247.com/mk/prodava-%D0%BF%D0%BB%D0%B0%D1%86/Skopje?
+status=0&floor_from=-1&floor_to=-1&page=2
+     -> 0 new ads on page 2
+
+   [Page 03] -> https://imoti247.com/mk/prodava-%D0%BF%D0%BB%D0%B0%D1%86/Skopje?
+status=0&floor_from=-1&floor_to=-1&page=3
+     -> 0 new ads on page 3
+
+   [Page 04] -> https://imoti247.com/mk/prodava-%D0%BF%D0%BB%D0%B0%D1%86/Skopje?
+status=0&floor_from=-1&floor_to=-1&page=4
+     -> 0 new ads on page 4
+
+   [Page 05] -> https://imoti247.com/mk/prodava-%D0%BF%D0%BB%D0%B0%D1%86/Skopje?
+status=0&floor_from=-1&floor_to=-1&page=5
+     -> 0 new ads on page 5
+
+   [Page 06] -> https://imoti247.com/mk/prodava-%D0%BF%D0%BB%D0%B0%D1%86/Skopje?
+status=0&floor_from=-1&floor_to=-1&page=6
+     -> 0 new ads on page 6
+     5 empty pages in a row -> stopping
+
+   ============================================================
+   DONE — Плацови Продажба
+   New ads: 1
+   Skipped: 0
+   Errors:  0
+   Chrome restarts: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_PLACEVI
+_PRODAZBA/data/imoti247.db
+   ============================================================
+✅ I247_PLACEVI_PRODAZBA — COMPLETED
+
+[27/29] Starting...
+
+######################################################################
+# RUNNING: I247_STANOVI_PRODAZBA
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/_imoti24
+7_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_STA
+NOVI_PRODAZBA/config.json
+# Timeout: 120 min
+# Started: 2026-10-04 21:43:36
+######################################################################
+
+   ============================================================
+   IMOTI247 SCRAPER — Станови Продажба
+   URL: https://imoti247.com/mk/prodava-stanovi/Skopje?status=0&floor_from=-1&fl
+oor_to=-1
+   Pages: 50
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_STANOVI
+_PRODAZBA/data/imoti247.db
+   ============================================================
+     [CHROME] Starting fresh Chrome instance (restart #0)...
+     [CHROME] PID: 28954
+     [CHROME] Ready.
+
+   [Page 01] -> https://imoti247.com/mk/prodava-stanovi/Skopje?status=0&floor_fr
+om=-1&floor_to=-1&page=1
+     -> 5 new ads on page 1
+     SUCCESS -> 77041 | +38978222112 | AERODROM- SUPERIUM trosoben stan od 56m2
+na 13 kat...
+     SUCCESS -> 77042 | +38975205005 | Продавам 2 собен стан карпош2...
+     SUCCESS -> 76973 | +38976220548 | Се продава празен стан 40м2 во Аеродром..
+.
+     SUCCESS -> 76975 | +38978847162 | +38978847161 | Izdavam nenamesten stqn vo
+ Karpos4...
+     SUCCESS -> 77039 | +38970399055 | Se prodava luksuzno namesten stan -Duplex
+ vo K.Vod...
+
+   [Page 02] -> https://imoti247.com/mk/prodava-stanovi/Skopje?status=0&floor_fr
+om=-1&floor_to=-1&page=2
+     -> 1 new ads on page 2
+     SUCCESS -> 76943 | +38970318400 | Се продава стан во Кисела Вода...
+
+   [Page 03] -> https://imoti247.com/mk/prodava-stanovi/Skopje?status=0&floor_fr
+om=-1&floor_to=-1&page=3
+     -> 0 new ads on page 3
+
+   [Page 04] -> https://imoti247.com/mk/prodava-stanovi/Skopje?status=0&floor_fr
+om=-1&floor_to=-1&page=4
+     -> 0 new ads on page 4
+
+   [Page 05] -> https://imoti247.com/mk/prodava-stanovi/Skopje?status=0&floor_fr
+om=-1&floor_to=-1&page=5
+     -> 0 new ads on page 5
+
+   [Page 06] -> https://imoti247.com/mk/prodava-stanovi/Skopje?status=0&floor_fr
+om=-1&floor_to=-1&page=6
+     -> 0 new ads on page 6
+
+   [Page 07] -> https://imoti247.com/mk/prodava-stanovi/Skopje?status=0&floor_fr
+om=-1&floor_to=-1&page=7
+     -> 0 new ads on page 7
+     5 empty pages in a row -> stopping
+
+   ============================================================
+   DONE — Станови Продажба
+   New ads: 6
+   Skipped: 0
+   Errors:  0
+   Chrome restarts: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_STANOVI
+_PRODAZBA/data/imoti247.db
+   ============================================================
+✅ I247_STANOVI_PRODAZBA — COMPLETED
+
+[28/29] Starting...
+
+######################################################################
+# RUNNING: I247_STANOVI_RENTA
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/_imoti24
+7_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_STA
+NOVI_RENTA/config.json
+# Timeout: 120 min
+# Started: 2026-10-04 21:46:42
+######################################################################
+
+   ============================================================
+   IMOTI247 SCRAPER — Станови Изнајмување
+   URL: https://imoti247.com/mk/izdava-stanovi/Skopje?status=0&floor_from=-1&flo
+or_to=-1
+   Pages: 50
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_STANOVI
+_RENTA/data/imoti247.db
+   ============================================================
+     [CHROME] Starting fresh Chrome instance (restart #0)...
+     [CHROME] PID: 29815
+     [CHROME] Ready.
+
+   [Page 01] -> https://imoti247.com/mk/izdava-stanovi/Skopje?status=0&floor_fro
+m=-1&floor_to=-1&page=1
+     -> 12 new ads on page 1
+     SUCCESS -> 77048 | +38977737882 | Се издава...
+     SUCCESS -> 77032 | +38970274423 | KOMFOREN TROSOBEN STAN VO CRNICE...
+     SUCCESS -> 77045 | +38970274423 | PRAZEN STAN ZA DELOVNA NAMENA VO AERODROM
+...
+     SUCCESS -> 77044 | +38970274423 | MODEREN DVOSOBEN STAN VO TAFTALIDZE...
+     SUCCESS -> 77038 | +38970274423 | SE IZDAVA PRAZEN TROSOBEN STAN VO STROG C
+ENTAR...
+     SUCCESS -> 77037 | +38970274423 | SE IZDAVA GARSONJERA VO KARPOSH,MIDA...
+     SUCCESS -> 77029 | +38970274423 | NEVSELUVAN CETIRISOBEN STAN VO CRNICE...
+     SUCCESS -> 77036 | +38970610633 | Stan za kratok prestoj vo Skopje – Aerodr
+om...
+     SUCCESS -> 77030 | +38970274423 | UDOBEN TROSOBEN STAN VO KOZLE...
+     SUCCESS -> 77031 | +38970274423 | NEVSELUVAN DVOSOBEN STAN VO AERODROM...
+     SUCCESS -> 77046 | +38972270623 | Стан за изнајмувње...
+     SUCCESS -> 77043 | +38970274423 | UDOBEN DVOSOBEN STAN VO KAPISHTEC...
+
+   [Page 02] -> https://imoti247.com/mk/izdava-stanovi/Skopje?status=0&floor_fro
+m=-1&floor_to=-1&page=2
+     -> 11 new ads on page 2
+     SUCCESS -> 77010 | +38970274423 | UDOBEN DVOSOBEN STAN NA ATRAKTIVNA LOKACI
+JA VO CEN...
+     SUCCESS -> 77011 | +38970274423 | FUNKCIONALEN TROSOBEN STAN VO TAFTALIDZE.
+..
+     SUCCESS -> 77008 | +38975366977 | Се изнајмува НАМЕСТЕН СТАН од 68м2 во нас
+. Даме Гр...
+     SUCCESS -> 77015 | +38970274423 | FUNKCIONALEN TROSOBEN STAN VO KISELA VODA
+,RASADNIK...
+     SUCCESS -> 77016 | +38977443824 | Izdavam stan Adora Flatiron (Pelga) Kisel
+a Voda...
+     SUCCESS -> 77021 | +38971210222 | Урбан Лајф издава стан во Кисела вода...
+     SUCCESS -> 77022 | +38971210222 | Урбан Лајф издава стан во Центар...
+     SUCCESS -> 77013 | +38970274423 | PRAZEN CETIRISOBEN STAN VO CENTAR,KAPISHT
+EC...
+     SUCCESS -> 77027 | +38971719874 | Се изнајмува комфорен и простран стан во
+Дебар Маа...
+     SUCCESS -> 77018 | +38978224656 | Se Izdava Luksuzno Namesten Stan , Kisela
+ Voda...
+     SUCCESS -> 77014 | +38975447463 | СЕ ИЗДАВА РЕНОВИРАН ТРОСОСОБЕН СТАН ВО СТ
+РОГ ЦЕНТА...
+
+   [Page 03] -> https://imoti247.com/mk/izdava-stanovi/Skopje?status=0&floor_fro
+m=-1&floor_to=-1&page=3
+     -> 3 new ads on page 3
+     SUCCESS -> 76979 | +38977771759 | Se izdava moderen stan so prekrasen pogle
+d na Vodn...
+     SUCCESS -> 76977 | +38978847161 | +38978847162 | Издавам стан во Карпош 4..
+.
+     SUCCESS -> 76997 |  | Стан за изнајмување-Стар аеродром...
+
+   [Page 04] -> https://imoti247.com/mk/izdava-stanovi/Skopje?status=0&floor_fro
+m=-1&floor_to=-1&page=4
+     -> 3 new ads on page 4
+     SUCCESS -> 76970 | +38978348111 | Се издава едносонен стан во Ново Лисиче с
+проти пар...
+     SUCCESS -> 76976 | +38978847161 | +38978847162 | Издавам нов стан празен во
+ Даме Груев позади Кам...
+     SUCCESS -> 76971 | +38971204866 | СЕ ИЗДАВА ДВОСОБЕН СТАН ВО КАРПОШ 1...
+
+   [Page 05] -> https://imoti247.com/mk/izdava-stanovi/Skopje?status=0&floor_fro
+m=-1&floor_to=-1&page=5
+     -> 6 new ads on page 5
+     SUCCESS -> 76929 | +38975398248 | ЦЕЛОСНО РЕНОВИРАН ДВОСОБЕН СТАН ВО КАРПОШ
+ 3...
+     SUCCESS -> 76948 | +38977512475 | Се издава двособен стан во Автокоманда...
+     SUCCESS -> 76935 | +38970274423 | KOMFOREN DVOSOBEN STAN VO STROG CENTAR...
+     SUCCESS -> 76941 | +38970610633 | Stan za kratok prestoj vo Skopje – Aerodr
+om...
+     SUCCESS -> 76938 | +38971313316 | Се издава (продава) двособен целосно наме
+стен стан...
+     SUCCESS -> 76944 | +38971204866 | СЕ ИЗДАВА ДВОСОБЕН СТАН ВО КИСЕЛА ВОДА...
+
+   [Page 06] -> https://imoti247.com/mk/izdava-stanovi/Skopje?status=0&floor_fro
+m=-1&floor_to=-1&page=6
+     -> 3 new ads on page 6
+     SUCCESS -> 76921 | +38970274423 | KOMFOREN DVOSOBEN STAN VO CENTAR...
+     SUCCESS -> 76924 | +38971210222 | Урбан Лајф издава деловен простор во Цент
+ар...
+     SUCCESS -> 76928 | +38975398248 | НОВ И МОДЕРНО НАМЕСТЕН ДВОСОБЕН СТАН СО П
+АРКИНГ...
+
+   [Page 07] -> https://imoti247.com/mk/izdava-stanovi/Skopje?status=0&floor_fro
+m=-1&floor_to=-1&page=7
+     -> 1 new ads on page 7
+     SUCCESS -> 76907 | +38971246623 | Se izdava stan vo Aerodrom...
+
+   [Page 08] -> https://imoti247.com/mk/izdava-stanovi/Skopje?status=0&floor_fro
+m=-1&floor_to=-1&page=8
+     -> 0 new ads on page 8
+
+   [Page 09] -> https://imoti247.com/mk/izdava-stanovi/Skopje?status=0&floor_fro
+m=-1&floor_to=-1&page=9
+     -> 0 new ads on page 9
+
+   [Page 10] -> https://imoti247.com/mk/izdava-stanovi/Skopje?status=0&floor_fro
+m=-1&floor_to=-1&page=10
+     -> 0 new ads on page 10
+
+   [Page 11] -> https://imoti247.com/mk/izdava-stanovi/Skopje?status=0&floor_fro
+m=-1&floor_to=-1&page=11
+     -> 0 new ads on page 11
+
+   [Page 12] -> https://imoti247.com/mk/izdava-stanovi/Skopje?status=0&floor_fro
+m=-1&floor_to=-1&page=12
+     -> 0 new ads on page 12
+     5 empty pages in a row -> stopping
+
+   ============================================================
+   DONE — Станови Изнајмување
+   New ads: 39
+   Skipped: 0
+   Errors:  0
+   Chrome restarts: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_STANOVI
+_RENTA/data/imoti247.db
+   ============================================================
+✅ I247_STANOVI_RENTA — COMPLETED
+
+[29/29] Starting...
+
+######################################################################
+# RUNNING: I247_VIKENDICA_PRODAZBA
+# Scraper: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/_imoti24
+7_scraper.py
+# Config:  /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_VIK
+ENDICA_PRODAZBA/config.json
+# Timeout: 120 min
+# Started: 2026-10-04 21:55:10
+######################################################################
+
+   ============================================================
+   IMOTI247 SCRAPER — Викендица Продажба
+   URL: https://imoti247.com/mk/prodava-%D0%B2%D0%B8%D0%BA%D0%B5%D0%BD%D0%B4%D0%
+B8%D1%86%D0%B0?status=0&floor_from=-1&floor_to=-1
+   Pages: 50
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_VIKENDI
+CA_PRODAZBA/data/imoti247.db
+   ============================================================
+     [CHROME] Starting fresh Chrome instance (restart #0)...
+     [CHROME] PID: 31512
+     [CHROME] Ready.
+
+   [Page 01] -> https://imoti247.com/mk/prodava-%D0%B2%D0%B8%D0%BA%D0%B5%D0%BD%D
+0%B4%D0%B8%D1%86%D0%B0?status=0&floor_from=-1&floor_to=-1&page=1
+     -> 0 new ads on page 1
+
+   [Page 02] -> https://imoti247.com/mk/prodava-%D0%B2%D0%B8%D0%BA%D0%B5%D0%BD%D
+0%B4%D0%B8%D1%86%D0%B0?status=0&floor_from=-1&floor_to=-1&page=2
+     -> 0 new ads on page 2
+
+   [Page 03] -> https://imoti247.com/mk/prodava-%D0%B2%D0%B8%D0%BA%D0%B5%D0%BD%D
+0%B4%D0%B8%D1%86%D0%B0?status=0&floor_from=-1&floor_to=-1&page=3
+     -> 0 new ads on page 3
+
+   [Page 04] -> https://imoti247.com/mk/prodava-%D0%B2%D0%B8%D0%BA%D0%B5%D0%BD%D
+0%B4%D0%B8%D1%86%D0%B0?status=0&floor_from=-1&floor_to=-1&page=4
+     -> 0 new ads on page 4
+
+   [Page 05] -> https://imoti247.com/mk/prodava-%D0%B2%D0%B8%D0%BA%D0%B5%D0%BD%D
+0%B4%D0%B8%D1%86%D0%B0?status=0&floor_from=-1&floor_to=-1&page=5
+     -> 0 new ads on page 5
+     5 empty pages in a row -> stopping
+
+   ============================================================
+   DONE — Викендица Продажба
+   New ads: 0
+   Skipped: 0
+   Errors:  0
+   Chrome restarts: 0
+   DB: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/IMOTI247/I247_VIKENDI
+CA_PRODAZBA/data/imoti247.db
+   ============================================================
+✅ I247_VIKENDICA_PRODAZBA — COMPLETED
+
+======================================================================
+BATCH COMPLETE — 2026-10-04 21:56:42
+Duration: 1h 2m
+Success: 29/29
+Failed:  0/29
+======================================================================
+
+BATCH EXIT: 0
+
+Starting serve_ana.py...
+======================================================================
+SERVE ANA — 2026-10-04 21:56:42
+======================================================================
+
+Found 29 category databases
+  PAZAR3/P3_BARAKI_PRODAZBA: 506 leads
+  PAZAR3/P3_BARAKI_RENTA: 509 leads
+  PAZAR3/P3_DELOVEN_PRODAZBA: 524 leads
+  PAZAR3/P3_DELOVEN_RENTA: 522 leads
+  PAZAR3/P3_KUKJI_PRODAZBA: 515 leads
+  PAZAR3/P3_KUKJI_RENTA: 508 leads
+  PAZAR3/P3_STANOVI_PRODAZBA: 609 leads
+  PAZAR3/P3_STANOVI_RENTA: 793 leads
+  PAZAR3/P3_VIKENDICI_PRODAZBA: 452 leads
+  REKLAMA5/R5_BARAKI_KONTEJNERI: 213 leads
+  REKLAMA5/R5_DELOVEN_MIXED: 330 leads
+  REKLAMA5/R5_DELOVEN_PRODAZBA: 316 leads
+  REKLAMA5/R5_DELOVEN_RENTA: 367 leads
+  REKLAMA5/R5_GARAZI_PRODAZBA: 347 leads
+  REKLAMA5/R5_KUKJI_PRODAZBA: 321 leads
+  REKLAMA5/R5_KUKJI_RENTA: 313 leads
+  REKLAMA5/R5_MAGACINI: 266 leads
+  REKLAMA5/R5_PLOCOVI: 387 leads
+  REKLAMA5/R5_STANOVI_PRODAZBA: 421 leads
+  REKLAMA5/R5_STANOVI_RENTA: 457 leads
+  REKLAMA5/R5_VIKENDICI_PRODAZBA: 129 leads
+  IMOTI247/I247_DELOVNI_PRODAZBA: 244 leads
+  IMOTI247/I247_DELOVNI_RENTA: 602 leads
+  IMOTI247/I247_KUKJI_PRODAZBA: 190 leads
+  IMOTI247/I247_KUKJI_RENTA: 240 leads
+  IMOTI247/I247_PLACEVI_PRODAZBA: 494 leads
+  IMOTI247/I247_STANOVI_PRODAZBA: 592 leads
+  IMOTI247/I247_STANOVI_RENTA: 662 leads
+  IMOTI247/I247_VIKENDICA_PRODAZBA: 211 leads
+
+Total leads (before dedup): 12040
+After dedup: 7076
+
+======================================================================
+CSV GENERATED: /home/metropolis4/Documents/PROJECTS/SCRAPERS_FINAL/output/ana_ba
+tch_2026-10-04.csv
+Total leads: 7076
+======================================================================
+
+By priority tier:
+  TIER 1 (Apartments):     1882
+  TIER 2 (Commercial/Houses): 2968
+  TIER 3 (Land/Garages):   1690
+  TIER 4 (Weekenders):     536
+
+COMPLETE CYCLE FINISHED
